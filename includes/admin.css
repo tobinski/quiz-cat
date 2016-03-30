@@ -1,0 +1,59 @@
+#fca_qc_admin_page {
+	width: 90%;
+	margin-top: 2rem;
+	margin-bottom: 15px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.fca_qc_toggle_h3:hover {
+	cursor: pointer;
+}
+
+.fca_qc_label {
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+.fca_qc_align_top {
+	margin-bottom: 1rem;
+	width: 100%;
+}
+
+.fca_qc_admin_panel {
+	width: 100%;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 1rem;
+}
+
+#fca_qc_question_count {
+	margin-bottom: 20px;
+	width: 50px;
+}
+
+.fca_qc_delete_icon {
+	cursor: pointer;
+	color: red;
+	float: right;
+	margin-top: 1rem;
+}
+
+.fca_qc_notice, .fca_qc_warning {
+	position: absolute;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	font-size: 16pt;
+	padding: 1rem;
+	margin-top: 1rem;
+	width: 97%;
+}
+
+.fca_qc_notice {
+	background-color: #2ecc71;
+}
+.fca_qc_warning {
+
+	background-color: #e74c3c;
+}
