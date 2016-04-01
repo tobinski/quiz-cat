@@ -1,2 +1,2 @@
-# TestPrep
-Test Prep Plugin
+# Quiz Cat
+Wordpress Quizzes Made Easy
