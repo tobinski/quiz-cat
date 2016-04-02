@@ -19,9 +19,14 @@
 .fca_qc_admin_label {
 	font-weight: bold;
 }
+.fca_qc_question_label, .fca_qc_result_label {
+	margin-top: 1rem;
+	cursor: pointer;
+}
 
 
 .fca_qc_delete_icon {
+	margin-top: 1rem;
 	color: red;
 	cursor: pointer;
 	float: right;
@@ -41,6 +46,11 @@
 
 .fca_qc_image {
 	max-width: 100%;
+}
+.fca_qc_result_item, .fca_qc_question_item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+	margin-bottom: 1rem;
 }
 
 
