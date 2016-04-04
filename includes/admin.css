@@ -1,8 +1,24 @@
+.pointer{
+	cursor: pointer;
+}
 
+.fca_qc_quiz_image_upload_btn, .fca_qc_quiz_image_revert_btn {
+
+	font-size: 1.5rem;
+	margin: 1rem 0;
+}
+
+.fca_qc_quiz_image_upload_btn{
+	color: #40d47e;	
+}
+.fca_qc_quiz_image_revert_btn{
+	color: red;
+}	
+	
+	
 #fca_qc_quiz_description {
 	width: 98%;
 }
-
 
 .fca_qc_two_third_div {
 	vertical-align: text-top;
@@ -33,6 +49,12 @@
 
 }
 
+.fca_qc_add_btn {
+	color: #40d47e;
+	font-size: 1.5rem;
+	margin: 1rem 0;
+}
+
 .fca_qc_texta {
 	width: 98%;
 	min-height: 4rem;
@@ -46,6 +68,9 @@
 
 .fca_qc_image {
 	max-width: 100%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .fca_qc_result_item, .fca_qc_question_item {
     border: 1px solid #ddd;
@@ -54,8 +79,3 @@
 }
 
 
-/** HIDE SUBMIT DIV **/
-
-#submitdiv {
-	display: none;
-}

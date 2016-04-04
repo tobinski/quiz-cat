@@ -46,6 +46,7 @@ jQuery(document).ready(function($){
 		
 		add_input_click_toggles()
 		attach_delete_button_handlers()
+		attach_image_upload_handlers()
 		
 		setConfirmUnload( true )
 	})
@@ -110,34 +111,40 @@ jQuery(document).ready(function($){
 	////////////////
 	
 	
-	//ACTION WHEN CLICKING IMAGE UPLOAD
-    $('.fca_qc_quiz_image_upload_btn').click(function(e) {
-		$this = $( this )
-        e.preventDefault()
-		
-        var image = wp.media({ 
-            title: adminData.selectImage,
-            // mutiple: true if you want to upload multiple files at once
-            multiple: false
-        }).open()
-        .on('select', function(e){
-            // This will return the selected image from the Media Uploader, the result is an object
-            var uploaded_image = image.state().get('selection').first()
-
-            var image_url = uploaded_image.toJSON().url
-            // Assign the url value to the input field
-			$this.siblings('.fca_qc_image_input').val(image_url)
-			$this.siblings('.fca_qc_image').attr('src',image_url)
-			
-        })
-    })
 	
-	//ACTION WHEN CLICKING REMOVE IMAGE
-	$('.fca_qc_quiz_image_revert_btn').click( function(e) {
-		$( this ).siblings('.fca_qc_image_input').val('')
-		$( this ).siblings('.fca_qc_image').attr('src','')
+	function attach_image_upload_handlers() {
+		//ACTION WHEN CLICKING IMAGE UPLOAD
+		$('.fca_qc_quiz_image_upload_btn').unbind( 'click' )
+		$('.fca_qc_quiz_image_upload_btn').click(function(e) {
+			$this = $( this )
+			e.preventDefault()
+			
+			var image = wp.media({ 
+				title: adminData.selectImage,
+				// mutiple: true if you want to upload multiple files at once
+				multiple: false
+			}).open()
+			.on('select', function(e){
+				// This will return the selected image from the Media Uploader, the result is an object
+				var uploaded_image = image.state().get('selection').first()
+
+				var image_url = uploaded_image.toJSON().url
+				// Assign the url value to the input field
+				$this.siblings('.fca_qc_image_input').val(image_url)
+				$this.siblings('.fca_qc_image').attr('src',image_url)
+				
+			})
+		})
 		
-	})
+		//ACTION WHEN CLICKING REMOVE IMAGE
+		$('.fca_qc_quiz_image_revert_btn').unbind( 'click' )
+		$('.fca_qc_quiz_image_revert_btn').click( function(e) {
+			$( this ).siblings('.fca_qc_image_input').val('')
+			$( this ).siblings('.fca_qc_image').attr('src','')
+			
+		})
+	}
+	attach_image_upload_handlers()
 
 	
 	////////////////
@@ -162,7 +169,7 @@ jQuery(document).ready(function($){
 		setConfirmUnload( true )
 	}) 
 	
-	$( '#fca_qc_submit_btn' ).click(function(){
+	$( '#publish' ).click(function(){
 		setConfirmUnload( false )
 	})
 	
