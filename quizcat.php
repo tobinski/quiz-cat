@@ -491,14 +491,14 @@ function fca_qc_escape_input($data) {
 
 function fca_qc_do_quiz( $atts ) {
 	
-	if ( empty ( $atts[ 'id' ] ) ) {
+	if ( !empty ( $atts[ 'id' ] ) ) {
 		$quiz_meta = get_post_meta ( $atts[ 'id' ], 'quiz-cat-meta', true );
 		$quiz_meta['title'] = get_the_title ( $atts[ 'id' ] );
 		$quiz_questions = get_post_meta ( $atts[ 'id' ], 'quiz-cat-questions', true );
 		$quiz_results = get_post_meta ( $atts[ 'id' ], 'quiz-cat-results', true );
 		$quiz_settings = get_post_meta ( $atts[ 'id' ], 'quiz-cat-settings', true );
 		
-		if ( empty ($quiz_meta) || empty ($quiz_questions) ) {
+		if ( !$quiz_meta || !$quiz_questions ) {
 			echo '<p>Quiz Cat: ' . __('No Quiz found', 'fca_quiz_cat') . '</p>';
 			return false;
 		}
