@@ -3,9 +3,8 @@
 }
 
 .fca_qc_quiz_image_upload_btn, .fca_qc_quiz_image_revert_btn {
-
 	font-size: 1.5rem;
-	margin: 1rem 0;
+	margin-bottom: 0.5rem;
 }
 
 .fca_qc_quiz_image_upload_btn{

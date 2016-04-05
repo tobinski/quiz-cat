@@ -217,14 +217,14 @@ function fca_qc_render_description_meta_box( $post ) {
 	echo '</div>';
 	
 	echo '<div class="fca_qc_one_third_div">';
-		echo "<label class='fca_qc_admin_label'>" . __('Image', 'fca_quiz_cat') . "</label><br>";
+		echo "<label class='fca_qc_admin_label'>" . __('Image', 'fca_quiz_cat') . "</label>";
 		echo "<input type='text' class='fca_qc_image_input' name='fca_qc_quiz_description_image_src' id='fca_qc_quiz_description_image_src' style='display: none;' value='" . $quiz_meta['desc_img_src'] . "'>";
-		
+		echo "<span class='pointer dashicons dashicons-welcome-add-page fca_qc_quiz_image_upload_btn'></span>";	
+		echo "<span class='pointer dashicons dashicons-no-alt fca_qc_quiz_image_revert_btn'></span>";	
 		//ASSIGN PLACEHOLDER IMAGE
 		empty ( $quiz_meta['desc_img_src'] ) ? $quiz_meta['desc_img_src'] = FCA_QC_PLUGINS_URL . '/assets/image-placeholder.png' : '';
 		echo "<img class='fca_qc_image' id='fca_qc_quiz_description_image' src='" . $quiz_meta['desc_img_src'] . "'>";
-		echo "<span class='pointer dashicons dashicons-welcome-add-page fca_qc_quiz_image_upload_btn'></span>";	
-		echo "<span class='pointer dashicons dashicons-no-alt fca_qc_quiz_image_revert_btn'></span>";	
+
 	echo '</div>';
 	
 }
@@ -360,11 +360,12 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 			$html .= '</div>';
 			
 			$html .= '<div class="fca_qc_one_third_div">';
-				$html .= "<label class='fca_qc_admin_label'>" . __('Image', 'fca_quiz_cat') . "</label><br>";
+				$html .= "<label class='fca_qc_admin_label'>" . __('Image', 'fca_quiz_cat') . "</label>";
 				$html .= '<input type="text" class="fca_qc_image_input" name="fca_qc_quiz_result_image_src[]" style="display: none;" value="' . $result['img'] . '">';
-				$html .= '<img class="fca_qc_image" id="fca_qc_quiz_result_image[]" src="' . $result['img'] . '">';
 				$html .= "<span class='pointer dashicons dashicons-welcome-add-page fca_qc_quiz_image_upload_btn'></span>";		
 				$html .= "<span class='pointer dashicons dashicons-no-alt fca_qc_quiz_image_revert_btn'></span>";
+				$html .= '<img class="fca_qc_image" id="fca_qc_quiz_result_image[]" src="' . $result['img'] . '">';
+
 			$html .= '</div>';
 		
 		$html .= '</div>';
