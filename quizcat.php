@@ -508,10 +508,11 @@ function fca_qc_do_quiz( $atts ) {
 		wp_enqueue_style( 'fca_qc_quiz_stylesheet', plugins_url( 'includes/quiz.css', __FILE__ ) );
 		wp_enqueue_script( 'fca_qc_quiz_js', plugins_url( 'includes/quiz.js', __FILE__ ) );
 		
+		//SEND JS THE DATA BUT CONVERT ANY ESCAPED THINGS BACK TO NORMAL CHARACTERS
 		$quiz_data = array(
-			'quiz_meta' => $quiz_meta,
-			'quiz_questions' => $quiz_questions,
-			'quiz_results' => $quiz_results,
+			'quiz_meta' => fca_qc_convert_entities($quiz_meta),
+			'quiz_questions' => fca_qc_convert_entities($quiz_questions),
+			'quiz_results' => fca_qc_convert_entities($quiz_results),
 			'quiz_settings' => $quiz_settings,
 		);	
 		
@@ -567,3 +568,9 @@ function fca_qc_do_quiz( $atts ) {
 	}
 }
 add_shortcode( 'quiz-cat', 'fca_qc_do_quiz' );
+
+function fca_qc_convert_entities ( $array ) {
+	$array = is_array($array) ? array_map('fca_qc_convert_entities', $array) : wp_kses_decode_entities( $array );
+
+    return $array;
+}
