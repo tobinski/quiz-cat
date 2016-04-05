@@ -108,7 +108,7 @@ jQuery( document ).ready(function($) {
 	}
 	
 	function resetScore() {
-		$( '#fca_qc_score_div' ).show()
+		$( '#fca_qc_score_div' ).hide()
 		$( '#fca_qc_score' ).html( '' )
 	}
 	
