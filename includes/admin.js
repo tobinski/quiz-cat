@@ -10,6 +10,20 @@ jQuery(document).ready(function($){
 	console.log ( adminData.resultDiv )
 	
 	////////////////
+	//	SET DEFAULTS
+	////////////////
+	
+	
+	//MAKE THE QUESTION INPUTS AND RESULT TOGGLEABLE INPUTS HIDDEN
+	$( '.fca_qc_question_input_div, .fca_qc_result_input_div').hide()
+	
+	//DUPLICATE THE SAVE/UPDATE AND PREVIEW BUTTONS
+	let newButton = $( '#major-publishing-actions').clone()
+	$( '#normal-sortables' ).append( newButton )
+	
+	
+	
+	////////////////
 	//	ON CLICK EVENT HANDLERS
 	////////////////
 	
@@ -169,18 +183,12 @@ jQuery(document).ready(function($){
 		setConfirmUnload( true )
 	}) 
 	
-	$( '#publish' ).click(function(){
+	$( 'input[type="submit"]' ).click(function(){
 		setConfirmUnload( false )
 	})
 	
 	
-	////////////////
-	//	SET DEFAULTS
-	////////////////
-	
-	
-	//MAKE THE QUESTION INPUTS AND RESULT TOGGLEABLE INPUTS HIDDEN
-	$( '.fca_qc_question_input_div, .fca_qc_result_input_div').hide()
+
 	
 	
 })

@@ -1,6 +1,34 @@
-#fca_qc_question, .fca_qc_answer, #fca_qc_answer_container, #fca_qc_back_container {
-	text-align: center;
+#fca_qc_question,
+.fca_qc_answer,
+#fca_qc_answer_container,
+#fca_qc_back_container,
+#fca_qc_quiz_title,
+#fca_qc_quiz_description,
+#fca_qc_quiz_description_img,
+#fca_qc_question_count {
 	
+	text-align: center;
+}
+
+#fca_qc_quiz_title {
+	font-size: 26px;
+}
+
+#fca_qc_quiz_description {
+	font-size: 16px;
+}
+
+
+#fca_qc_start_button{
+	
+	display: block;
+	width: 200px;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+	font-size: 20px;
+	margin-left: auto;
+    margin-right: auto;
+
 }
 
 #fca_qc_answer_container, #fca_qc_back_container {
