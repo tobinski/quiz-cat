@@ -7,21 +7,27 @@ jQuery( document ).ready(function($) {
 	let questions = quizData.quiz_questions
 	let results = quizData.quiz_results
 	let settings = quizData.quiz_settings
-
+	
+	const correctString = quizData.correct_string
+	const wrongString = quizData.wrong_string
 	const questionCount = questions.length
 	let currentQuestion = 0
 	let score = 0
 	let currentAnswer, currentHint = ''
 	
 	$( '#fca_qc_start_button' ).click(function() {
+		
 		$( '#fca_qc_quiz_title' ).hide()
 		$( '#fca_qc_quiz_description' ).hide()
 		$( '#fca_qc_quiz_description_img' ).hide()
-		$( '#fca_qc_quiz_div' ).show()
-		$( '#fca_qc_question_count' ).show()
-		$( '#fca_qc_question_count' ).html( ( currentQuestion + 1) + "/" + questionCount)
 		$( this ).hide()
+		
+		$( '#fca_qc_quiz_div' ).show()
+		$( '#fca_qc_quiz_footer' ).show()
+		$( '#fca_qc_question_count' ).html( ( currentQuestion + 1) + "/" + questionCount)
+		
 		showQuestion()
+		
 	})
 	
 	$( '#fca_qc_restart_button' ).click(function() {
@@ -41,21 +47,31 @@ jQuery( document ).ready(function($) {
 		
 	})
 
-	$( '#fca_qc_answer_1,#fca_qc_answer_2,#fca_qc_answer_3,#fca_qc_answer_4' ).click(function() {
+	$( '.fca_qc_answer_div' ).click(function() {
 		$( this ).blur()
-		$( '#fca_qc_quiz_div' ).addClass( 'flip' )
-		$( '#fca_qc_hint' ).html( currentHint )
 		
-		$( '#fca_qc_result_back' ).removeClass( 'correct-answer' )
-
-		if ( $( this ).html() == currentAnswer ) {
+		
+		$( '#fca_qc_quiz_div' ).addClass( 'flip' )
+		$( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
+		$( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
+		$( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
+		$( '#fca_qc_correct_answer' ).html( currentAnswer )
+		$( '#fca_qc_quiz_div' ).addClass( 'flip' )
+		
+		if ( $( this ).children('.fca_qc_answer_span').html() == currentAnswer ) {
+			
 			score = score + 1
-			$( '#fca_qc_result_back' ).addClass( 'correct-answer' )
-			$( '#fca_qc_result_back' ).html( 'Correct!' )
+			
+			$( '#fca_qc_back_container' ).addClass( 'correct-answer' )
+			$( '#fca_qc_question_right_or_wrong' ).html( correctString )
+			$( '#fca_qc_correct_answer_p' ).hide()
+			
 			
 		} else {
-		
-			$( '#fca_qc_result_back' ).html( 'Incorrect' )
+
+			$( '#fca_qc_back_container' ).addClass( 'wrong-answer' )
+			$( '#fca_qc_question_right_or_wrong' ).html( wrongString )
+			$( '#fca_qc_correct_answer_p' ).show()
 			
 		}
 	
@@ -67,7 +83,7 @@ jQuery( document ).ready(function($) {
 			
 			$( '#fca_qc_question_count' ).html( ( currentQuestion + 1) + "/" + questionCount)
 			
-			$( '#fca_qc_answer_1,#fca_qc_answer_2,#fca_qc_answer_3,#fca_qc_answer_4' ).removeClass('quizprep-wrong-answer')
+			$( '.fca_qc_answer_div' ).removeClass('quizprep-wrong-answer')
 			
 			let question = questions[currentQuestion].question
 			let answer = questions[currentQuestion].answer
@@ -84,10 +100,10 @@ jQuery( document ).ready(function($) {
 			$( '#fca_qc_question_back' ).html(question)
 			
 			
-			$( '#fca_qc_answer_1' ).html(shuffled_answers[0])
-			$( '#fca_qc_answer_2' ).html(shuffled_answers[1])
-			$( '#fca_qc_answer_3' ).html(shuffled_answers[2])
-			$( '#fca_qc_answer_4' ).html(shuffled_answers[3])
+			$( '.fca_qc_answer_span' ).eq(0).html(shuffled_answers[0])
+			$( '.fca_qc_answer_span' ).eq(1).html(shuffled_answers[1])
+			$( '.fca_qc_answer_span' ).eq(2).html(shuffled_answers[2])
+			$( '.fca_qc_answer_span' ).eq(3).html(shuffled_answers[3])
 			
 			currentQuestion = currentQuestion + 1
 						
@@ -101,15 +117,15 @@ jQuery( document ).ready(function($) {
 	}
 	
 	function drawScore() {
-		$( '#fca_qc_score_div' ).show()
-		let newScore = score / currentQuestion
-		newScore = newScore * 100
-		$( '#fca_qc_score' ).html( score + "/" + currentQuestion + " = " + newScore.toFixed(0) + "%" )
+		//$( '#fca_qc_score_div' ).show()
+		//let newScore = score / currentQuestion
+		//newScore = newScore * 100
+		//$( '#fca_qc_score' ).html( score + "/" + currentQuestion + " = " + newScore.toFixed(0) + "%" )
 	}
 	
 	function resetScore() {
-		$( '#fca_qc_score_div' ).hide()
-		$( '#fca_qc_score' ).html( '' )
+		//$( '#fca_qc_score_div' ).hide()
+		//$( '#fca_qc_score' ).html( '' )
 	}
 	
 	function endTest() {
@@ -119,7 +135,6 @@ jQuery( document ).ready(function($) {
 		drawScore()
 		
 	}
-	
 
 	function shuffleArray(array) {
 		for (let i = array.length - 1; i > 0; i--) {
@@ -130,7 +145,5 @@ jQuery( document ).ready(function($) {
 		}
 		return array
 	}
-
 	
 })
-

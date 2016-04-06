@@ -514,6 +514,8 @@ function fca_qc_do_quiz( $atts ) {
 			'quiz_questions' => fca_qc_convert_entities($quiz_questions),
 			'quiz_results' => fca_qc_convert_entities($quiz_results),
 			'quiz_settings' => $quiz_settings,
+			'wrong_string' =>  __('Wrong!', 'fca_quiz_cat'),
+			'correct_string' => __('Correct!', 'fca_quiz_cat'),
 		);	
 		
 		$user_data = array(
@@ -524,42 +526,39 @@ function fca_qc_do_quiz( $atts ) {
 		wp_localize_script( 'fca_qc_quiz_js', 'quizData', $quiz_data );
 		wp_localize_script( 'fca_qc_quiz_js', 'userData', $user_data );
 		
+		$svg_rectangle = '<svg class="fca_qc_rectancle" width="26" height="26"><rect width="26" height="26" style="fill:#fff;stroke-width:1;stroke:#000"></svg>';
+		
 		ob_start(); ?>
-		
-		<h2 id='fca_qc_quiz_title'><?php echo $quiz_meta['title'] ?></h2>
-		<p id='fca_qc_quiz_description'><?php echo $quiz_meta['desc'] ?></p>
-		<img id='fca_qc_quiz_description_img' src='<?php echo $quiz_meta['desc_img_src'] ?>'>
-		
-		<button type='button' id='fca_qc_start_button'>Start Quiz!</button>
-		<button type='button' id='fca_qc_restart_button' style='display: none;'>Retake Quiz!</button>
-		<div class='flip-container' id='fca_qc_quiz_div' style='display: none;'>
-			<div class='flipper'>
-				<div class='front' id='fca_qc_answer_container'>
-					<p id='fca_qc_question'>Question</p>
-					<button type='button' class='fca_qc_answer' id='fca_qc_answer_1'></button>
-					<button type='button' class='fca_qc_answer' id='fca_qc_answer_2'></button>
-					<button type='button' class='fca_qc_answer' id='fca_qc_answer_3'></button>
-					<button type='button' class='fca_qc_answer' id='fca_qc_answer_4'></button>
-				</div>
-				<div class='back' id='fca_qc_back_container'>
-					<p id='fca_qc_question_back'>Question</p>
-					<p id='fca_qc_result_back'></p>
-					<p id='fca_qc_hint'>Hint</p>
-					<button type='button' id='fca_qc_next_question'>Next Question</button><br>
+		<div class='fca_qc_quiz' id='<?php echo 'fca_qc_quiz_' . $atts[ 'id' ] ?>'>
+			<h2 id='fca_qc_quiz_title'><?php echo $quiz_meta['title'] ?></h2>
+			<p id='fca_qc_quiz_description'><?php echo $quiz_meta['desc'] ?></p>
+			<img id='fca_qc_quiz_description_img' src='<?php echo $quiz_meta['desc_img_src'] ?>'>
+			
+			<button type='button' class='fca_qc_button' id='fca_qc_start_button'><?php _e('Start Quiz', 'fca_quiz_cat') ?></button>
+			<button type='button' class='fca_qc_button' id='fca_qc_restart_button' style='display: none;'><?php _e('Retake Quiz', 'fca_quiz_cat') ?></button>
+			<div class='flip-container' id='fca_qc_quiz_div' style='display: none;'>
+				<div class='flipper'>
+					<div class='front' id='fca_qc_answer_container'>
+						<p id='fca_qc_question'><?php _e('Question', 'fca_quiz_cat') ?></p>
+							<div class='fca_qc_answer_div'><?php echo $svg_rectangle ?><span class='fca_qc_answer_span'></span></div>
+							<div class='fca_qc_answer_div'><?php echo $svg_rectangle ?><span class='fca_qc_answer_span'></span></div>
+							<div class='fca_qc_answer_div'><?php echo $svg_rectangle ?><span class='fca_qc_answer_span'></span></div>
+							<div class='fca_qc_answer_div'><?php echo $svg_rectangle ?><span class='fca_qc_answer_span'></span></div>
+					</div>
+					<div class='back' id='fca_qc_back_container'>
+						<p id='fca_qc_question_right_or_wrong'></p>
+						<span id='fca_qc_question_back'></span></p>
+						<p class='fca_qc_back_response'><?php _e('Your answer: ', 'fca_quiz_cat') ?><span id='fca_qc_your_answer'></span></p>
+						<p id='fca_qc_correct_answer_p' class='fca_qc_back_response'><?php _e('Correct answer: ', 'fca_quiz_cat') ?><span id='fca_qc_correct_answer'></span></p>
+						<button type='button' id='fca_qc_next_question'><?php _e('Next', 'fca_quiz_cat') ?></button>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<p id='fca_qc_question_count' style='display: none;'></p>
-
-
-		
-		<div id='fca_qc_score_div' style='display: none;'>
-			<p id='fca_qc_score_info'>Your Score:</p>
-			<p id='fca_qc_score'></p>
 			
+			<div id='fca_qc_quiz_footer' style='display: none;'>
+				<span id='fca_qc_question_count'></span>		
+			</div>
 		</div>
-		
 		<?php
 		
 		echo ob_get_clean();

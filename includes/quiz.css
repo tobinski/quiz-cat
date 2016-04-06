@@ -1,46 +1,119 @@
-#fca_qc_question,
-.fca_qc_answer,
-#fca_qc_answer_container,
-#fca_qc_back_container,
-#fca_qc_quiz_title,
-#fca_qc_quiz_description,
-#fca_qc_quiz_description_img,
-#fca_qc_question_count {
-	
+div.fca_qc_quiz {
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 30px 50px;
 	text-align: center;
 }
 
 #fca_qc_quiz_title {
 	font-size: 26px;
+	margin:0;
+	padding:0;
+	
 }
 
 #fca_qc_quiz_description {
+	
+	font-size: 16px;
+	margin: 20px 0;
+}
+
+#fca_qc_quiz_description_img {
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#fca_qc_question {
+	font-size: 26px;
+	margin-bottom: 20px;
+}
+
+svg.fca_qc_rectancle {
+	margin: 15px;
+}
+
+span.fca_qc_answer_span {
+	position: relative;
+	top: -21px;
 	font-size: 16px;
 }
 
-
-#fca_qc_start_button{
-	
-	display: block;
+button.fca_qc_button {
 	width: 200px;
-	margin-bottom: 1rem;
-	margin-top: 1rem;
+	height: 50px;
+	margin-top: 20px;
+	padding: 13px 45px;
+	border-radius: 2px;
+	background-color: #58afa2;
+	box-shadow: 0 2px 0 0 #3c7d73;
+
+}
+
+#fca_qc_next_question {
+	background-color: inherit;
+	color: black;
+	width: 140px;
+	border-radius: 2px;
+	border: solid 2px #151515;	
+	margin-top: 35px;
+}
+
+div.fca_qc_answer_div {
+	display: block;
+	margin-bottom: 20px;
+	width: 100%;
+	height: 56px;
+	border-radius: 2px;
+	background-color: #dbdbdb;
+	color: black;
+	text-align: left;
+	text-transform: none;
+	font-weight: normal;
+	cursor: pointer;
+}
+
+#fca_qc_your_answer, #fca_qc_correct_answer {
+	font-weight: normal;
+}
+
+div.fca_qc_answer_div:hover {
+	background-color: #8dc8bf;
+}
+
+#fca_qc_quiz_footer {
+	margin-top: 20px;
+	font-size: 16px;
+}
+
+#fca_qc_question_count{
+	font-size: 16px;
+}
+
+#fca_qc_question_right_or_wrong{
+	font-size: 26px;
+	margin: 30px 0;
+
+}
+
+#fca_qc_question_back {
 	font-size: 20px;
-	margin-left: auto;
-    margin-right: auto;
-
+	font-weight: bold;
 }
 
-#fca_qc_answer_container, #fca_qc_back_container {
-	padding: 10px;	
+p.fca_qc_back_response {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
 
-.fca_qc_answer {
-	margin: 10px;
-}
 
-.correct-answer {
-	color: #2ecc71;
+div.correct-answer {
+	background-color: #abdc8c;
+}
+div.wrong-answer {
+	background-color: #f57484;
 }
 
 /**** FLIP CARD CSS ****/
@@ -55,7 +128,7 @@
 
 .flip-container, .front, .back {
 	width: 100%;
-	height: 300px;
+	height: 400px;
 }
 
 /* flip speed goes here */
@@ -71,7 +144,6 @@
 	backface-visibility: hidden;
 	transition: 0.6s;
 	transform-style: preserve-3d;
-	border: 1px solid black;
 	position: absolute;
 	top: 0;
 	left: 0;
