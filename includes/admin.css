@@ -14,7 +14,6 @@
 	color: red;
 }	
 	
-	
 #fca_qc_quiz_description {
 	width: 98%;
 }
@@ -34,6 +33,15 @@
 .fca_qc_admin_label {
 	font-weight: bold;
 }
+.fca_qc_admin_label_switch {
+	vertical-align: text-bottom;
+	padding-left: 15px;
+	height: 40px;
+    line-height: 40px;
+	margin-bottom: 30px;
+
+}
+
 .fca_qc_question_label, .fca_qc_result_label {
 	margin-top: 1rem;
 	cursor: pointer;
@@ -50,7 +58,7 @@
 
 .fca_qc_add_btn {
 	color: #40d47e;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	margin: 1rem 0;
 }
 
@@ -65,6 +73,10 @@
 	margin-bottom: 1rem;
 }
 
+.fca_qc_text_input {
+	width: 250px;
+}
+
 .fca_qc_image {
 	max-width: 100%;
 	display: block;
@@ -77,4 +89,39 @@
 	margin-bottom: 1rem;
 }
 
+/* ON OFF SWITCH */
 
+.fca_qc_onoffswitch {
+	display: inline-block;
+    position: relative;
+	width: 60px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.fca_qc_onoffswitch-checkbox {
+    display: none;
+}
+.fca_qc_onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 36px; padding: 0; line-height: 36px;
+    border: 2px solid #CCCCCC; border-radius: 36px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s ease-in;
+}
+.fca_qc_onoffswitch-label:before {
+    content: "";
+    display: block; width: 36px; margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 22px;
+    border: 2px solid #CCCCCC; border-radius: 36px;
+    transition: all 0.3s ease-in 0s; 
+}
+.fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label {
+    background-color: #0085ba;
+}
+.fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label, .fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label:before {
+   border-color: #0085ba;
+}
+.fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label:before {
+    right: 0px; 
+}

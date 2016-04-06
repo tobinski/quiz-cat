@@ -331,7 +331,7 @@ function fca_qc_render_add_result_meta_box( $post ) {
 	echo "<span id='fca_qc_add_result_btn' class='dashicons dashicons-plus-alt fca_qc_add_btn pointer'></span>";
 }
 
-//RENDER A RESULT META BOXE
+//RENDER A RESULT META BOX
 // INPUT: ARRAY->$results (TITLE, DESC, IMG), INT|STRING->$result_number, STRING->$operation ('echo' OR 'return')
 // OUTPUT: ECHO OR RETURNED HTML
 function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'echo' ) {
@@ -348,13 +348,13 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 	
 	$html = "<div class='fca_qc_result_item fca_qc_deletable_item' id='fca_qc_result_$result_number'>";
 		$html .= "<span class='dashicons dashicons-trash fca_qc_delete_icon'></span>";
-		$html .= "<h3 class='fca_qc_result_label'>" . __('Result', 'fca_quiz_cat') . ' ' . $result_number . "</h3>";
+		$html .= "<h3 class='fca_qc_result_label'><span class='fca_qc_result_score_value'></span><span class='fca_qc_result_score_title'>" . $result['title'] . "</span></h3>";
 		
 		$html .= "<div class='fca_qc_result_input_div'>";
 			
 			$html .= '<div class="fca_qc_two_third_div">';
 				$html .= "<label class='fca_qc_admin_label'>" . __('Result Title', 'fca_quiz_cat') . "</label><br>";
-				$html .= "<input type='text' class='fca_qc_text_input' name='fca_qc_quiz_result[]' value='" . $result['title'] . "'></input><br>";
+				$html .= "<input type='text' class='fca_qc_text_input fca_qc_quiz_result' name='fca_qc_quiz_result_title[]' value='" . $result['title'] . "'></input><br>";
 				$html .= "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'fca_quiz_cat') . "</label><br>";
 				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_result_description[]'>" . $result['desc'] . "</textarea><br>";
 			$html .= '</div>';
@@ -394,12 +394,15 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 	
 	
 	$shortcode = '[quiz-cat id="' . $post->ID . '"]';
-
-	echo "<input type='checkbox' class='fca_qc_checkbox' id='fca_qc_hide_answers_until_end' name='fca_qc_hide_answers_until_end' $hide_answers></input>";		
-	echo "<label class='fca_qc_admin_label' for='fca_qc_hide_answers_until_end'>" . __('Hide answers until the end of the quiz', 'fca_quiz_cat') . "</label><br><br>";
-
+		
+	echo "<div class='fca_qc_onoffswitch'>";
+		echo "<input type='checkbox' class='fca_qc_onoffswitch-checkbox' id='fca_qc_hide_answers_until_end' style='display:none;' name='fca_qc_hide_answers_until_end' $hide_answers></input>";		
+	echo "<label class='fca_qc_onoffswitch-label' for='fca_qc_hide_answers_until_end'></label>";
+	echo "</div>";
+	echo "<label class='fca_qc_admin_label fca_qc_admin_label_switch' for='fca_qc_hide_answers_until_end'>" . __('Hide answers until the end of the quiz', 'fca_quiz_cat') . "</label><br>";
+	
 	echo "<label class='fca_qc_admin_label' for='fca_qc_shortcode_input'>" . __('Shortcode (copy & paste in to the post or page where you want the quiz to appear)', 'fca_quiz_cat') . "</label><br>";
-	echo "<input type='text' class='fca_qc_text_input' id='fca_qc_shortcode_input' name='fca_qc_shortcode_input' value='$shortcode' readonly><br><br>";		
+	echo "<input type='text' class='fca_qc_text_input' id='fca_qc_shortcode_input' name='fca_qc_shortcode_input' value='$shortcode' readonly>";		
 				
 }
 
@@ -443,10 +446,10 @@ function fca_qc_save_post( $post_id ) {
 	
 	
 	//SAVING RESULTS
-	$n = empty ( $_POST['fca_qc_quiz_result'] ) ? 0 : count ( $_POST['fca_qc_quiz_result'] );
+	$n = empty ( $_POST['fca_qc_quiz_result_title'] ) ? 0 : count ( $_POST['fca_qc_quiz_result_title'] );
 	
 	for ($i = 0; $i < $n ; $i++) {
-		$results[$i]['title'] = fca_qc_escape_input($_POST['fca_qc_quiz_result'][$i]);
+		$results[$i]['title'] = fca_qc_escape_input($_POST['fca_qc_quiz_result_title'][$i]);
 		$results[$i]['desc'] = fca_qc_escape_input($_POST['fca_qc_quiz_result_description'][$i]);
 		$results[$i]['img'] = fca_qc_escape_input($_POST['fca_qc_quiz_result_image_src'][$i]);
 	} 
