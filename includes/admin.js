@@ -39,11 +39,13 @@ jQuery(document).ready(function($){
 		
 		$( '#fca_qc_add_question_btn' ).before(div_to_append)
 		
-		add_question_heading_text()
+		add_question_heading_text_handlers()
 		add_input_click_toggles()
 		attach_delete_button_handlers()
+		calcResults()
 		
 		setConfirmUnload( true )
+		
 	})
 	
 	//THE ADD RESULT BUTTON
@@ -61,15 +63,17 @@ jQuery(document).ready(function($){
 		add_input_click_toggles()
 		attach_delete_button_handlers()
 		attach_image_upload_handlers()
+		add_result_heading_text_handlers()
+		calcResults()
 		
 		setConfirmUnload( true )
+		
 	})
 	
 	//results -> based on question count, divided by result count, with rounding to cover all
 	//
 	//at max ( equal to questions ) -> remove ability to add more
-	//when question count changes, have to re-calculate
-
+	//when question or result count changes, have to re-calculate
 
 	function calcResults () {
 		const questionCount = $( '.fca_qc_question_item' ).length
@@ -106,26 +110,17 @@ jQuery(document).ready(function($){
 				n = end + 1
 				
 				if (end == start ) {
-					$(this).children('.fca_qc_result_label').html( start )
+					$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( start + ': ' )
 				} else {
-					$(this).children('.fca_qc_result_label').html( start + '-' + end)
+					$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( start + '-' + end + ': ')
 				}		
 			} else {
-				$(this).children('.fca_qc_result_label').html( 'Unused' )
+				$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( 'Unused: ' )
 			}
 
 		})
-	}
-		
-	
-	calcResults ()
-
-
-
-	 
-	
-	
-	
+	}	
+	calcResults()
 	
 	//MAKES SHORTCODE INPUT AUTO-SELECT THE TEXT WHEN YOU CLICK IT
 	$('#fca_qc_shortcode_input').click(function(e) {
@@ -148,7 +143,7 @@ jQuery(document).ready(function($){
 	
 	//MAKES QUESTION HEADINGS AUTOMATICALLY SHOW THE QUESTION FROM THE INPUT BELOW IT
 	
-	function add_question_heading_text() {
+	function add_question_heading_text_handlers() {
 			
 		$('.fca_qc_question_text').unbind( 'keyup' )
 
@@ -158,7 +153,19 @@ jQuery(document).ready(function($){
 			$( this ).closest( '.fca_qc_question_input_div').prev().children( '.fca_qc_quiz_heading_text' ).html( $( this ).val() )
 		})	
 	}
-	add_question_heading_text()
+	add_question_heading_text_handlers()
+	
+	//MAKES RESULT HEADINGS AUTOMATICALLY SHOW THE RESULT TITLE FROM THE INPUT BELOW IT
+	
+	function add_result_heading_text_handlers() {
+			
+		$('.fca_qc_quiz_result').unbind( 'keyup' )
+
+		$( '.fca_qc_quiz_result' ).keyup( function() {
+			$( this ).closest( '.fca_qc_result_input_div').siblings( '.fca_qc_result_label').children( '.fca_qc_result_score_title' ).html( $( this ).val() )
+		})	
+	}
+	add_result_heading_text_handlers()
 	
 	//THE DELETE QUESTION BUTTON
 	function attach_delete_button_handlers() {
@@ -169,7 +176,7 @@ jQuery(document).ready(function($){
 
 			if (confirm( adminData.sureWarning )) {
 				$( this ).closest('.fca_qc_deletable_item').remove()
-
+				calcResults ()
 				setConfirmUnload( true )
 
 			} else {
@@ -180,12 +187,10 @@ jQuery(document).ready(function($){
 	}	
 	attach_delete_button_handlers()
 	
-
 	
 	////////////////
 	//	MEDIA UPLOAD
 	////////////////
-	
 	
 	
 	function attach_image_upload_handlers() {
