@@ -65,6 +65,68 @@ jQuery(document).ready(function($){
 		setConfirmUnload( true )
 	})
 	
+	//results -> based on question count, divided by result count, with rounding to cover all
+	//
+	//at max ( equal to questions ) -> remove ability to add more
+	//when question count changes, have to re-calculate
+
+
+	function calcResults () {
+		const questionCount = $( '.fca_qc_question_item' ).length
+		const resultCount = $( '.fca_qc_result_item' ).length
+
+		const divisor = parseInt ( (questionCount + 1) / resultCount )
+		let remainder = ( (questionCount + 1) % resultCount )
+		
+		let n = 0
+		
+		$( '.fca_qc_result_item' ).each(function() {
+			
+			if ( n <= questionCount ) {
+				let start = n
+				let end = 0
+						
+				if ( start == questionCount ) {
+					
+					end = start
+					
+				} else {
+					
+					end = start + (divisor - 1)
+					if ( remainder != 0 ) {
+						end = end + 1
+						remainder = remainder - 1
+					}
+					if ( end > questionCount ) {
+						end = questionCount
+					}
+					
+				}
+				
+				n = end + 1
+				
+				if (end == start ) {
+					$(this).children('.fca_qc_result_label').html( start )
+				} else {
+					$(this).children('.fca_qc_result_label').html( start + '-' + end)
+				}		
+			} else {
+				$(this).children('.fca_qc_result_label').html( 'Unused' )
+			}
+
+		})
+	}
+		
+	
+	calcResults ()
+
+
+
+	 
+	
+	
+	
+	
 	//MAKES SHORTCODE INPUT AUTO-SELECT THE TEXT WHEN YOU CLICK IT
 	$('#fca_qc_shortcode_input').click(function(e) {
 		this.select()
