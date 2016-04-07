@@ -107,7 +107,35 @@ div.fca_qc_answer_div:hover {
 	font-size: 16px;
 }
 
+#fca_qc_result_text{
+	font-weight: bold;
+	font-size: 16px;
+	margin: 0 0 15px 0;
+}
 
+div.fca_eoi_question_response_item {
+	margin: 0 0 15px 0;
+}
+
+h3.fca_eoi_question_response_question {
+	font-size: 20px;
+	font-weight: bold;
+	margin:0 0 10px 0;
+	padding-top: 15px;
+}
+
+p.fca_eoi_question_response_response {
+	font-size: 16px;
+	margin: 0 0 10px 0;
+}
+p.fca_eoi_question_response_correct_answer {
+	font-size: 16px;
+	margin: 0;
+	padding-bottom: 15px;
+}
+.fca_qc_bold{
+	font-weight: bold;
+}
 
 #fca_qc_question_count{
 	font-size: 16px;

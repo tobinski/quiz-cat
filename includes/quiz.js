@@ -5,6 +5,7 @@ jQuery( document ).ready(function($) {
 	
 	const questions = quizData.quiz_questions
 	let questionsShuffled = shuffleArray( quizData.quiz_questions )
+	let responses = []
 	
 	const results = quizData.quiz_results
 	const settings = quizData.quiz_settings
@@ -14,8 +15,8 @@ jQuery( document ).ready(function($) {
 	const wrongString = quizData.wrong_string
 	const questionCount = questions.length
 	
-	const resultsDiv = quizData.results_div
-	const answerDiv = quizData.answer_div
+	const yourAnswerString = quizData.your_answer_string
+	const correctAnswerString = quizData.correct_answer_string
 	
 	const scoreString = $( '#fca_qc_score_text').html()
 	
@@ -69,6 +70,9 @@ jQuery( document ).ready(function($) {
 
 	$( '.fca_qc_answer_div' ).click(function() {
 		$( this ).blur()
+		
+		responses.push ( $( this ).children('.fca_qc_answer_span').html() )
+		
 		if ( hideAnswers ) {
 			if ( $( this ).children('.fca_qc_answer_span').html() == currentAnswer ) {
 				
@@ -144,7 +148,7 @@ jQuery( document ).ready(function($) {
 		
 	}
 	
-	function set_score() {
+	function set_result() {
 
 		let yourResult = "undefined"
 		let i = 0
@@ -169,6 +173,38 @@ jQuery( document ).ready(function($) {
 			
 	}
 	
+	function show_responses() {
+		
+		let i = 0;
+		
+		for ( i = 0; i<questionsShuffled.length; i++ ) {
+			do_answer_response_div( questionsShuffled[i].question, questionsShuffled[i].answer, responses[i], i + 1 )
+		}
+		$( '#fca_qc_result_container' ).show()
+	}
+	
+	function do_answer_response_div( question, answer, response, questionNumber ) {
+		
+		let html = '';
+		
+		if ( answer == response ) {
+			html += "<div class='fca_eoi_question_response_item correct-answer'>";
+		} else {
+			html += "<div class='fca_eoi_question_response_item wrong-answer'>";
+		}
+				
+		html += "<h3 class='fca_eoi_question_response_question'>" + questionNumber + ". " + question + "</h3>"
+		
+		html += "<p class='fca_eoi_question_response_response'><span class='fca_qc_bold'>" + yourAnswerString + " </span>" + response + "</p>";
+		html += "<p class='fca_eoi_question_response_correct_answer'><span class='fca_qc_bold'>" + correctAnswerString + " </span>" + answer + "</p>";
+					
+		html += "</div>";
+		
+		$( '#fca_qc_insert_response_above' ).before(html)
+		
+		
+	}
+	
 	function resetScore() {
 		//$( '#fca_qc_score_div' ).hide()
 		//$( '#fca_qc_score' ).html( '' )
@@ -178,10 +214,14 @@ jQuery( document ).ready(function($) {
 	
 		$( '#fca_qc_quiz_footer' ).hide()
 		$( '#fca_qc_quiz_div' ).hide()
-		$( '#fca_qc_restart_button' ).show()
+		//$( '#fca_qc_restart_button' ).show()
 		$( '#fca_qc_score_container' ).show()
 		
-		set_score()
+		set_result()
+		
+		if ( hideAnswers ) {
+			show_responses()
+		}
 		
 	}
 

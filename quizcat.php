@@ -527,8 +527,8 @@ function fca_qc_do_quiz( $atts ) {
 			'quiz_settings' => $quiz_settings,
 			'wrong_string' =>  __('Wrong!', 'fca_quiz_cat'),
 			'correct_string' => __('Correct!', 'fca_quiz_cat'),
-			'results_div' => fca_qc_do_score_panel('return'),
-			'answer_div' => fca_qc_do_answer_panel('return'),
+			'your_answer_string' => __('Your answer:', 'fca_quiz_cat'),
+			'correct_answer_string' => __('Correct answer:', 'fca_quiz_cat'),
 		);	
 		
 		$user_data = array(
@@ -559,6 +559,7 @@ function fca_qc_do_quiz( $atts ) {
 			<div id='fca_qc_quiz_footer' style='display: none;'>
 				<span id='fca_qc_question_count'></span>		
 			</div>
+			<?php fca_qc_do_result_panel() ?> 
 			
 		</div>
 		<?php
@@ -611,6 +612,20 @@ function fca_qc_do_score_panel( $operation = 'echo') {
 		$html .= "<h3 id='fca_qc_score_title'></h3>";
 		$html .= "<img id='fca_qc_score_img' src=''>";
 		$html .= "<p id='fca_qc_score_desc'></p>";
+	$html .= "</div>";
+	
+	if ( $operation == 'echo' ) {
+		echo $html;
+	} else {
+		return $html;
+	}
+}
+
+function fca_qc_do_result_panel( $operation = 'echo') {
+	$html = "<div id='fca_qc_result_container' style='display:none;'>";
+		$html .= "<p id='fca_qc_result_text'>" . __('Your Answers', 'fca_quiz_cat') . "</p>";
+		//THIS IS WHERE EACH RESPONSE WILL BE INSERTED
+		$html .= "<div id='fca_qc_insert_response_above'></div>";
 	$html .= "</div>";
 	
 	if ( $operation == 'echo' ) {
