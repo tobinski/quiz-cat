@@ -20,6 +20,24 @@ define( 'FCA_QC_PLUGINS_URL', plugins_url( '', __FILE__ ) );
 add_action( 'wp_ajax_fca_qc_submit_form', 'fca_qc_submit_form' );
 add_action( 'wp_ajax_nopriv_fca_qc_submit_form', 'fca_qc_submit_form' );
 
+//RUN FILTER ON FRONT-END STRINGS
+$strings_array = array (
+	'no_quiz_found' => __('No Quiz found', 'fca_quiz_cat'),
+	'correct' => __('Correct!', 'fca_quiz_cat'),
+	'wrong' => __('Correct!', 'fca_quiz_cat'),
+	'your_answer' => __('Your answer:', 'fca_quiz_cat'),
+	'correct_answer' => __('Correct answer:', 'fca_quiz_cat'),
+    'question' => __('Question', 'fca_quiz_cat'),
+	'next' =>  __('Next', 'fca_quiz_cat'),
+	'you_got' =>  __('You got', 'fca_quiz_cat'),
+	'out_of' => __('out of', 'fca_quiz_cat'),
+	'your_answers' =>  __('Your Answers', 'fca_quiz_cat'),
+	'start_quiz' => __('Start Quiz', 'fca_quiz_cat'),
+	'retake_quiz' => __('Retake Quiz', 'fca_quiz_cat'),
+);
+$quiz_text_strings = apply_filters( 'fca_qc_quiz_text', $strings_array );
+
+
 
 ////////////////////////////
 //		SET UP POST TYPE
@@ -503,6 +521,8 @@ function fca_qc_escape_input($data) {
 
 function fca_qc_do_quiz( $atts ) {
 	
+	global $quiz_text_strings;
+	
 	if ( !empty ( $atts[ 'id' ] ) ) {
 		$quiz_meta = get_post_meta ( $atts[ 'id' ], 'quiz-cat-meta', true );
 		$quiz_meta['title'] = get_the_title ( $atts[ 'id' ] );
@@ -511,7 +531,7 @@ function fca_qc_do_quiz( $atts ) {
 		$quiz_settings = get_post_meta ( $atts[ 'id' ], 'quiz-cat-settings', true );
 		
 		if ( !$quiz_meta || !$quiz_questions ) {
-			echo '<p>Quiz Cat: ' . __('No Quiz found', 'fca_quiz_cat') . '</p>';
+			echo '<p>Quiz Cat: ' . $quiz_text_strings[ 'no_quiz_found' ] . '</p>';
 			return false;
 		}
 		
@@ -525,10 +545,10 @@ function fca_qc_do_quiz( $atts ) {
 			'quiz_questions' => fca_qc_convert_entities($quiz_questions),
 			'quiz_results' => fca_qc_convert_entities($quiz_results),
 			'quiz_settings' => $quiz_settings,
-			'wrong_string' =>  __('Wrong!', 'fca_quiz_cat'),
-			'correct_string' => __('Correct!', 'fca_quiz_cat'),
-			'your_answer_string' => __('Your answer:', 'fca_quiz_cat'),
-			'correct_answer_string' => __('Correct answer:', 'fca_quiz_cat'),
+			'wrong_string' => $quiz_text_strings[ 'wrong' ],
+			'correct_string' => $quiz_text_strings[ 'correct' ],
+			'your_answer_string' => $quiz_text_strings[ 'your_answer' ],
+			'correct_answer_string' => $quiz_text_strings[ 'correct_answer' ],
 		);	
 		
 		$user_data = array(
@@ -545,7 +565,7 @@ function fca_qc_do_quiz( $atts ) {
 			<p id='fca_qc_quiz_description'><?php echo $quiz_meta['desc'] ?></p>
 			<img id='fca_qc_quiz_description_img' src='<?php echo $quiz_meta['desc_img_src'] ?>'>
 			
-			<button type='button' class='fca_qc_button' id='fca_qc_start_button'><?php _e('Start Quiz', 'fca_quiz_cat') ?></button>
+			<button type='button' class='fca_qc_button' id='fca_qc_start_button'><?php echo $quiz_text_strings[ 'start_quiz' ] ?></button>
 			
 			<div class='flip-container' id='fca_qc_quiz_div' style='display: none;'>
 				<div class='flipper'>
@@ -555,7 +575,7 @@ function fca_qc_do_quiz( $atts ) {
 				</div>
 			</div>
 			<?php fca_qc_do_score_panel() ?> 
-			<button type='button' class='fca_qc_button' id='fca_qc_restart_button' style='display: none;'><?php _e('Retake Quiz', 'fca_quiz_cat') ?></button>
+			<button type='button' class='fca_qc_button' id='fca_qc_restart_button' style='display: none;'><?php echo $quiz_text_strings[ 'retake_quiz' ]  ?></button>
 			<div id='fca_qc_quiz_footer' style='display: none;'>
 				<span id='fca_qc_question_count'></span>		
 			</div>
@@ -566,17 +586,17 @@ function fca_qc_do_quiz( $atts ) {
 		
 		echo ob_get_clean();
 	} else {
-		echo '<p>Quiz Cat: ' . __('No Quiz found', 'fca_quiz_cat') . '</p>';
+		echo '<p>Quiz Cat: ' . $quiz_text_strings[ 'no_quiz_found' ] . '</p>';
 	}
 }
 add_shortcode( 'quiz-cat', 'fca_qc_do_quiz' );
 
 function fca_qc_do_question_panel( $operation = 'echo' ) {
-	
+	global $quiz_text_strings;
 	$svg_rectangle = '<svg class="fca_qc_rectancle" width="26" height="26"><rect width="26" height="26" style="fill:#fff;stroke-width:1;stroke:#000"></svg>';
 			
 	$html = "<div class='front' id='fca_qc_answer_container'>";
-		$html .= "<p id='fca_qc_question'>" . __('Question', 'fca_quiz_cat') . "</p>";
+		$html .= "<p id='fca_qc_question'>" . $quiz_text_strings['question'] . "</p>";
 		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
 		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
 		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
@@ -591,12 +611,13 @@ function fca_qc_do_question_panel( $operation = 'echo' ) {
 }
 
 function fca_qc_do_answer_panel( $operation = 'echo') {
+	global $quiz_text_strings;
 	$html = "<div class='back' id='fca_qc_back_container'>";
 		$html .= "<p id='fca_qc_question_right_or_wrong'></p>";
 		$html .= "<span id='fca_qc_question_back'></span></p>";
-		$html .= "<p class='fca_qc_back_response'>" . __('Your answer: ', 'fca_quiz_cat') . "<span id='fca_qc_your_answer'></span></p>";
-		$html .= "<p id='fca_qc_correct_answer_p' class='fca_qc_back_response'>" . __('Correct answer: ', 'fca_quiz_cat') . "<span id='fca_qc_correct_answer'></span></p>";
-		$html .= "<button type='button' id='fca_qc_next_question'>" . __('Next', 'fca_quiz_cat') . "</button>";
+		$html .= "<p class='fca_qc_back_response'>" . $quiz_text_strings['your_answer'] . " <span id='fca_qc_your_answer'></span></p>";
+		$html .= "<p id='fca_qc_correct_answer_p' class='fca_qc_back_response'>" . $quiz_text_strings['correct_answer'] . " <span id='fca_qc_correct_answer'></span></p>";
+		$html .= "<button type='button' id='fca_qc_next_question'>" . $quiz_text_strings['next'] . "</button>";
 	$html .= "</div>";
 	
 	if ( $operation == 'echo' ) {
@@ -607,8 +628,9 @@ function fca_qc_do_answer_panel( $operation = 'echo') {
 }
 
 function fca_qc_do_score_panel( $operation = 'echo') {
+	global $quiz_text_strings;
 	$html = "<div id='fca_qc_score_container' style='display:none;'>";
-		$html .= "<p id='fca_qc_score_text'>" . __('You got', 'fca_quiz_cat') . " {{SCORE_CORRECT}} " . __('out of', 'fca_quiz_cat') . " {{SCORE_TOTAL}} " . __('right', 'fca_quiz_cat') . "</p>";
+		$html .= "<p id='fca_qc_score_text'>" . $quiz_text_strings['you_got'] . " {{SCORE_CORRECT}} " . $quiz_text_strings['out_of'] . " {{SCORE_TOTAL}} </p>";
 		$html .= "<h3 id='fca_qc_score_title'></h3>";
 		$html .= "<img id='fca_qc_score_img' src=''>";
 		$html .= "<p id='fca_qc_score_desc'></p>";
@@ -622,8 +644,9 @@ function fca_qc_do_score_panel( $operation = 'echo') {
 }
 
 function fca_qc_do_result_panel( $operation = 'echo') {
+	global $quiz_text_strings;
 	$html = "<div id='fca_qc_result_container' style='display:none;'>";
-		$html .= "<p id='fca_qc_result_text'>" . __('Your Answers', 'fca_quiz_cat') . "</p>";
+		$html .= "<p id='fca_qc_result_text'>" . $quiz_text_strings['your_answers'] . "</p>";
 		//THIS IS WHERE EACH RESPONSE WILL BE INSERTED
 		$html .= "<div id='fca_qc_insert_response_above'></div>";
 	$html .= "</div>";
