@@ -501,16 +501,9 @@ add_action( 'save_post_fca_qc_quiz', 'fca_qc_save_post' );
 
 function fca_qc_escape_input($data) {
  
-	if (!empty($data)) {
-
-		$data = htmlentities ( $data, ENT_QUOTES );
+	$data = htmlentities ( $data, ENT_QUOTES );
 		
-		return $data;
-		
-	} else {
-	
-		return false;
-	}
+	return $data;
 
 }
 
