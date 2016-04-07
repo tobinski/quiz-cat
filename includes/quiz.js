@@ -1,8 +1,5 @@
 jQuery( document ).ready(function($) {
 	
-	console.log(quizData)
-	console.log(userData)
-	
 	const questions = quizData.quiz_questions
 	let questionsShuffled = shuffleArray( quizData.quiz_questions )
 	let responses = []
