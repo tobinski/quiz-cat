@@ -4,19 +4,16 @@ div.fca_qc_quiz {
 	margin-right: auto;
 	padding: 30px 50px;
 	text-align: center;
+	color: #151515;
 }
-
 #fca_qc_quiz_title {
-	font-size: 26px;
-	margin:0;
-	padding:0;
-	
+	color: #151515;
+	margin: 0 0 20px 0;
 }
 
 #fca_qc_quiz_description {
-	
 	font-size: 16px;
-	margin: 20px 0;
+	margin: 0 0 20px 0;
 }
 
 #fca_qc_quiz_description_img {
@@ -28,26 +25,30 @@ div.fca_qc_quiz {
 #fca_qc_question {
 	font-size: 26px;
 	margin-bottom: 20px;
+	color: #151515;
 }
 
-svg.fca_qc_rectancle {
+div.fca_qc_quiz svg.fca_qc_rectancle {
 	margin: 15px;
 }
 
-span.fca_qc_answer_span {
+div.fca_qc_quiz span.fca_qc_answer_span {
 	position: relative;
 	top: -21px;
 	font-size: 16px;
+	color: #151515;
+	
 }
 
-button.fca_qc_button {
+div.fca_qc_quiz button.fca_qc_button {
 	width: 200px;
-	height: 50px;
 	margin-top: 20px;
-	padding: 13px 45px;
 	border-radius: 2px;
+	font-weight: bold;
 	background-color: #58afa2;
 	box-shadow: 0 2px 0 0 #3c7d73;
+	color: #FFF;
+	font-size: 20px;
 
 }
 
@@ -60,7 +61,7 @@ button.fca_qc_button {
 	margin-top: 35px;
 }
 
-div.fca_qc_answer_div {
+div.fca_qc_quiz div.fca_qc_answer_div {
 	display: block;
 	margin-bottom: 20px;
 	width: 100%;
@@ -72,66 +73,75 @@ div.fca_qc_answer_div {
 	text-transform: none;
 	font-weight: normal;
 	cursor: pointer;
+	color: #151515;
 }
 
 #fca_qc_your_answer, #fca_qc_correct_answer {
 	font-weight: normal;
 }
 
-div.fca_qc_answer_div:hover {
+div.fca_qc_quiz div.fca_qc_answer_div:hover {
 	background-color: #8dc8bf;
 }
-#fca_qc_score_text{
-	font-size: 14px;
-	margin: 0 30px 0 0;
-}
+
 #fca_qc_score_text{
 	font-size: 14px;
 	margin: 30px 0 10px 0;
+	color: #151515;
 }
 #fca_qc_score_title{
 	font-size: 26px;
 	margin: 0 0 20px 0;
+	color: #151515;
 }
 #fca_qc_score_img{
 	margin: 0 0 20px 0;
 	max-width: 500px;
 }
 #fca_qc_score_desc{
+	font-size: 16px;
 	margin: 0 0 30px 0;
+	color: #151515;
+	
 }
 
 
 #fca_qc_quiz_footer {
 	margin-top: 20px;
 	font-size: 16px;
+	color: #151515;
 }
 
 #fca_qc_result_text{
 	font-weight: bold;
 	font-size: 16px;
 	margin: 0 0 15px 0;
+	color: #151515;
 }
 
-div.fca_eoi_question_response_item {
+div.fca_qc_quiz div.fca_eoi_question_response_item {
 	margin: 0 0 15px 0;
+	color: #151515;
 }
 
-h3.fca_eoi_question_response_question {
+div.fca_qc_quiz h3.fca_eoi_question_response_question {
 	font-size: 20px;
 	font-weight: bold;
 	margin:0 0 10px 0;
 	padding-top: 15px;
+	color: #151515;
 }
 
-p.fca_eoi_question_response_response {
+div.fca_qc_quiz p.fca_eoi_question_response_response {
 	font-size: 16px;
 	margin: 0 0 10px 0;
+	color: #151515;
 }
-p.fca_eoi_question_response_correct_answer {
+div.fca_qc_quiz p.fca_eoi_question_response_correct_answer {
 	font-size: 16px;
 	margin: 0;
 	padding-bottom: 15px;
+	color: #151515;
 }
 .fca_qc_bold{
 	font-weight: bold;
@@ -139,30 +149,34 @@ p.fca_eoi_question_response_correct_answer {
 
 #fca_qc_question_count{
 	font-size: 16px;
+	color: #151515;
 }
 
 #fca_qc_question_right_or_wrong{
 	font-size: 26px;
 	margin: 30px 0;
+	color: #151515;
 
 }
 
 #fca_qc_question_back {
 	font-size: 20px;
 	font-weight: bold;
+	color: #151515;
 }
 
-p.fca_qc_back_response {
+div.fca_qc_quiz p.fca_qc_back_response {
 	font-size: 16px;
 	font-weight: bold;
 	margin-bottom: 20px;
+	color: #151515;
 }
 
 
-div.correct-answer {
+div.fca_qc_quiz div.correct-answer {
 	background-color: #abdc8c;
 }
-div.wrong-answer {
+div.fca_qc_quiz div.wrong-answer {
 	background-color: #f57484;
 }
 
