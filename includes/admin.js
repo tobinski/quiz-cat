@@ -251,7 +251,7 @@ jQuery(document).ready(function($){
 		setConfirmUnload( true )
 	}) 
 	
-	$( 'input[type="submit"]' ).click(function(){
+	$( 'input[type="submit"], #publish' ).click(function(){
 		setConfirmUnload( false )
 	})
 	
