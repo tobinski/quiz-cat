@@ -81,11 +81,33 @@ div.fca_qc_answer_div {
 div.fca_qc_answer_div:hover {
 	background-color: #8dc8bf;
 }
+#fca_qc_score_text{
+	font-size: 14px;
+	margin: 0 30px 0 0;
+}
+#fca_qc_score_text{
+	font-size: 14px;
+	margin: 30px 0 10px 0;
+}
+#fca_qc_score_title{
+	font-size: 26px;
+	margin: 0 0 20px 0;
+}
+#fca_qc_score_img{
+	margin: 0 0 20px 0;
+	max-width: 500px;
+}
+#fca_qc_score_desc{
+	margin: 0 0 30px 0;
+}
+
 
 #fca_qc_quiz_footer {
 	margin-top: 20px;
 	font-size: 16px;
 }
+
+
 
 #fca_qc_question_count{
 	font-size: 16px;

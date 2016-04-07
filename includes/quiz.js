@@ -2,18 +2,37 @@ jQuery( document ).ready(function($) {
 	
 	console.log(quizData)
 	console.log(userData)
-
 	
-	let questions = quizData.quiz_questions
-	let results = quizData.quiz_results
-	let settings = quizData.quiz_settings
+	const questions = quizData.quiz_questions
+	let questionsShuffled = shuffleArray( quizData.quiz_questions )
+	
+	const results = quizData.quiz_results
+	const settings = quizData.quiz_settings
+	const hideAnswers = settings.hide_answers == 'on' ? true : false
 	
 	const correctString = quizData.correct_string
 	const wrongString = quizData.wrong_string
 	const questionCount = questions.length
+	
+	const resultsDiv = quizData.results_div
+	const answerDiv = quizData.answer_div
+	
+	const scoreString = $( '#fca_qc_score_text').html()
+	
 	let currentQuestion = 0
 	let score = 0
 	let currentAnswer, currentHint = ''
+	
+	function preloadImages() {
+		let preloaded_images = []
+		
+		for (i = 0; i < results.length; i++) {
+			preloaded_images[i] = new Image()
+			preloaded_images[i].src = results[i].img
+		}
+
+	}
+	preloadImages()
 	
 	$( '#fca_qc_start_button' ).click(function() {
 		
@@ -35,6 +54,7 @@ jQuery( document ).ready(function($) {
 		currentQuestion = 0
 		//shuffled_data = shuffleArray( quiz_data )
 		$( '#fca_qc_quiz_div' ).show()
+		$( '#fca_qc_score_container' ).hide()
 		$( this ).hide()
 		resetScore()
 		showQuestion()
@@ -49,30 +69,41 @@ jQuery( document ).ready(function($) {
 
 	$( '.fca_qc_answer_div' ).click(function() {
 		$( this ).blur()
-		
-		
-		$( '#fca_qc_quiz_div' ).addClass( 'flip' )
-		$( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
-		$( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
-		$( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
-		$( '#fca_qc_correct_answer' ).html( currentAnswer )
-		$( '#fca_qc_quiz_div' ).addClass( 'flip' )
-		
-		if ( $( this ).children('.fca_qc_answer_span').html() == currentAnswer ) {
-			
-			score = score + 1
-			
-			$( '#fca_qc_back_container' ).addClass( 'correct-answer' )
-			$( '#fca_qc_question_right_or_wrong' ).html( correctString )
-			$( '#fca_qc_correct_answer_p' ).hide()
-			
+		if ( hideAnswers ) {
+			if ( $( this ).children('.fca_qc_answer_span').html() == currentAnswer ) {
+				
+				score = score + 1
+				showQuestion()
+				
+			} else {
+
+				showQuestion()
+			}
 			
 		} else {
-
-			$( '#fca_qc_back_container' ).addClass( 'wrong-answer' )
-			$( '#fca_qc_question_right_or_wrong' ).html( wrongString )
-			$( '#fca_qc_correct_answer_p' ).show()
+			$( '#fca_qc_quiz_div' ).addClass( 'flip' )
+			$( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
+			$( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
+			$( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
+			$( '#fca_qc_correct_answer' ).html( currentAnswer )
+			$( '#fca_qc_quiz_div' ).addClass( 'flip' )
 			
+			if ( $( this ).children('.fca_qc_answer_span').html() == currentAnswer ) {
+				
+				score = score + 1
+				
+				$( '#fca_qc_back_container' ).addClass( 'correct-answer' )
+				$( '#fca_qc_question_right_or_wrong' ).html( correctString )
+				$( '#fca_qc_correct_answer_p' ).hide()
+				
+				
+			} else {
+
+				$( '#fca_qc_back_container' ).addClass( 'wrong-answer' )
+				$( '#fca_qc_question_right_or_wrong' ).html( wrongString )
+				$( '#fca_qc_correct_answer_p' ).show()
+				
+			}
 		}
 	
 	})
@@ -85,21 +116,19 @@ jQuery( document ).ready(function($) {
 			
 			$( '.fca_qc_answer_div' ).removeClass('quizprep-wrong-answer')
 			
-			let question = questions[currentQuestion].question
-			let answer = questions[currentQuestion].answer
-			currentHint = questions[currentQuestion].hint  //'GLOBAL' HINT
-			let wrong1 = questions[currentQuestion].wrong1
-			let wrong2 = questions[currentQuestion].wrong2
-			let wrong3 = questions[currentQuestion].wrong3
+			let question = questionsShuffled[currentQuestion].question
+			let answer = questionsShuffled[currentQuestion].answer
+			currentHint = questionsShuffled[currentQuestion].hint  //'GLOBAL' HINT
+			let wrong1 = questionsShuffled[currentQuestion].wrong1
+			let wrong2 = questionsShuffled[currentQuestion].wrong2
+			let wrong3 = questionsShuffled[currentQuestion].wrong3
 			
 			let answers = [answer, wrong1, wrong2, wrong3]
 			let shuffled_answers = shuffleArray( answers )
 			
 			$( '#fca_qc_question' ).html(question)
-			
 			$( '#fca_qc_question_back' ).html(question)
-			
-			
+						
 			$( '.fca_qc_answer_span' ).eq(0).html(shuffled_answers[0])
 			$( '.fca_qc_answer_span' ).eq(1).html(shuffled_answers[1])
 			$( '.fca_qc_answer_span' ).eq(2).html(shuffled_answers[2])
@@ -110,17 +139,34 @@ jQuery( document ).ready(function($) {
 			currentAnswer = answer
 		
 		} else {
-			alert ("the test has ended!")
 			endTest()
 		}
 		
 	}
 	
-	function drawScore() {
-		//$( '#fca_qc_score_div' ).show()
-		//let newScore = score / currentQuestion
-		//newScore = newScore * 100
-		//$( '#fca_qc_score' ).html( score + "/" + currentQuestion + " = " + newScore.toFixed(0) + "%" )
+	function set_score() {
+
+		let yourResult = "undefined"
+		let i = 0
+		
+		while ( yourResult == "undefined" ) {
+			if ( results[i].min <= score && results[i].max >= score) {
+				yourResult = results[i]
+			} else if( i == results.length ) {
+				yourResult = 'error'
+			}else {
+				i++
+			}
+		}
+
+		let scoreParagraph = scoreString.replace('{{SCORE_CORRECT}}', score)
+		scoreParagraph = scoreParagraph.replace('{{SCORE_TOTAL}}', questionCount)
+		  
+		$( '#fca_qc_score_text').html( scoreParagraph )
+		$( '#fca_qc_score_title').html( yourResult.title )
+		$( '#fca_qc_score_img').attr( 'src', yourResult.img )
+		$( '#fca_qc_score_desc').html( yourResult.desc )
+			
 	}
 	
 	function resetScore() {
@@ -130,9 +176,12 @@ jQuery( document ).ready(function($) {
 	
 	function endTest() {
 	
+		$( '#fca_qc_quiz_footer' ).hide()
 		$( '#fca_qc_quiz_div' ).hide()
 		$( '#fca_qc_restart_button' ).show()
-		drawScore()
+		$( '#fca_qc_score_container' ).show()
+		
+		set_score()
 		
 	}
 

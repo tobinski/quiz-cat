@@ -40,9 +40,9 @@ jQuery(document).ready(function($){
 		$( '#fca_qc_add_question_btn' ).before(div_to_append)
 		
 		add_question_heading_text_handlers()
-		add_input_click_toggles()
+		add_question_and_result_click_toggles()
 		attach_delete_button_handlers()
-		calcResults()
+		setScoreRanges()
 		
 		setConfirmUnload( true )
 		
@@ -60,28 +60,29 @@ jQuery(document).ready(function($){
 		
 		$( '#fca_qc_add_result_btn' ).before(div_to_append)
 		
-		add_input_click_toggles()
+		add_question_and_result_click_toggles()
 		attach_delete_button_handlers()
 		attach_image_upload_handlers()
 		add_result_heading_text_handlers()
-		calcResults()
+		setScoreRanges()
 		
 		setConfirmUnload( true )
 		
 	})
 	
+	
+	//FINDS RANGE OF RESULTS FOR EACH RESULT AUTOMATICALLY.
 	//results -> based on question count, divided by result count, with rounding to cover all
-	//
+	//e.g. 5 ANSWERS, 3 RESULTS = [0-1],[2-3],[4-5]
 	//at max ( equal to questions ) -> remove ability to add more
 	//when question or result count changes, have to re-calculate
-
-	function calcResults () {
+	function setScoreRanges() {
 		const questionCount = $( '.fca_qc_question_item' ).length
 		const resultCount = $( '.fca_qc_result_item' ).length
-
+		//plus one because zero is a possible result, e.g. you can get 0/10
 		const divisor = parseInt ( (questionCount + 1) / resultCount )
 		let remainder = ( (questionCount + 1) % resultCount )
-		
+		//n is the result 'counter' to be iterated, and passed to the next result to start at
 		let n = 0
 		
 		$( '.fca_qc_result_item' ).each(function() {
@@ -109,6 +110,10 @@ jQuery(document).ready(function($){
 				
 				n = end + 1
 				
+				
+				$(this).children( '.fca_qc_result_min' ).attr('value', start)
+				$(this).children( '.fca_qc_result_max' ).attr('value', end)
+				
 				if (end == start ) {
 					$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( start + ': ' )
 				} else {
@@ -120,7 +125,7 @@ jQuery(document).ready(function($){
 
 		})
 	}	
-	calcResults()
+	setScoreRanges()
 	
 	//MAKES SHORTCODE INPUT AUTO-SELECT THE TEXT WHEN YOU CLICK IT
 	$('#fca_qc_shortcode_input').click(function(e) {
@@ -128,21 +133,18 @@ jQuery(document).ready(function($){
 	})
 	
 	//MAKES QUESTION AND RESULT LABELS TOGGLE THE INPUT VISIBILITY ON CLICK
-	function add_input_click_toggles() {
+	function add_question_and_result_click_toggles() {
 			
 		$( '.fca_qc_question_label, .fca_qc_result_label' ).unbind( 'click' )
 
-
 		$( '.fca_qc_question_label, .fca_qc_result_label' ).click( function() {
-			$( this ).next().toggle( 'fast' )
-				
+			$( this ).next().toggle( 'fast' )	
 		})	
 	}
-	add_input_click_toggles()
+	add_question_and_result_click_toggles()
 	
 	
 	//MAKES QUESTION HEADINGS AUTOMATICALLY SHOW THE QUESTION FROM THE INPUT BELOW IT
-	
 	function add_question_heading_text_handlers() {
 			
 		$('.fca_qc_question_text').unbind( 'keyup' )
@@ -156,7 +158,6 @@ jQuery(document).ready(function($){
 	add_question_heading_text_handlers()
 	
 	//MAKES RESULT HEADINGS AUTOMATICALLY SHOW THE RESULT TITLE FROM THE INPUT BELOW IT
-	
 	function add_result_heading_text_handlers() {
 			
 		$('.fca_qc_quiz_result').unbind( 'keyup' )
@@ -176,7 +177,7 @@ jQuery(document).ready(function($){
 
 			if (confirm( adminData.sureWarning )) {
 				$( this ).closest('.fca_qc_deletable_item').remove()
-				calcResults ()
+				setScoreRanges ()
 				setConfirmUnload( true )
 
 			} else {
