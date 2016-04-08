@@ -371,15 +371,19 @@ function fca_qc_render_add_result_meta_box( $post ) {
 // OUTPUT: ECHO OR RETURNED HTML
 function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'echo' ) {
 	
+	$default_image = FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png';
+	
 	if ( empty ( $result ) ) {
 		$result = array(
 			'title' => '',
 			'desc' => '',
-			'img' => FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png',
+			'img' => $default_image,
 		
 		);
 		
 	}
+	
+	empty ( $result['img'] ) ? $result['img'] = $default_image : '';
 	
 	$html = "<div class='fca_qc_result_item fca_qc_deletable_item' id='fca_qc_result_$result_number'>";
 		$html .= "<span class='dashicons dashicons-trash fca_qc_delete_icon'></span>";
@@ -453,6 +457,10 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 //CUSTOM SAVE HOOK
 function fca_qc_save_post( $post_id ) {
 	
+	//DON'T SAVE THE DEFAULT IMAGE:
+	$default_image = FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png';
+	
+	
 	//SAVING META DATA ( DESCRIPTION, IMAGE )
 	$meta_fields = array (
 		'fca_qc_quiz_description'	=> 'desc',
@@ -464,6 +472,8 @@ function fca_qc_save_post( $post_id ) {
 	forEach ( $meta_fields as $key => $value ) {
 		empty ( $_POST[$key] ) ?  $_POST[$key] = '' : '';
 		$meta[$value] = $_POST[$key];
+		
+		$meta[$value] == $default_image ? $meta[$value] = '' : '';
 	}
 	
 	update_post_meta ( $post_id, 'quiz-cat-meta', $meta );
@@ -496,6 +506,8 @@ function fca_qc_save_post( $post_id ) {
 		$results[$i]['img'] = fca_qc_escape_input( $_POST['fca_qc_quiz_result_image_src'][$i] );
 		$results[$i]['min'] = intval ( fca_qc_escape_input( $_POST['fca_qc_result_min'][$i] ) );
 		$results[$i]['max'] = intval ( fca_qc_escape_input( $_POST['fca_qc_result_max'][$i] ) );
+		
+		$results[$i]['img'] == $default_image ? $results[$i]['img'] = '' : '';
 		
 	} 	
 				
