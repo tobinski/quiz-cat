@@ -170,6 +170,7 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'show_string' =>  __('show', 'fca_quiz_cat'),
 			'unused_string' =>  __('Unused', 'fca_quiz_cat'),
 			'points_string' =>  __('Points', 'fca_quiz_cat'),
+			'image_placeholder_url' => FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png',
 		);
 		
 		wp_localize_script( 'fca_qc_admin_js', 'adminData', $admin_data ); 
@@ -244,7 +245,7 @@ function fca_qc_render_description_meta_box( $post ) {
 		echo "<span class='pointer dashicons dashicons-welcome-add-page fca_qc_quiz_image_upload_btn'></span>";	
 		echo "<span class='pointer dashicons dashicons-no-alt fca_qc_quiz_image_revert_btn'></span>";	
 		//ASSIGN PLACEHOLDER IMAGE
-		empty ( $quiz_meta['desc_img_src'] ) ? $quiz_meta['desc_img_src'] = FCA_QC_PLUGINS_URL . '/assets/image-placeholder.png' : '';
+		empty ( $quiz_meta['desc_img_src'] ) ? $quiz_meta['desc_img_src'] = FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png' : '';
 		echo "<img class='fca_qc_image' id='fca_qc_quiz_description_image' src='" . $quiz_meta['desc_img_src'] . "'>";
 
 	echo '</div>';
@@ -374,7 +375,7 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 		$result = array(
 			'title' => '',
 			'desc' => '',
-			'img' => FCA_QC_PLUGINS_URL . '/assets/image-placeholder.png',
+			'img' => FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png',
 		
 		);
 		

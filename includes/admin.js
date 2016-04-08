@@ -253,7 +253,7 @@ jQuery(document).ready(function($){
 		$('.fca_qc_quiz_image_revert_btn').unbind( 'click' )
 		$('.fca_qc_quiz_image_revert_btn').click( function(e) {
 			$( this ).siblings('.fca_qc_image_input').val('')
-			$( this ).siblings('.fca_qc_image').attr('src','')
+			$( this ).siblings('.fca_qc_image').attr('src', adminData.image_placeholder_url )
 			
 		})
 	}
