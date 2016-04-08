@@ -43,6 +43,7 @@
 .fca_qc_admin_label {
 	font-weight: bold;
 	display: block;
+	margin-bottom: 5px;
 }
 .fca_qc_admin_label_switch {
 	vertical-align: text-bottom;
