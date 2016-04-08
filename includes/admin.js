@@ -12,14 +12,17 @@ jQuery(document).ready(function($){
 	////////////////
 	
 	
-	//MAKE THE QUESTION INPUTS AND RESULT TOGGLEABLE INPUTS HIDDEN
-	$( '.fca_qc_question_input_div, .fca_qc_result_input_div').hide()
+	//HIDE THE INDIVIDUAL QUESTION AND RESULT INPUTS, AS WELL AS THE DEFAULT SUBMIT/PUBLISH METABOX
+	$( '.fca_qc_question_input_div, .fca_qc_result_input_div, #submitdiv').hide()
+	
 	
 	//DUPLICATE THE SAVE/UPDATE AND PREVIEW BUTTONS
-	let newButton = $( '#major-publishing-actions').clone()
+	let newButton = $( '#publish').clone()
 	$( '#normal-sortables' ).append( newButton )
 	
-	
+	//SHOW OUR MAIN DIV AFTER WE'RE DONE WITH DOM CHANGES
+	$( '#wpbody-content').show()
+
 	
 	////////////////
 	//	ON CLICK EVENT HANDLERS

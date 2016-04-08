@@ -2,6 +2,13 @@
 	cursor: pointer;
 }
 
+#wpbody-content {
+	display: none;
+}
+
+#publish {
+	float: right;
+}
 .fca_qc_quiz_image_upload_btn, .fca_qc_quiz_image_revert_btn {
 	font-size: 1.5rem;
 	margin-bottom: 0.5rem;
