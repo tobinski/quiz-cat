@@ -1,7 +1,7 @@
 jQuery( document ).ready(function($) {
 	
 	const questions = quizData.quiz_questions
-	let questionsShuffled = shuffleArray( quizData.quiz_questions )
+	let questionsArray = quizData.quiz_questions
 	let responses = []
 	
 	const results = quizData.quiz_results
@@ -117,12 +117,12 @@ jQuery( document ).ready(function($) {
 			
 			$( '.fca_qc_answer_div' ).removeClass('quizprep-wrong-answer')
 			
-			let question = questionsShuffled[currentQuestion].question
-			let answer = questionsShuffled[currentQuestion].answer
-			currentHint = questionsShuffled[currentQuestion].hint  //'GLOBAL' HINT
-			let wrong1 = questionsShuffled[currentQuestion].wrong1
-			let wrong2 = questionsShuffled[currentQuestion].wrong2
-			let wrong3 = questionsShuffled[currentQuestion].wrong3
+			let question = questionsArray[currentQuestion].question
+			let answer = questionsArray[currentQuestion].answer
+			currentHint = questionsArray[currentQuestion].hint  //'GLOBAL' HINT
+			let wrong1 = questionsArray[currentQuestion].wrong1
+			let wrong2 = questionsArray[currentQuestion].wrong2
+			let wrong3 = questionsArray[currentQuestion].wrong3
 			
 			let answers = [answer, wrong1, wrong2, wrong3]
 			let shuffled_answers = shuffleArray( answers )
@@ -174,8 +174,8 @@ jQuery( document ).ready(function($) {
 		
 		let i = 0;
 		
-		for ( i = 0; i<questionsShuffled.length; i++ ) {
-			do_answer_response_div( questionsShuffled[i].question, questionsShuffled[i].answer, responses[i], i + 1 )
+		for ( i = 0; i<questionsArray.length; i++ ) {
+			do_answer_response_div( questionsArray[i].question, questionsArray[i].answer, responses[i], i + 1 )
 		}
 		$( '#fca_qc_result_container' ).show()
 	}
