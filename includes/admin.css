@@ -53,11 +53,10 @@
 	margin-bottom: 5px;
 }
 .fca_qc_admin_label_switch {
-	vertical-align: text-bottom;
-	padding-left: 15px;
-	height: 40px;
-    line-height: 40px;
-	margin-bottom: 30px;
+	display: inline-block;
+	height: 30px;
+	vertical-align: top;
+	line-height: 30px;
 
 }
 
@@ -111,9 +110,10 @@
 /* ON OFF SWITCH */
 
 .fca_qc_onoffswitch {
+	margin-left: 15px;
 	display: inline-block;
     position: relative;
-	width: 60px;
+	width: 50px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .fca_qc_onoffswitch-checkbox {
@@ -121,19 +121,19 @@
 }
 .fca_qc_onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    height: 36px; padding: 0; line-height: 36px;
-    border: 2px solid #CCCCCC; border-radius: 36px;
+    height: 26px; padding: 0; line-height: 26px;
+    border: 2px solid #CCCCCC; border-radius: 26px;
     background-color: #FFFFFF;
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.3s ease-in-out;
 }
 .fca_qc_onoffswitch-label:before {
     content: "";
-    display: block; width: 36px; margin: 0px;
+    display: block; width: 26px; margin: 0px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
     right: 22px;
-    border: 2px solid #CCCCCC; border-radius: 36px;
-    transition: all 0.3s ease-in 0s; 
+    border: 2px solid #CCCCCC; border-radius: 26px;
+    transition: all 0.3s ease-in-out 0s; 
 }
 .fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label {
     background-color: #0085ba;
