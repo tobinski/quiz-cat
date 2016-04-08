@@ -163,11 +163,13 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'resultDiv' 	=> 	fca_qc_render_result_meta_box( array(), '{{RESULT_NUMBER}}', 'return' ),
 			
 			//SOME LOCALIZATION STRINGS FOR JAVASCRIPT STUFF
-			'navigationWarning' => __( "You have entered new data on this page.  If you navigate away from this page without first saving your data, the changes will be lost.", 'fca_quiz_cat'),
-			'sureWarning' => 	 __( 'Are you sure?', 'fca_quiz_cat'),
-			'selectImage' => __('Select Image', 'fca_quiz_cat' ),			
-			'remove' =>  __('remove', 'fca_quiz_cat'),
-			'show' =>  __('show', 'fca_quiz_cat'),
+			'navigationWarning_string' => __( "You have entered new data on this page.  If you navigate away from this page without first saving your data, the changes will be lost.", 'fca_quiz_cat'),
+			'sureWarning_string' => 	 __( 'Are you sure?', 'fca_quiz_cat'),
+			'selectImage_string' => __('Select Image', 'fca_quiz_cat' ),			
+			'remove_string' =>  __('remove', 'fca_quiz_cat'),
+			'show_string' =>  __('show', 'fca_quiz_cat'),
+			'unused_string' =>  __('Unused', 'fca_quiz_cat'),
+			'points_string' =>  __('Points', 'fca_quiz_cat'),
 		);
 		
 		wp_localize_script( 'fca_qc_admin_js', 'adminData', $admin_data ); 

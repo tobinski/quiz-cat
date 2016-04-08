@@ -80,12 +80,12 @@ jQuery(document).ready(function($){
 			
 			$(this).parent().next().toggle()
 			
-			const str = "(" + adminData.remove + ")"
+			const str = "(" + adminData.remove_string + ")"
 			
 			if ( $(this).html() === str ) {
-				$(this).html( "(" + adminData.show + ")") 
+				$(this).html( "(" + adminData.show_string + ")") 
 			} else {
-				$(this).html( "(" + adminData.remove + ")") 
+				$(this).html( "(" + adminData.remove_string + ")") 
 			}
 		})
 	}
@@ -144,7 +144,7 @@ jQuery(document).ready(function($){
 		
 		$('.fca_qc_delete_icon').click( function(){
 
-			if (confirm( adminData.sureWarning )) {
+			if (confirm( adminData.sureWarning_string )) {
 				$( this ).closest('.fca_qc_deletable_item').remove()
 				setScoreRanges ()
 				setConfirmUnload( true )
@@ -206,12 +206,12 @@ jQuery(document).ready(function($){
 				$(this).children( '.fca_qc_result_max' ).attr('value', end)
 				
 				if (end == start ) {
-					$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( start + ': ' )
+					$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( start + ' ' + adminData.points_string + ': ' )
 				} else {
-					$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( start + '-' + end + ': ')
+					$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( start + '-' + end + ' ' + adminData.points_string + ': ')
 				}		
 			} else {
-				$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( 'Unused: ' )
+				$(this).children('.fca_qc_result_label').children('.fca_qc_result_score_value').html( adminData.unused_string )
 			}
 
 		})
@@ -230,7 +230,7 @@ jQuery(document).ready(function($){
 			e.preventDefault()
 			
 			var image = wp.media({ 
-				title: adminData.selectImage,
+				title: adminData.selectImage_string,
 				// mutiple: true if you want to upload multiple files at once
 				multiple: false
 			}).open()
@@ -269,7 +269,7 @@ jQuery(document).ready(function($){
 
 	function unloadMessage() {
 		
-		 return adminData.navigationWarning 
+		 return adminData.navigationWarning_string 
 
 	}
 	
