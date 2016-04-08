@@ -1,26 +1,32 @@
 jQuery( document ).ready(function($) {
 	
-	const questions = quizData.quiz_questions
-	let questionsArray = quizData.quiz_questions
-	let responses = []
 	
+	////////////////
+	//	VARIABLES FROM PHP
+	////////////////	
+	
+	const questions = quizData.quiz_questions
 	const results = quizData.quiz_results
 	const settings = quizData.quiz_settings
 	const hideAnswers = settings.hide_answers == 'on' ? true : false
-	
-	const correctString = quizData.correct_string
-	const wrongString = quizData.wrong_string
-	const questionCount = questions.length
-	
 	const yourAnswerString = quizData.your_answer_string
 	const correctAnswerString = quizData.correct_answer_string
+	const correctString = quizData.correct_string
+	const wrongString = quizData.wrong_string
 	
+	const questionCount = questions.length
 	const scoreString = $( '#fca_qc_score_text').html()
 	
-	let currentQuestion = 0
-	let score = 0
-	let currentAnswer, currentHint = ''
+	let responses = []  //PUSH EACH USERS RESPONSE INTO THIS ARRAY FOR SHOWING AT THE END
+	let currentQuestion = 0  //CURRENT ACTIVE QUESTION (INTEGER)
+	let score = 0  //SCORE INTEGER (INTEGER)
+	let currentAnswer = '' // CORRECT ANSWER FOR THIS QUESTION,  (STRING) USED TO SEE IF INPUT MATCHES IT TO COUNT AS CORRECT
+	let currentHint = ''  //(UNUSED) HINT
 	
+	////////////////
+	//	PRE LOAD RESULT IMAGES 
+	////////////////	
+		
 	function preloadImages() {
 		let preloaded_images = []
 		
@@ -31,6 +37,11 @@ jQuery( document ).ready(function($) {
 
 	}
 	preloadImages()
+	
+	
+	////////////////
+	//	EVENT HANDLERS 
+	////////////////	
 	
 	$( '#fca_qc_start_button' ).click(function() {
 		
@@ -47,6 +58,7 @@ jQuery( document ).ready(function($) {
 		
 	})
 	
+	//UNUSED 
 	$( '#fca_qc_restart_button' ).click(function() {
 		score = 0
 		currentQuestion = 0
@@ -66,6 +78,7 @@ jQuery( document ).ready(function($) {
 	})
 
 	$( '.fca_qc_answer_div' ).click(function() {
+		
 		$( this ).blur()
 		
 		responses.push ( $( this ).children('.fca_qc_answer_span').html() )
@@ -109,6 +122,12 @@ jQuery( document ).ready(function($) {
 	
 	})
 	
+	
+	////////////////
+	//	HELPER FUNCTIONS 
+	////////////////	
+	
+	
 	function showQuestion() {
 		
 		if (  currentQuestion < questionCount  ) {
@@ -117,12 +136,12 @@ jQuery( document ).ready(function($) {
 			
 			$( '.fca_qc_answer_div' ).removeClass('quizprep-wrong-answer')
 			
-			let question = questionsArray[currentQuestion].question
-			let answer = questionsArray[currentQuestion].answer
-			currentHint = questionsArray[currentQuestion].hint  //'GLOBAL' HINT
-			let wrong1 = questionsArray[currentQuestion].wrong1
-			let wrong2 = questionsArray[currentQuestion].wrong2
-			let wrong3 = questionsArray[currentQuestion].wrong3
+			let question = questions[currentQuestion].question
+			let answer = questions[currentQuestion].answer
+			//currentHint = questions[currentQuestion].hint  //'GLOBAL' HINT - unused
+			let wrong1 = questions[currentQuestion].wrong1
+			let wrong2 = questions[currentQuestion].wrong2
+			let wrong3 = questions[currentQuestion].wrong3
 			
 			let answers = [answer, wrong1, wrong2, wrong3]
 			let shuffled_answers = shuffleArray( answers )
@@ -170,38 +189,40 @@ jQuery( document ).ready(function($) {
 			
 	}
 	
+	//DRAW THE 'YOUR RESPOSNES' BOXES AT THE END OF THE QUIZ
 	function show_responses() {
 		
-		let i = 0;
+		let i = 0
 		
-		for ( i = 0; i<questionsArray.length; i++ ) {
-			do_answer_response_div( questionsArray[i].question, questionsArray[i].answer, responses[i], i + 1 )
+		for ( i = 0; i<questions.length; i++ ) {
+			do_answer_response_div( questions[i].question, questions[i].answer, responses[i], i + 1 )
 		}
 		$( '#fca_qc_result_container' ).show()
 	}
 	
 	function do_answer_response_div( question, answer, response, questionNumber ) {
 		
-		let html = '';
+		let html = ''
 		
 		if ( answer == response ) {
-			html += "<div class='fca_eoi_question_response_item correct-answer'>";
+			html += "<div class='fca_eoi_question_response_item correct-answer'>"
 		} else {
-			html += "<div class='fca_eoi_question_response_item wrong-answer'>";
+			html += "<div class='fca_eoi_question_response_item wrong-answer'>"
 		}
 				
 		html += "<h3 class='fca_eoi_question_response_question'>" + questionNumber + ". " + question + "</h3>"
 		
-		html += "<p class='fca_eoi_question_response_response'><span class='fca_qc_bold'>" + yourAnswerString + " </span>" + response + "</p>";
-		html += "<p class='fca_eoi_question_response_correct_answer'><span class='fca_qc_bold'>" + correctAnswerString + " </span>" + answer + "</p>";
+		html += "<p class='fca_eoi_question_response_response'><span class='fca_qc_bold'>" + yourAnswerString + " </span>" + response + "</p>"
+		html += "<p class='fca_eoi_question_response_correct_answer'><span class='fca_qc_bold'>" + correctAnswerString + " </span>" + answer + "</p>"
 					
-		html += "</div>";
+		html += "</div>"
 		
 		$( '#fca_qc_insert_response_above' ).before(html)
 		
 		
 	}
 	
+	//UNUSED
 	function resetScore() {
 		//$( '#fca_qc_score_div' ).hide()
 		//$( '#fca_qc_score' ).html( '' )
@@ -221,6 +242,10 @@ jQuery( document ).ready(function($) {
 		}
 		
 	}
+	
+	////////////////
+	//	UTILITY FUNCTIONS 
+	////////////////	
 
 	function shuffleArray(array) {
 		for (let i = array.length - 1; i > 0; i--) {
