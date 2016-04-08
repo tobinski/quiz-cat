@@ -49,7 +49,9 @@ div.fca_qc_quiz button.fca_qc_button {
 	box-shadow: 0 2px 0 0 #3c7d73;
 	color: #FFF;
 	font-size: 20px;
-
+	transition: all 0s;
+	border: none;
+}
 }
 
 #fca_qc_next_question {
@@ -163,6 +165,7 @@ div.fca_qc_quiz p.fca_eoi_question_response_correct_answer {
 	font-size: 20px;
 	font-weight: bold;
 	color: #151515;
+	padding: 0 5px;
 }
 
 div.fca_qc_quiz p.fca_qc_back_response {
@@ -236,13 +239,6 @@ div.fca_qc_quiz div.wrong-answer {
 	}
 	div.fca_qc_quiz button.fca_qc_button {
 		width: 80%;
-		margin-top: 20px;
-		border-radius: 2px;
-		font-weight: bold;
-		background-color: #58afa2;
-		box-shadow: 0 2px 0 0 #3c7d73;
-		color: #FFF;
 		font-size: 16px;
-
 	}
 }

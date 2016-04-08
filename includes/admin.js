@@ -132,6 +132,11 @@ jQuery(document).ready(function($){
 		this.select()
 	})
 	
+	//MAKES CLICKING LABELS AUTO-SELECT THE NEXT ITEM
+	$('.fca_qc_admin_label').click(function(e) {
+		$( this ).next().focus()
+	})
+	
 	//MAKES QUESTION AND RESULT LABELS TOGGLE THE INPUT VISIBILITY ON CLICK
 	function add_question_and_result_click_toggles() {
 			
