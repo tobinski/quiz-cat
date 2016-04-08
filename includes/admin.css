@@ -18,6 +18,16 @@
 	width: 98%;
 }
 
+.fca_qc_answer_toggle{
+	color: #0073aa;
+	text-decoration: underline;
+}
+
+.fca_qc_answer_toggle:hover{
+	color: #00a0d2;
+	text-decoration: underline;
+}
+
 .fca_qc_two_third_div {
 	vertical-align: text-top;
 	width: 65%;

@@ -166,6 +166,8 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'navigationWarning' => __( "You have entered new data on this page.  If you navigate away from this page without first saving your data, the changes will be lost.", 'fca_quiz_cat'),
 			'sureWarning' => 	 __( 'Are you sure?', 'fca_quiz_cat'),
 			'selectImage' => __('Select Image', 'fca_quiz_cat' ),			
+			'remove' =>  __('remove', 'fca_quiz_cat'),
+			'show' =>  __('show', 'fca_quiz_cat'),
 		);
 		
 		wp_localize_script( 'fca_qc_admin_js', 'adminData', $admin_data ); 
@@ -307,11 +309,22 @@ function fca_qc_render_question_meta_box( $question, $question_number, $operatio
 				$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 1', 'fca_quiz_cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_1[]'>" . $question['wrong1']  ."</textarea><br>";
 				
-				$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 2', 'fca_quiz_cat') . "</label>";
-				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_2[]'>" . $question['wrong2']  ."</textarea><br>";
+				if ( empty ($question['wrong2']) ) {
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 2', 'fca_quiz_cat') . " <span class='fca_qc_answer_toggle'>(" . __('show', 'fca_quiz_cat') . ")</span></label>";
+					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_2[]' style='display:none;'>" . $question['wrong2']  ."</textarea><br>";
+				} else {
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 2', 'fca_quiz_cat') . " <span class='fca_qc_answer_toggle'>(" . __('remove', 'fca_quiz_cat') . ")</span></label>";
+					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_2[]'>" . $question['wrong2']  ."</textarea><br>";
+				}
 				
-				$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 3', 'fca_quiz_cat') . "</label>";
-				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_3[]'>" . $question['wrong3']  ."</textarea><br>";
+				if ( empty ($question['wrong3']) ) {
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 3', 'fca_quiz_cat') . " <span class='fca_qc_answer_toggle'>(" . __('show', 'fca_quiz_cat') . ")</span></label>";
+					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_3[]' style='display:none;'>" . $question['wrong3']  ."</textarea><br>";
+				} else {
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 3', 'fca_quiz_cat') . " <span class='fca_qc_answer_toggle'>(" . __('remove', 'fca_quiz_cat') . ")</span></label>";
+					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_3[]' >" . $question['wrong3']  ."</textarea><br>";
+				}
+
 				
 			$html .= "</div >";
 			

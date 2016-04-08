@@ -148,12 +148,19 @@ jQuery( document ).ready(function($) {
 			
 			$( '#fca_qc_question' ).html(question)
 			$( '#fca_qc_question_back' ).html(question)
-						
-			$( '.fca_qc_answer_span' ).eq(0).html(shuffled_answers[0])
-			$( '.fca_qc_answer_span' ).eq(1).html(shuffled_answers[1])
-			$( '.fca_qc_answer_span' ).eq(2).html(shuffled_answers[2])
-			$( '.fca_qc_answer_span' ).eq(3).html(shuffled_answers[3])
 			
+			$( '.fca_qc_answer_div' ).show()
+			
+			//PUT OUR ANSWER DATA INTO THE DIVS, BUT IF ITS EMPTY HIDE THE PARENT ELEMENT
+			for (var i = 0; i<shuffled_answers.length; i++) {
+				if ( shuffled_answers[i] == '') {
+					$( '.fca_qc_answer_span' ).eq(i).parent().hide()
+				} else {
+					$( '.fca_qc_answer_span' ).eq(i).html(shuffled_answers[i])
+				}
+		
+			}
+				
 			currentQuestion = currentQuestion + 1
 						
 			currentAnswer = answer
