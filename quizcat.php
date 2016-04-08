@@ -152,7 +152,7 @@ add_action('manage_fca_qc_quiz_posts_custom_column', 'fca_qc_manage_post_table_c
 //ENQUEUE ANY SCRIPTS OR CSS FOR OUR ADMIN PAGE EDITOR
 function fca_qc_admin_cpt_script( $hook ) {
 	global $post;  
-	if ( $hook == 'post-new.php' || $hook == 'post.php'  &&  $post->post_type === 'fca_qc_quiz' ) {  
+	if ( ($hook == 'post-new.php' || $hook == 'post.php')  &&  $post->post_type === 'fca_qc_quiz' ) {  
 		wp_enqueue_media();		
 		wp_enqueue_script('fca_qc_admin_js', FCA_QC_PLUGINS_URL . '/includes/admin.js' );		
 		wp_enqueue_style( 'fca_qc_admin_stylesheet', FCA_QC_PLUGINS_URL . '/includes/admin.css' );
