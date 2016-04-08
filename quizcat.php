@@ -269,7 +269,8 @@ function fca_qc_render_questions_meta_box( $post ) {
 			
 		}		
 	}	
-	echo "<span id='fca_qc_add_question_btn'  class='dashicons dashicons-plus-alt fca_qc_add_btn pointer'></span>";
+	
+	echo "<button type='button' id='fca_qc_add_question_btn' class='button-secondary fca_qc_add_btn' ><span class='dashicons dashicons-plus' style='vertical-align: text-top;'></span>" .__('Add', 'fca_quiz_cat') . "</button>";
 	
 }
 
@@ -358,8 +359,8 @@ function fca_qc_render_add_result_meta_box( $post ) {
 			
 		}		
 	}	
+	echo "<button type='button' id='fca_qc_add_result_btn' class='button-secondary fca_qc_add_btn' ><span class='dashicons dashicons-plus' style='vertical-align: text-top;'></span>" .__('Add', 'fca_quiz_cat') . "</button>";
 
-	echo "<span id='fca_qc_add_result_btn' class='dashicons dashicons-plus-alt fca_qc_add_btn pointer'></span>";
 }
 
 // RENDER A RESULT META BOX
