@@ -88,11 +88,12 @@
 .fca_qc_question_texta {
 	width: 98%;
 	min-height: 2rem;
-	margin-bottom: 1rem;
+	margin-bottom: 5px;
 }
 
 .fca_qc_text_input {
 	width: 250px;
+	margin-bottom: 5px;
 }
 
 .fca_qc_image {
