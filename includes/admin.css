@@ -11,7 +11,7 @@
 }
 .fca_qc_quiz_image_upload_btn, .fca_qc_quiz_image_revert_btn {
 	font-size: 1.5rem;
-	margin-bottom: 0.5rem;
+	margin-left: 7px !important;
 }
 
 .fca_qc_quiz_image_upload_btn{
@@ -99,9 +99,23 @@
 .fca_qc_image {
 	max-width: 100%;
 	display: block;
-    margin-left: auto;
-    margin-right: auto;
+	cursor: pointer;
 }
+img.fca_qc_image:hover + div.fca_qc_image_hover_controls {
+	visibility: visible;
+}
+
+div.fca_qc_image_hover_controls:hover {
+	visibility: visible;
+}
+
+div.fca_qc_image_hover_controls {
+	visibility: hidden;
+	position: relative;
+	top: -35px;
+}
+
+
 .fca_qc_result_item, .fca_qc_question_item {
     border: 1px solid #ddd;
     padding: 1rem;

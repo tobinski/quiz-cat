@@ -227,10 +227,15 @@ jQuery(document).ready(function($){
 		
 	function attach_image_upload_handlers() {
 		//ACTION WHEN CLICKING IMAGE UPLOAD
-		$('.fca_qc_quiz_image_upload_btn').unbind( 'click' )
-		$('.fca_qc_quiz_image_upload_btn').click(function(e) {
-			$this = $( this )
+		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').unbind( 'click' )
+		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').click(function(e) {
+			
 			e.preventDefault()
+			$this = $( this )
+			//IF WE CLICK ON THE IMAGE VS THE BUTTON IT HAS TO WORK A LITTLE DIFFERENTLY
+			if ( $(this).hasClass( 'fca_qc_quiz_image_upload_btn' ) ) {
+				$this = $( this.parentNode ).siblings('.fca_qc_image')
+			}			
 			
 			var image = wp.media({ 
 				title: adminData.selectImage_string,
@@ -243,8 +248,10 @@ jQuery(document).ready(function($){
 
 				var image_url = uploaded_image.toJSON().url
 				// Assign the url value to the input field
-				$this.siblings('.fca_qc_image_input').val(image_url)
-				$this.siblings('.fca_qc_image').attr('src',image_url)
+				$this.siblings('.fca_qc_image_input').attr('value', image_url)
+				$this.attr('src',image_url)
+				//UNHIDE THE REMOVE IMAGE BUTTON
+				$this.siblings('.fca_qc_image_hover_controls').children('.fca_qc_quiz_image_revert_btn').show()
 				
 			})
 		})
@@ -252,8 +259,9 @@ jQuery(document).ready(function($){
 		//ACTION WHEN CLICKING REMOVE IMAGE
 		$('.fca_qc_quiz_image_revert_btn').unbind( 'click' )
 		$('.fca_qc_quiz_image_revert_btn').click( function(e) {
-			$( this ).siblings('.fca_qc_image_input').val('')
-			$( this ).siblings('.fca_qc_image').attr('src', adminData.image_placeholder_url )
+			$( this.parentNode ).siblings('.fca_qc_image_input').attr('value', '')
+			$( this.parentNode ).siblings('.fca_qc_image').attr('src', adminData.image_placeholder_url )
+			$( this ).hide()
 			
 		})
 	}
