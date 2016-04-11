@@ -164,11 +164,28 @@ jQuery( document ).ready(function($) {
 			currentQuestion = currentQuestion + 1
 						
 			currentAnswer = answer
-		
+			
+			scale_flip_box()
+			
 		} else {
 			endTest()
 		}
 		
+	}
+	
+	function scale_flip_box() {
+		let newHeight = $('#fca_qc_question').outerHeight( true )
+		
+		$( '.fca_qc_answer_div' ).each(function(){
+			if ( $( this ).is( ':visible' ) ) {
+				
+				newHeight += $(this).outerHeight( true )
+			}
+			
+		})
+
+		$( '#fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
+
 	}
 	
 	function set_result() {
