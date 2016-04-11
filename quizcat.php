@@ -72,7 +72,7 @@ function fca_qc_register_post_type() {
 		'show_in_nav_menus' => false,
 		'show_in_menu' => true,
 		'show_in_admin_bar' => true,
-		'menu_position' => 10,
+		'menu_position' => 103,
 		'menu_icon' => null,
 		'capability_type' => 'post',
 		'hierarchical' => false,
