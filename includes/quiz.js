@@ -183,6 +183,10 @@ jQuery( document ).ready(function($) {
 			}
 			
 		})
+		
+		if ( newHeight < 400 ) {
+			newHeight = 400
+		}
 
 		$( '#fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
 
