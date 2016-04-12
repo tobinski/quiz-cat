@@ -67,7 +67,7 @@ function fca_qc_register_post_type() {
 		'description' => "",
 		'public' => false,
 		'exclude_from_search' => true,
-		'publicly_queryable' => false,
+		'publicly_queryable' => true,
 		'show_ui' => true,
 		'show_in_nav_menus' => false,
 		'show_in_menu' => true,
@@ -143,6 +143,18 @@ function fca_qc_manage_post_table_columns($column_name, $id) {
 }   
 // Add to admin_init function
 add_action('manage_fca_qc_quiz_posts_custom_column', 'fca_qc_manage_post_table_columns', 10, 2);
+
+
+//PREVIEW
+function fca_qc_live_preview( $content ){
+	global $post;
+	if ( is_user_logged_in() && $post->post_type === 'fca_qc_quiz' && is_main_query() )  {
+		return $content . do_shortcode("[quiz-cat id='" . $post->ID . "']");
+	} else {
+		return $content;
+	}
+}
+add_filter( 'the_content', 'fca_qc_live_preview');
 
 
 ////////////////////////////
