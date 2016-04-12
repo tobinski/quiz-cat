@@ -453,18 +453,27 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 	
 	
 	$shortcode = '[quiz-cat id="' . $post->ID . '"]';
-		
-
-	echo "<label class='fca_qc_admin_label fca_qc_admin_label_switch' for='fca_qc_hide_answers_until_end'>" . __('Hide answers until the end of the quiz', 'fca_quiz_cat') . "</label>";
-	echo "<div class='fca_qc_onoffswitch'>";
-		echo "<input type='checkbox' class='fca_qc_onoffswitch-checkbox' id='fca_qc_hide_answers_until_end' style='display:none;' name='fca_qc_hide_answers_until_end' $hide_answers></input>";		
-	echo "<label class='fca_qc_onoffswitch-label' for='fca_qc_hide_answers_until_end'></label>";
-	echo "</div>";
-
-	
-	echo "<label class='fca_qc_admin_label' for='fca_qc_shortcode_input'>" . __('Shortcode (copy & paste in to the post or page where you want the quiz to appear)', 'fca_quiz_cat') . "</label>";
-	echo "<input type='text' class='fca_qc_text_input' id='fca_qc_shortcode_input' name='fca_qc_shortcode_input' value='$shortcode' readonly>";		
-	
+	echo "<table id='fca_qc_setting_table'>";
+		echo "<tr>";
+			echo "<th>";
+				echo "<label class='fca_qc_admin_label fca_qc_admin_settings_label' for='fca_qc_hide_answers_until_end'>" . __('Hide answers until the end of the quiz', 'fca_quiz_cat') . "</label>";
+			echo "</th>";
+			echo "<td>";
+				echo "<div class='fca_qc_onoffswitch'>";
+					echo "<input type='checkbox' class='fca_qc_onoffswitch-checkbox' id='fca_qc_hide_answers_until_end' style='display:none;' name='fca_qc_hide_answers_until_end' $hide_answers></input>";		
+				echo "<label class='fca_qc_onoffswitch-label' for='fca_qc_hide_answers_until_end'></label>";
+				echo "</div>";
+			echo "</td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<th>";
+				echo "<label class='fca_qc_admin_label fca_qc_admin_settings_label' for='fca_qc_shortcode_input'>" . __('Shortcode', 'fca_quiz_cat') . "</label>";
+			echo "</th>";
+			echo "<td>";
+				echo "<input type='text' class='fca_qc_text_input' id='fca_qc_shortcode_input' name='fca_qc_shortcode_input' value='$shortcode' readonly>";		
+			echo "</td>";
+		echo "<tr>";
+	echo "</table>";
 }
 
 
