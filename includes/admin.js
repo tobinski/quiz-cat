@@ -22,6 +22,29 @@ jQuery(document).ready(function($){
 	
 	//SHOW OUR MAIN DIV AFTER WE'RE DONE WITH DOM CHANGES
 	$( '#wpbody-content').show()
+	
+	
+	//DRAG AND DROP SUPPORT
+	function add_drag_and_drop_sort() {
+		
+		$( '.fca_qc_sortable_results, .fca_qc_sortable_questions' ).sortable({
+			revert: true,
+		})
+		
+		$( '.fca_qc_sortable_results, .fca_qc_sortable_questions' ).disableSelection()
+		
+		$( '.fca_qc_sortable_results' ).unbind( 'sortupdate' )
+		$( '.fca_qc_sortable_results' ).on( 'sortupdate', function( event, ui ) {
+			setScoreRanges()
+		})
+	
+		$( '.fca_qc_sortable_questions' ).unbind( 'sortupdate' )
+		$( '.fca_qc_sortable_questions' ).on( 'sortupdate', function( event, ui ) {
+			setQuestionNumbers()
+		})
+	
+	}
+	add_drag_and_drop_sort()
 
 	
 	////////////////
@@ -38,14 +61,15 @@ jQuery(document).ready(function($){
 		let div_to_append = adminData.questionDiv.replace('{{QUESTION_NUMBER}}', question_number)
 		div_to_append = div_to_append.replace('{{QUESTION_NUMBER}}:', question_number + ':')
 		
-		$( '#fca_qc_add_question_btn' ).before(div_to_append)
+		$( '.fca_qc_sortable_questions' ).append(div_to_append)
 		
 		add_question_heading_text_handlers()
 		add_question_and_result_click_toggles()
 		add_question_3_and_4_toggles()
 		attach_delete_button_handlers()
 		setScoreRanges()
-		
+		setQuestionNumbers()
+		add_drag_and_drop_sort()
 		setConfirmUnload( true )
 		
 	})
@@ -60,14 +84,14 @@ jQuery(document).ready(function($){
 		let div_to_append = adminData.resultDiv.replace('{{RESULT_NUMBER}}', result_number )
 		div_to_append = div_to_append.replace('{{RESULT_NUMBER}}<', result_number + '<' )
 		
-		$( '#fca_qc_add_result_btn' ).before(div_to_append)
+		$( '.fca_qc_sortable_results' ).append(div_to_append)
 		
 		add_question_and_result_click_toggles()
 		attach_delete_button_handlers()
 		attach_image_upload_handlers()
 		add_result_heading_text_handlers()
 		setScoreRanges()
-		
+		add_drag_and_drop_sort()
 		setConfirmUnload( true )
 		
 	})
@@ -220,6 +244,14 @@ jQuery(document).ready(function($){
 		})
 	}	
 	setScoreRanges()
+	
+	function setQuestionNumbers(){
+		let n = 1;
+		$( '.fca_qc_question_item' ).each(function() {
+			$(this).children( '.fca_qc_question_label' ).children( '.fca_qc_quiz_heading_question_number' ).html( adminData.question_string + ' ' + n + ': ')
+			n = n + 1
+		})
+	}
 	
 	////////////////
 	//	MEDIA UPLOAD

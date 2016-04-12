@@ -120,6 +120,8 @@ div.fca_qc_image_hover_controls {
     border: 1px solid #ddd;
     padding: 1rem;
 	margin-bottom: 1rem;
+	cursor: move;
+	background-color: #FFF;
 }
 
 /* ON OFF SWITCH */
