@@ -67,7 +67,7 @@ function fca_qc_register_post_type() {
 		'description' => "",
 		'public' => false,
 		'exclude_from_search' => true,
-		'publicly_queryable' => true,
+		'publicly_queryable' => false,
 		'show_ui' => true,
 		'show_in_nav_menus' => false,
 		'show_in_menu' => true,
@@ -86,19 +86,6 @@ function fca_qc_register_post_type() {
 	register_post_type( 'fca_qc_quiz', $args );
 }
 add_action ( 'init', 'fca_qc_register_post_type' );
-
-
-//SET A TEMPLATE FOR THIS CPT
-function get_custom_post_type_template($single_template) {
-     global $post;
-
-     if ($post->post_type == 'fca_qc_quiz') {
-          $single_template = dirname( __FILE__ ) . '/post-type-template.php';
-     }
-     return $single_template;
-}
-add_filter( 'single_template', 'get_custom_post_type_template' );
-
 
 
 //CHANGE CUSTOM 'UPDATED' MESSAGES FOR OUR CPT
@@ -480,8 +467,6 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 	
 	echo "<label class='fca_qc_admin_label' for='fca_qc_shortcode_input'>" . __('Shortcode (copy & paste in to the post or page where you want the quiz to appear)', 'fca_quiz_cat') . "</label>";
 	echo "<input type='text' class='fca_qc_text_input' id='fca_qc_shortcode_input' name='fca_qc_shortcode_input' value='$shortcode' readonly>";		
-	
-	echo "<pre>" . get_the_permalink( $post->ID ) . "</pre>";
 	
 }
 

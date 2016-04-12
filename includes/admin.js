@@ -36,11 +36,13 @@ jQuery(document).ready(function($){
 		$( '.fca_qc_sortable_results' ).unbind( 'sortupdate' )
 		$( '.fca_qc_sortable_results' ).on( 'sortupdate', function( event, ui ) {
 			setScoreRanges()
+			setConfirmUnload( true )
 		})
 	
 		$( '.fca_qc_sortable_questions' ).unbind( 'sortupdate' )
 		$( '.fca_qc_sortable_questions' ).on( 'sortupdate', function( event, ui ) {
 			setQuestionNumbers()
+			setConfirmUnload( true )
 		})
 	
 	}
