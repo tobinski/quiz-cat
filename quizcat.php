@@ -24,7 +24,7 @@ add_action( 'wp_ajax_nopriv_fca_qc_submit_form', 'fca_qc_submit_form' );
 $strings_array = array (
 	'no_quiz_found' => __('No Quiz found', 'fca_quiz_cat'),
 	'correct' => __('Correct!', 'fca_quiz_cat'),
-	'wrong' => __('Correct!', 'fca_quiz_cat'),
+	'wrong' => __('Wrong!', 'fca_quiz_cat'),
 	'your_answer' => __('Your answer:', 'fca_quiz_cat'),
 	'correct_answer' => __('Correct answer:', 'fca_quiz_cat'),
     'question' => __('Question', 'fca_quiz_cat'),
