@@ -13,12 +13,25 @@ jQuery(document).ready(function($){
 	
 	
 	//HIDE THE INDIVIDUAL QUESTION AND RESULT INPUTS, AS WELL AS THE DEFAULT SUBMIT/PUBLISH METABOX
-	$( '.fca_qc_question_input_div, .fca_qc_result_input_div, #submitdiv').hide()
+	$( '.fca_qc_question_input_div, .fca_qc_result_input_div').hide()
 	
 	
-	//DUPLICATE THE SAVE/UPDATE AND PREVIEW BUTTONS
-	let newButton = $( '#publish').clone()
-	$( '#normal-sortables' ).append( newButton )
+	//SET UP SAVE AND PREVIEW BUTTONS, THEN HIDE THE PUBLISHING METABOX
+	const saveButton = '<button type="button" class="button-primary" id="fca_qc_submit_button">' + adminData.save_string + '</buttton>'
+	const previewButton = '<button type="button" class="button-secondary" id="fca_qc_preview_button">' + adminData.preview_string + '</buttton>'
+
+	$( '#normal-sortables' ).append( saveButton )
+	$('#fca_qc_submit_button').click(function() {
+		setConfirmUnload( false )
+		$('#publish').click()
+	})
+	$( '#normal-sortables' ).append( previewButton )
+	$('#fca_qc_preview_button').click(function() {
+		$('#post-preview').click()
+	})
+	
+	$( '#submitdiv' ).hide()
+	
 	
 	//SHOW OUR MAIN DIV AFTER WE'RE DONE WITH DOM CHANGES
 	$( '#wpbody-content').show()
@@ -321,13 +334,6 @@ jQuery(document).ready(function($){
 	$( 'input, textarea' ).bind( 'change', function() { 
 		setConfirmUnload( true )
 	}) 
-	
-	$( 'input[type="submit"], #publish' ).click(function(){
-		setConfirmUnload( false )
-	})
-	
-	
 
-	
 	
 })

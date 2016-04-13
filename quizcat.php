@@ -186,6 +186,8 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'points_string' =>  __('Points', 'fca_quiz_cat'),
 			'image_placeholder_url' => FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png',
 			'question_string' =>  __('Question', 'fca_quiz_cat'),
+			'save_string' =>  __('Save', 'fca_quiz_cat'),
+			'preview_string' =>  __('Preview', 'fca_quiz_cat'),
 		);
 		
 		wp_localize_script( 'fca_qc_admin_js', 'adminData', $admin_data ); 
@@ -496,6 +498,10 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 
 //CUSTOM SAVE HOOK
 function fca_qc_save_post( $post_id ) {
+	
+	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
 	
 	//ONLY DO OUR STUFF IF ITS A REAL SAVE, NOT A NEW IMPORTED ONE
 	if ( !empty ( $_POST['fca_qc_quiz_description_image_src'] ) ) {

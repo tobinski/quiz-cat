@@ -6,8 +6,8 @@
 	display: none;
 }
 
-#publish {
-	float: right;
+#fca_qc_submit_button {
+	margin-right: 5px;
 }
 .fca_qc_quiz_image_upload_btn, .fca_qc_quiz_image_revert_btn {
 	font-size: 1.5rem;
