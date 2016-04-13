@@ -265,11 +265,13 @@ function fca_qc_render_description_meta_box( $post ) {
 	
 	echo "<img class='fca_qc_image' id='fca_qc_quiz_description_image' style='max-width: 252px' src='" . $quiz_meta['desc_img_src'] . "'>";
 	echo "<div class='fca_qc_image_hover_controls'>";
-		echo "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'fca_quiz_cat') . "</button>";
-		//IF PLACEHOLDER IS THERE DON'T SHOW THE "REMOVE" BUTTON
+		
+		//IF PLACEHOLDER IS THERE DON'T SHOW THE "REMOVE OR CHANGE" BUTTON
 		if ( $quiz_meta['desc_img_src'] == $img_placeholder ) {
+			echo "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn' style='display:none;'>" . __('Change', 'fca_quiz_cat') . "</button>";
 			echo "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn' style='display:none;'>" . __('Remove', 'fca_quiz_cat') . "</button>";
 		}else {
+			echo "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'fca_quiz_cat') . "</button>";
 			echo "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn'>" . __('Remove', 'fca_quiz_cat') . "</button>";
 		}
 		
@@ -428,12 +430,14 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 				$html .= '<input type="text" class="fca_qc_image_input" name="fca_qc_quiz_result_image_src[]" style="display: none;" value="' . $result['img'] . '">';
 				$html .= '<img class="fca_qc_image" id="fca_qc_quiz_result_image[]" src="' . $result['img'] . '">';
 				$html .= "<div class='fca_qc_image_hover_controls'>";
-					$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'fca_quiz_cat') . "</button>";
-				
+									
 					if (  $result['img'] == $default_image  ) {
+						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn' style='display:none;'>" . __('Change', 'fca_quiz_cat') . "</button>";
 						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn' style='display:none;'>" . __('Remove', 'fca_quiz_cat') . "</button>";
 					}else {
+						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'fca_quiz_cat') . "</button>";
 						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn'>" . __('Remove', 'fca_quiz_cat') . "</button>";
+						
 					}
 					
 				$html .= "</div>";

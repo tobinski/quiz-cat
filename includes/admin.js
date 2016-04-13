@@ -295,8 +295,9 @@ jQuery(document).ready(function($){
 				// Assign the url value to the input field
 				$this.siblings('.fca_qc_image_input').attr('value', image_url)
 				$this.attr('src',image_url)
-				//UNHIDE THE REMOVE IMAGE BUTTON
+				//UNHIDE THE REMOVE AND CHANGE IMAGE BUTTONS
 				$this.siblings('.fca_qc_image_hover_controls').children('.fca_qc_quiz_image_revert_btn').show()
+				$this.siblings('.fca_qc_image_hover_controls').children('.fca_qc_quiz_image_upload_btn').show()
 				
 			})
 		})
@@ -307,6 +308,7 @@ jQuery(document).ready(function($){
 			$( this.parentNode ).siblings('.fca_qc_image_input').attr('value', '')
 			$( this.parentNode ).siblings('.fca_qc_image').attr('src', adminData.image_placeholder_url )
 			$( this ).hide()
+			$( this ).siblings( '.fca_qc_quiz_image_upload_btn' ).hide()
 			
 		})
 	}
