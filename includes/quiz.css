@@ -6,17 +6,17 @@ div.fca_qc_quiz {
 	text-align: center;
 	color: #151515;
 }
-#fca_qc_quiz_title {
+h2.fca_qc_quiz_title {
 	color: #151515;
 	margin: 0 0 20px 0;
 }
 
-#fca_qc_quiz_description {
+.fca_qc_quiz_description {
 	font-size: 16px;
 	margin: 0 0 20px 0;
 }
 
-#fca_qc_quiz_description_img {
+.fca_qc_quiz_description_img {
 	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
@@ -54,7 +54,7 @@ div.fca_qc_quiz button.fca_qc_button {
 }
 }
 
-#fca_qc_next_question {
+.fca_qc_next_question {
 	background-color: inherit;
 	color: black;
 	width: 140px;
@@ -86,21 +86,21 @@ div.fca_qc_quiz div.fca_qc_answer_div:hover {
 	background-color: #8dc8bf;
 }
 
-#fca_qc_score_text{
+.fca_qc_score_text{
 	font-size: 14px;
 	margin: 30px 0 10px 0;
 	color: #151515;
 }
-#fca_qc_score_title{
+h3.fca_qc_score_title{
 	font-size: 26px;
 	margin: 0 0 20px 0;
 	color: #151515;
 }
-#fca_qc_score_img{
+.fca_qc_score_img{
 	margin: 0 0 20px 0;
 	max-width: 100%;
 }
-#fca_qc_score_desc{
+.fca_qc_score_desc{
 	font-size: 16px;
 	margin: 0 0 30px 0;
 	color: #151515;
@@ -108,13 +108,13 @@ div.fca_qc_quiz div.fca_qc_answer_div:hover {
 }
 
 
-#fca_qc_quiz_footer {
+.fca_qc_quiz_footer {
 	margin-top: 20px;
 	font-size: 16px;
 	color: #151515;
 }
 
-#fca_qc_result_text{
+.fca_qc_result_text{
 	font-weight: bold;
 	font-size: 16px;
 	margin: 0 0 15px 0;
@@ -235,7 +235,7 @@ div.fca_qc_quiz div.wrong-answer {
 
 @media (max-width: 600px) {
 	div.fca_qc_quiz {
-		    padding: 30px 0px;
+		padding: 30px 0px;
 	}
 	div.fca_qc_quiz button.fca_qc_button {
 		width: 80%;

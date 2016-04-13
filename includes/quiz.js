@@ -2,26 +2,18 @@ jQuery( document ).ready(function($) {
 	
 	
 	////////////////
-	//	VARIABLES FROM PHP
-	////////////////	
+	//	LOAD VARIABLES FROM PHP
+	////////////////
 	
-	const questions = quizData.quiz_questions
-	const results = quizData.quiz_results
-	const settings = quizData.quiz_settings
-	const hideAnswers = settings.hide_answers == 'on' ? true : false
-	const yourAnswerString = quizData.your_answer_string
-	const correctAnswerString = quizData.correct_answer_string
-	const correctString = quizData.correct_string
-	const wrongString = quizData.wrong_string
 	
-	const questionCount = questions.length
-	const scoreString = $( '#fca_qc_score_text').html()
+	const scoreString = $( '.fca_qc_score_text').first().html()
 	
-	let responses = []  //PUSH EACH USERS RESPONSE INTO THIS ARRAY FOR SHOWING AT THE END
-	let currentQuestion = 0  //CURRENT ACTIVE QUESTION (INTEGER)
-	let score = 0  //SCORE INTEGER (INTEGER)
-	let currentAnswer = '' // CORRECT ANSWER FOR THIS QUESTION,  (STRING) USED TO SEE IF INPUT MATCHES IT TO COUNT AS CORRECT
-	let currentHint = ''  //(UNUSED) HINT
+	let quizzes = {}
+	
+	$('.fca_qc_quiz').each(function( index ) {
+		let thisId = get_quiz_id(this)
+		quizzes[thisId] = eval( 'quizData_' + thisId )
+	})
 	
 	////////////////
 	//	PRE LOAD RESULT IMAGES 
@@ -30,11 +22,13 @@ jQuery( document ).ready(function($) {
 	function preloadImages() {
 		let preloaded_images = []
 		
-		for (i = 0; i < results.length; i++) {
-			preloaded_images[i] = new Image()
-			preloaded_images[i].src = results[i].img
+		for (var i = 0; i < quizzes.length; i++) {
+		
+			for (var j = 0; i < quizzes[i].quiz_results.length; j++) {
+				preloaded_images[j] = new Image()
+				preloaded_images[j].src = quizzes[i].quiz_results[j].img
+			}
 		}
-
 	}
 	preloadImages()
 	
@@ -43,79 +37,78 @@ jQuery( document ).ready(function($) {
 	//	EVENT HANDLERS 
 	////////////////	
 	
-	$( '#fca_qc_start_button' ).click(function() {
+	$( '.fca_qc_start_button' ).click(function() {
 		
-		$( '#fca_qc_quiz_title' ).hide()
-		$( '#fca_qc_quiz_description' ).hide()
-		$( '#fca_qc_quiz_description_img' ).hide()
+		let thisQuiz =  quizzes[ get_quiz_id( this.parentNode ) ]
+		
+		thisQuiz.currentQuestion = 0
+		thisQuiz.score = 0
+		thisQuiz.responses = []
+		thisQuiz.questionCount = thisQuiz.questions.length
+		thisQuiz.selector = this.parentNode
+		thisQuiz.hideAnswers = thisQuiz.quiz_settings.hide_answers == 'on' ? true : false
+				
+		
+		$( this ).siblings( '.fca_qc_quiz_title' ).hide()
+		$( this ).siblings( '.fca_qc_quiz_description' ).hide()
+		$( this ).siblings( '.fca_qc_quiz_description_img' ).hide()
 		$( this ).hide()
 		
-		$( '#fca_qc_quiz_div' ).show()
-		$( '#fca_qc_quiz_footer' ).show()
-		$( '#fca_qc_question_count' ).html( ( currentQuestion + 1) + "/" + questionCount)
+		$( this ).siblings( '.fca_qc_quiz_div' ).show()
+		$( this ).siblings( '.fca_qc_quiz_footer' ).show()
+		$( this ).siblings( '.flip-container' ).show()
+		$( this ).siblings( '.fca_qc_question_count' ).html( 1 + "/" + thisQuiz.questionCount )
 		
-		showQuestion()
+		showQuestion( thisQuiz )
 		
 	})
 	
-	//UNUSED 
-	$( '#fca_qc_restart_button' ).click(function() {
-		score = 0
-		currentQuestion = 0
-		//shuffled_data = shuffleArray( quiz_data )
-		$( '#fca_qc_quiz_div' ).show()
-		$( '#fca_qc_score_container' ).hide()
-		$( this ).hide()
-		resetScore()
-		showQuestion()
-		
-	})
 	
-	$( '#fca_qc_next_question').click(function() {
-		showQuestion()
-		$( '#fca_qc_quiz_div' ).removeClass('flip')
-		
+	$( '.fca_qc_next_question').click(function() {
+		let thisQuiz =  quizzes[ get_quiz_id( $(this).closest('.fca_qc_quiz') ) ]
+		$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).removeClass('flip')
+		showQuestion( thisQuiz )
 	})
 
 	$( '.fca_qc_answer_div' ).click(function() {
-		
+		let thisQuiz =  quizzes[ get_quiz_id( $(this).closest('.fca_qc_quiz') ) ]
 		$( this ).blur()
 		
-		responses.push ( $( this ).children('.fca_qc_answer_span').html() )
+		thisQuiz.responses.push ( $( this ).children('.fca_qc_answer_span').html() )
 		
-		if ( hideAnswers ) {
-			if ( $( this ).children('.fca_qc_answer_span').html() == currentAnswer ) {
+		if ( thisQuiz.hideAnswers ) {
+			if ( $( this ).children('.fca_qc_answer_span').html() == thisQuiz.currentAnswer ) {
 				
-				score = score + 1
-				showQuestion()
+				thisQuiz.score = thisQuiz.score + 1
+				showQuestion( thisQuiz )
 				
 			} else {
 
-				showQuestion()
+				showQuestion( thisQuiz )
 			}
 			
 		} else {
-			$( '#fca_qc_quiz_div' ).addClass( 'flip' )
-			$( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
-			$( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
-			$( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
-			$( '#fca_qc_correct_answer' ).html( currentAnswer )
-			$( '#fca_qc_quiz_div' ).addClass( 'flip' )
 			
-			if ( $( this ).children('.fca_qc_answer_span').html() == currentAnswer ) {
+			$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).addClass( 'flip' )
+			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
+			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
+			$( thisQuiz.selector ).find( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
+			$( thisQuiz.selector ).find( '#fca_qc_correct_answer' ).html( thisQuiz.currentAnswer )
+			
+			if ( $( this ).children('.fca_qc_answer_span').html() == thisQuiz.currentAnswer ) {
 				
-				score = score + 1
+				thisQuiz.score = thisQuiz.score + 1
 				
-				$( '#fca_qc_back_container' ).addClass( 'correct-answer' )
-				$( '#fca_qc_question_right_or_wrong' ).html( correctString )
-				$( '#fca_qc_correct_answer_p' ).hide()
+				$( thisQuiz.selector ).find( '#fca_qc_back_container' ).addClass( 'correct-answer' )
+				$( thisQuiz.selector ).find( '#fca_qc_question_right_or_wrong' ).html( thisQuiz.correct_string )
+				$( thisQuiz.selector ).find( '#fca_qc_correct_answer_p' ).hide()
 				
 				
 			} else {
 
-				$( '#fca_qc_back_container' ).addClass( 'wrong-answer' )
-				$( '#fca_qc_question_right_or_wrong' ).html( wrongString )
-				$( '#fca_qc_correct_answer_p' ).show()
+				$( thisQuiz.selector ).find( '#fca_qc_back_container' ).addClass( 'wrong-answer' )
+				$( thisQuiz.selector ).find( '#fca_qc_question_right_or_wrong' ).html( thisQuiz.correct_string )
+				$( thisQuiz.selector ).find( '#fca_qc_correct_answer_p' ).show()
 				
 			}
 		}
@@ -127,56 +120,59 @@ jQuery( document ).ready(function($) {
 	//	HELPER FUNCTIONS 
 	////////////////	
 	
+	function get_quiz_id ( obj ){
+		return $( obj ).attr('id').replace(/\D+/g, "");
+	}
 	
-	function showQuestion() {
-		
-		if (  currentQuestion < questionCount  ) {
+	function showQuestion( quiz ) {
+
+		if (  quiz.currentQuestion < quiz.questionCount  ) {
 			
-			$( '#fca_qc_question_count' ).html( ( currentQuestion + 1) + "/" + questionCount)
+			$( quiz.selector ).find( '.fca_qc_question_count' ).html( ( quiz.currentQuestion + 1) + "/" + quiz.questionCount)
 			
-			$( '.fca_qc_answer_div' ).removeClass('quizprep-wrong-answer')
+			$( quiz.selector ).find( '.fca_qc_answer_div' ).removeClass('quizprep-wrong-answer')
 			
-			let question = questions[currentQuestion].question
-			let answer = questions[currentQuestion].answer
+			let question = quiz.questions[quiz.currentQuestion].question
+			let answer = quiz.questions[quiz.currentQuestion].answer
 			//currentHint = questions[currentQuestion].hint  //'GLOBAL' HINT - unused
-			let wrong1 = questions[currentQuestion].wrong1
-			let wrong2 = questions[currentQuestion].wrong2
-			let wrong3 = questions[currentQuestion].wrong3
+			let wrong1 = quiz.questions[quiz.currentQuestion].wrong1
+			let wrong2 = quiz.questions[quiz.currentQuestion].wrong2
+			let wrong3 = quiz.questions[quiz.currentQuestion].wrong3
 			
 			let answers = [answer, wrong1, wrong2, wrong3]
 			let shuffled_answers = shuffleArray( answers )
 			
-			$( '#fca_qc_question' ).html(question)
-			$( '#fca_qc_question_back' ).html(question)
+			$( quiz.selector ).find( '#fca_qc_question' ).html(question)
+			$( quiz.selector ).find( '#fca_qc_question_back' ).html(question)
 			
-			$( '.fca_qc_answer_div' ).show()
+			$( quiz.selector ).find( '.fca_qc_answer_div' ).show()
 			
 			//PUT OUR ANSWER DATA INTO THE DIVS, BUT IF ITS EMPTY HIDE THE PARENT ELEMENT
 			for (var i = 0; i<shuffled_answers.length; i++) {
 				if ( shuffled_answers[i] == '') {
-					$( '.fca_qc_answer_span' ).eq(i).parent().hide()
+					$( quiz.selector ).find( '.fca_qc_answer_span' ).eq(i).parent().hide()
 				} else {
-					$( '.fca_qc_answer_span' ).eq(i).html(shuffled_answers[i])
+					$( quiz.selector ).find( '.fca_qc_answer_span' ).eq(i).html(shuffled_answers[i])
 				}
 		
 			}
 				
-			currentQuestion = currentQuestion + 1
+			quiz.currentQuestion = quiz.currentQuestion + 1
 						
-			currentAnswer = answer
+			quiz.currentAnswer = answer
 			
-			scale_flip_box()
+			scale_flip_box( quiz.selector )
 			
 		} else {
-			endTest()
+			endTest( quiz )
 		}
 		
 	}
 	
-	function scale_flip_box() {
-		let newHeight = $('#fca_qc_question').outerHeight( true )
+	function scale_flip_box( selector ) {
+		let newHeight = $(selector).find('#fca_qc_question').outerHeight( true )
 		
-		$( '.fca_qc_answer_div' ).each(function(){
+		$(selector).find( '.fca_qc_answer_div' ).each(function(){
 			if ( $( this ).is( ':visible' ) ) {
 				
 				newHeight += $(this).outerHeight( true )
@@ -188,47 +184,45 @@ jQuery( document ).ready(function($) {
 			newHeight = 400
 		}
 
-		$( '#fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
+		$(selector).find( '.fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
 
 	}
 	
-	function set_result() {
+	function set_result( quiz ) {
 
 		let yourResult = "undefined"
 		let i = 0
 		
 		while ( yourResult == "undefined" ) {
-			if ( results[i].min <= score && results[i].max >= score) {
-				yourResult = results[i]
-			} else if( i == results.length ) {
+			if ( quiz.quiz_results[i].min <= quiz.score && quiz.quiz_results[i].max >= quiz.score) {
+				yourResult = quiz.quiz_results[i]
+			} else if( i == quiz.quiz_results.length ) {
 				yourResult = 'error'
 			}else {
 				i++
 			}
 		}
 
-		let scoreParagraph = scoreString.replace('{{SCORE_CORRECT}}', score)
-		scoreParagraph = scoreParagraph.replace('{{SCORE_TOTAL}}', questionCount)
+		let scoreParagraph = scoreString.replace('{{SCORE_CORRECT}}', quiz.score)
+		scoreParagraph = scoreParagraph.replace('{{SCORE_TOTAL}}', quiz.questionCount)
 		  
-		$( '#fca_qc_score_text').html( scoreParagraph )
-		$( '#fca_qc_score_title').html( yourResult.title )
-		$( '#fca_qc_score_img').attr( 'src', yourResult.img )
-		$( '#fca_qc_score_desc').html( yourResult.desc )
+		$( quiz.selector ).find( '.fca_qc_score_text').html( scoreParagraph )
+		$( quiz.selector ).find( '.fca_qc_score_title').html( yourResult.title )
+		$( quiz.selector ).find( '.fca_qc_score_img').attr( 'src', yourResult.img )
+		$( quiz.selector ).find( '.fca_qc_score_desc').html( yourResult.desc )
 			
 	}
 	
 	//DRAW THE 'YOUR RESPOSNES' BOXES AT THE END OF THE QUIZ
-	function show_responses() {
-		
-		let i = 0
-		
-		for ( i = 0; i<questions.length; i++ ) {
-			do_answer_response_div( questions[i].question, questions[i].answer, responses[i], i + 1 )
+	function show_responses( quiz ) {
+				
+		for (var i = 0; i<quiz.questions.length; i++ ) {
+			do_answer_response_div( quiz.questions[i].question, quiz.questions[i].answer, quiz.responses[i], i + 1, quiz.selector, quiz.your_answer_string, quiz.correct_answer_string  )
 		}
-		$( '#fca_qc_result_container' ).show()
+		$( quiz.selector ).find( '.fca_qc_result_container' ).show()
 	}
 	
-	function do_answer_response_div( question, answer, response, questionNumber ) {
+	function do_answer_response_div( question, answer, response, questionNumber, selector, yourAnswerString, correctAnswerString ) {
 		
 		let html = ''
 		
@@ -245,28 +239,21 @@ jQuery( document ).ready(function($) {
 					
 		html += "</div>"
 		
-		$( '#fca_qc_insert_response_above' ).before(html)
+		$( selector ).find( '.fca_qc_insert_response_above' ).before(html)
 		
 		
 	}
 	
-	//UNUSED
-	function resetScore() {
-		//$( '#fca_qc_score_div' ).hide()
-		//$( '#fca_qc_score' ).html( '' )
-	}
+	function endTest( quiz ) {
 	
-	function endTest() {
-	
-		$( '#fca_qc_quiz_footer' ).hide()
-		$( '#fca_qc_quiz_div' ).hide()
-		//$( '#fca_qc_restart_button' ).show()
-		$( '#fca_qc_score_container' ).show()
+		$( quiz.selector ).find( '.fca_qc_quiz_footer' ).hide()
+		$( quiz.selector ).find( '.fca_qc_quiz_div' ).hide()
+		$( quiz.selector ).find( '.fca_qc_score_container' ).show()
 		
-		set_result()
+		set_result( quiz )
 		
-		if ( hideAnswers ) {
-			show_responses()
+		if ( quiz.hideAnswers ) {
+			show_responses( quiz )
 		}
 		
 	}
