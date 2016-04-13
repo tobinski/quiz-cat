@@ -50,7 +50,7 @@ function fca_qc_register_post_type() {
 		'name' => _x('Quizzes','fca_quiz_cat'),
 		'singular_name' => _x('Quiz','fca_quiz_cat'),
 		'add_new' => _x('Add New','fca_quiz_cat'),
-		'all_items' => _x('All Quzzes','fca_quiz_cat'),
+		'all_items' => _x('All Quizzes','fca_quiz_cat'),
 		'add_new_item' => _x('Add New Quiz','fca_quiz_cat'),
 		'edit_item' => _x('Edit Quiz','fca_quiz_cat'),
 		'new_item' => _x('New Quiz','fca_quiz_cat'),
