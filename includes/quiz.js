@@ -8,6 +8,8 @@ jQuery( document ).ready(function($) {
 	
 	const scoreString = $( '.fca_qc_score_text').first().html()
 	
+	
+	//LOAD ALL QUIZZES INTO AN ARRAY AS KEY->VALUE PAIR WHERE KEY IS THE POST-ID OF THE QUIZ AND VALUE IS THE QUIZ OBJECT
 	let quizzes = {}
 	
 	$('.fca_qc_quiz').each(function( index ) {
@@ -107,7 +109,7 @@ jQuery( document ).ready(function($) {
 			} else {
 
 				$( thisQuiz.selector ).find( '#fca_qc_back_container' ).addClass( 'wrong-answer' )
-				$( thisQuiz.selector ).find( '#fca_qc_question_right_or_wrong' ).html( thisQuiz.correct_string )
+				$( thisQuiz.selector ).find( '#fca_qc_question_right_or_wrong' ).html( thisQuiz.wrong_string )
 				$( thisQuiz.selector ).find( '#fca_qc_correct_answer_p' ).show()
 				
 			}
