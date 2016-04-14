@@ -130,37 +130,49 @@ div.fca_qc_image_hover_controls {
 
 /* ON OFF SWITCH */
 
-.fca_qc_onoffswitch {
-	display: inline-block;
-    position: relative;
-	width: 50px;
+.onoffswitch {
+    position: relative; width: 76px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
-.fca_qc_onoffswitch-checkbox {
+.onoffswitch-checkbox {
     display: none;
 }
-.fca_qc_onoffswitch-label {
+.onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    height: 26px; padding: 0; line-height: 26px;
-    border: 2px solid #CCCCCC; border-radius: 26px;
-    background-color: #FFFFFF;
-    transition: background-color 0.3s ease-in-out;
+    border: 1px solid #FFF; border-radius: 20px;
 }
-.fca_qc_onoffswitch-label:before {
-    content: "";
-    display: block; width: 26px; margin: 0px;
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in-out 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #0085ba; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #32373c;
+    text-align: right;
+	font-weight: 500;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
-    right: 22px;
-    border: 2px solid #CCCCCC; border-radius: 26px;
+    right: 42px;
+    border: 1px solid #999999; border-radius: 20px;
     transition: all 0.3s ease-in-out 0s; 
 }
-.fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label {
-    background-color: #0085ba;
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
 }
-.fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label, .fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label:before {
-   border-color: #0085ba;
-}
-.fca_qc_onoffswitch-checkbox:checked + .fca_qc_onoffswitch-label:before {
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }

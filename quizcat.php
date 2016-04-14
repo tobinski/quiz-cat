@@ -482,9 +482,9 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 				echo "<label class='fca_qc_admin_label fca_qc_admin_settings_label' for='fca_qc_hide_answers_until_end'>" . __('Hide answers until the end of the quiz', 'fca_quiz_cat') . "</label>";
 			echo "</th>";
 			echo "<td>";
-				echo "<div class='fca_qc_onoffswitch'>";
-					echo "<input type='checkbox' class='fca_qc_onoffswitch-checkbox' id='fca_qc_hide_answers_until_end' style='display:none;' name='fca_qc_hide_answers_until_end' $hide_answers></input>";		
-				echo "<label class='fca_qc_onoffswitch-label' for='fca_qc_hide_answers_until_end'></label>";
+				echo "<div class='onoffswitch'>";
+					echo "<input type='checkbox' class='onoffswitch-checkbox' id='fca_qc_hide_answers_until_end' style='display:none;' name='fca_qc_hide_answers_until_end' $hide_answers></input>";		
+				echo "<label class='onoffswitch-label' for='fca_qc_hide_answers_until_end'><span class='onoffswitch-inner'><span class='onoffswitch-switch'></span></span></label>";
 				echo "</div>";
 			echo "</td>";
 		echo "</tr>";
