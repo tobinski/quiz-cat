@@ -189,6 +189,8 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'question_string' =>  __('Question', 'fca_quiz_cat'),
 			'save_string' =>  __('Save', 'fca_quiz_cat'),
 			'preview_string' =>  __('Preview', 'fca_quiz_cat'),
+			'on_string' =>  __('ON', 'fca_quiz_cat'),
+			'off_string' =>  __('OFF', 'fca_quiz_cat'),
 		);
 		
 		wp_localize_script( 'fca_qc_admin_js', 'adminData', $admin_data ); 

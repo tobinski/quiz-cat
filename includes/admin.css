@@ -151,12 +151,12 @@ div.fca_qc_image_hover_controls {
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-    content: "ON";
+    content: attr(data-content-on);
     padding-left: 10px;
     background-color: #0085ba; color: #FFFFFF;
 }
 .onoffswitch-inner:after {
-    content: "OFF";
+    content: attr(data-content-off);
     padding-right: 10px;
     background-color: #EEEEEE; color: #32373c;
     text-align: right;

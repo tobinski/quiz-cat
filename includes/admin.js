@@ -11,6 +11,12 @@ jQuery(document).ready(function($){
 	//	SET DEFAULTS
 	////////////////
 	
+	//SET TRANSLATIONS FOR ON/OFF SWITCHES
+	$( '.onoffswitch-inner' ).each( function(){
+		$(this).attr('data-content-on',adminData.on_string );
+		$(this).attr('data-content-off',adminData.off_string );
+	});
+	
 	
 	//HIDE THE INDIVIDUAL QUESTION AND RESULT INPUTS, AS WELL AS THE DEFAULT SUBMIT/PUBLISH METABOX
 	$( '.fca_qc_question_input_div:not(:first), .fca_qc_result_input_div:not(:first)').hide()
