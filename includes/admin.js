@@ -19,8 +19,13 @@ jQuery(document).ready(function($){
 	
 	
 	//HIDE THE INDIVIDUAL QUESTION AND RESULT INPUTS, AS WELL AS THE DEFAULT SUBMIT/PUBLISH METABOX
-	$( '.fca_qc_question_input_div:not(:first), .fca_qc_result_input_div:not(:first)').hide()
-	
+	if ( $( '.fca_qc_question_input_div' ).length > 1 ) {
+		$( '.fca_qc_question_input_div' ).hide()
+	}
+	if ( $( '.fca_qc_result_input_div' ).length > 1 ) {
+		$( '.fca_qc_result_input_div' ).hide()
+	}
+
 	
 	//SET UP SAVE AND PREVIEW BUTTONS, THEN HIDE THE PUBLISHING METABOX
 	const saveButton = '<button type="button" class="button-primary" id="fca_qc_submit_button">' + adminData.save_string + '</buttton>'
