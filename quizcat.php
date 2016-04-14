@@ -435,7 +435,7 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 					if (  $result['img'] == $default_image  ) {
 						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn' style='display:none;'>" . __('Change', 'fca_quiz_cat') . "</button>";
 						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn' style='display:none;'>" . __('Remove', 'fca_quiz_cat') . "</button>";
-					}else {
+					} else {
 						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'fca_quiz_cat') . "</button>";
 						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn'>" . __('Remove', 'fca_quiz_cat') . "</button>";
 						
@@ -665,9 +665,9 @@ function fca_qc_do_quiz( $atts ) {
 		</div>
 		<?php
 		
-		echo ob_get_clean();
+		return ob_get_clean();
 	} else {
-		echo '<p>Quiz Cat: ' . $quiz_text_strings[ 'no_quiz_found' ] . '</p>';
+		return '<p>Quiz Cat: ' . $quiz_text_strings[ 'no_quiz_found' ] . '</p>';
 	}
 }
 add_shortcode( 'quiz-cat', 'fca_qc_do_quiz' );
