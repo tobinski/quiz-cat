@@ -13,7 +13,7 @@ jQuery(document).ready(function($){
 	
 	
 	//HIDE THE INDIVIDUAL QUESTION AND RESULT INPUTS, AS WELL AS THE DEFAULT SUBMIT/PUBLISH METABOX
-	$( '.fca_qc_question_input_div, .fca_qc_result_input_div').hide()
+	$( '.fca_qc_question_input_div:not(:first), .fca_qc_result_input_div:not(:first)').hide()
 	
 	
 	//SET UP SAVE AND PREVIEW BUTTONS, THEN HIDE THE PUBLISHING METABOX
@@ -144,10 +144,13 @@ jQuery(document).ready(function($){
 	//MAKES QUESTION AND RESULT LABELS TOGGLE THE INPUT VISIBILITY ON CLICK
 	function add_question_and_result_click_toggles() {
 			
-		$( '.fca_qc_question_label, .fca_qc_result_label' ).unbind( 'click' )
+		$( '.fca_qc_question_item, .fca_qc_result_item' ).unbind( 'click' )
 
-		$( '.fca_qc_question_label, .fca_qc_result_label' ).click( function() {
-			$( this ).next().toggle( 'fast' )	
+		$( '.fca_qc_question_item' ).click( function() {
+			$( this ).find('.fca_qc_question_input_div').toggle( 'fast' )	
+		})	
+		$( '.fca_qc_result_item' ).click( function() {
+			$( this ).find('.fca_qc_result_input_div').toggle( 'fast' )	
 		})	
 	}
 	add_question_and_result_click_toggles()
