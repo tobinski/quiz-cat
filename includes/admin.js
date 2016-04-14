@@ -38,10 +38,20 @@ jQuery(document).ready(function($){
 	
 	
 	//DRAG AND DROP SUPPORT
+	var dragCheck = false;
 	function add_drag_and_drop_sort() {
 		
 		$( '.fca_qc_sortable_results, .fca_qc_sortable_questions' ).sortable({
 			revert: true,
+			start: function(){
+				// On drag set that flag to true
+				dragCheck = true;
+			},
+			stop: function(){
+				// On stop of dragging reset the flag back to false
+				dragCheck = false;
+			}
+	
 		})
 		
 		$( '.fca_qc_sortable_results' ).unbind( 'sortupdate' )
@@ -76,13 +86,13 @@ jQuery(document).ready(function($){
 		
 		$( '.fca_qc_sortable_questions' ).append(div_to_append)
 		
+		add_drag_and_drop_sort()
 		add_question_heading_text_handlers()
 		add_question_and_result_click_toggles()
 		add_question_3_and_4_toggles()
 		attach_delete_button_handlers()
 		setScoreRanges()
 		setQuestionNumbers()
-		add_drag_and_drop_sort()
 		setConfirmUnload( true )
 		
 	})
@@ -99,12 +109,12 @@ jQuery(document).ready(function($){
 		
 		$( '.fca_qc_sortable_results' ).append(div_to_append)
 		
+		add_drag_and_drop_sort()
 		add_question_and_result_click_toggles()
 		attach_delete_button_handlers()
 		attach_image_upload_handlers()
 		add_result_heading_text_handlers()
 		setScoreRanges()
-		add_drag_and_drop_sort()
 		setConfirmUnload( true )
 		
 	})
@@ -144,13 +154,19 @@ jQuery(document).ready(function($){
 	//MAKES QUESTION AND RESULT LABELS TOGGLE THE INPUT VISIBILITY ON CLICK
 	function add_question_and_result_click_toggles() {
 			
-		$( '.fca_qc_question_item, .fca_qc_result_item' ).unbind( 'click' )
+		$( '.fca_qc_question_item, .fca_qc_result_item' ).unbind( 'mouseup' )
 
-		$( '.fca_qc_question_item' ).click( function() {
-			$( this ).find('.fca_qc_question_input_div').toggle( 'fast' )	
+		$( '.fca_qc_question_item' ).bind( 'mouseup', function() {
+			if ( dragCheck == false ) {
+				$( this ).find( '.fca_qc_question_input_div' ).toggle( 'fast' )
+			}
+				
 		})	
-		$( '.fca_qc_result_item' ).click( function() {
-			$( this ).find('.fca_qc_result_input_div').toggle( 'fast' )	
+		$( '.fca_qc_result_item' ).bind( 'mouseup', function() {
+			if ( dragCheck == false ) {
+				$( this ).find( '.fca_qc_result_input_div' ).toggle( 'fast' )	
+			}
+					
 		})	
 	}
 	add_question_and_result_click_toggles()
@@ -159,7 +175,7 @@ jQuery(document).ready(function($){
 	//MAKES QUESTION HEADINGS AUTOMATICALLY SHOW THE QUESTION FROM THE INPUT BELOW IT
 	function add_question_heading_text_handlers() {
 			
-		$('.fca_qc_question_text').unbind( 'keyup' )
+		$( '.fca_qc_question_text' ).unbind( 'keyup' )
 
 
 		$( '.fca_qc_question_text' ).keyup( function() {
