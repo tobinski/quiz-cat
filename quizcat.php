@@ -424,17 +424,14 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 		
 		$html .= "<div class='fca_qc_result_input_div'>";
 			
-			$html .= '<div class="fca_qc_two_third_div">';
 				$html .= "<label class='fca_qc_admin_label'>" . __('Result Title', 'fca_quiz_cat') . "</label>";
 				$html .= "<input type='text' class='fca_qc_text_input fca_qc_quiz_result' name='fca_qc_quiz_result_title[]' value='" . $result['title'] . "'></input><br>";
 				$html .= "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'fca_quiz_cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_result_description[]'>" . $result['desc'] . "</textarea><br>";
-			$html .= '</div>';
 			
-			$html .= '<div class="fca_qc_one_third_div">';
 				$html .= "<label class='fca_qc_admin_label'>" . __('Image', 'fca_quiz_cat') . "</label>";
 				$html .= '<input type="text" class="fca_qc_image_input" name="fca_qc_quiz_result_image_src[]" style="display: none;" value="' . $result['img'] . '">';
-				$html .= '<img class="fca_qc_image" id="fca_qc_quiz_result_image[]" src="' . $result['img'] . '">';
+				$html .= '<img class="fca_qc_image" id="fca_qc_quiz_result_image[]" style="max-width: 252px" src="' . $result['img'] . '">';
 				$html .= "<div class='fca_qc_image_hover_controls'>";
 									
 					if (  $result['img'] == $default_image  ) {
@@ -447,8 +444,6 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 					}
 					
 				$html .= "</div>";
-
-			$html .= '</div>';
 		
 		$html .= '</div>';
 		
