@@ -10,7 +10,7 @@ jQuery( document ).ready(function($) {
 	
 	
 	//LOAD ALL QUIZZES INTO AN ARRAY AS KEY->VALUE PAIR WHERE KEY IS THE POST-ID OF THE QUIZ AND VALUE IS THE QUIZ OBJECT
-	let quizzes = []
+	let quizzes = {}
 	
 	$('.fca_qc_quiz').each(function( index ) {
 		let thisId = get_quiz_id(this)
