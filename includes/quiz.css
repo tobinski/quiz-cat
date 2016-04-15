@@ -52,7 +52,10 @@ div.fca_qc_quiz button.fca_qc_button {
 	transition: all 0s;
 	border: none;
 }
+div.fca_qc_quiz button.fca_qc_button:hover {
+	background-color: #3c7d73;
 }
+
 
 .fca_qc_next_question {
 	background-color: inherit;
