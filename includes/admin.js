@@ -165,20 +165,25 @@ jQuery(document).ready(function($){
 	//MAKES QUESTION AND RESULT LABELS TOGGLE THE INPUT VISIBILITY ON CLICK
 	function add_question_and_result_click_toggles() {
 			
-		$( '.fca_qc_question_item, .fca_qc_result_item' ).unbind( 'mouseup' )
+		$( '.fca_qc_question_item, .fca_qc_result_item' ).unbind( 'click' )
 
-		$( '.fca_qc_question_item' ).bind( 'mouseup', function() {
+		$( '.fca_qc_question_item' ).click( function() {
 			if ( dragCheck == false ) {
 				$( this ).find( '.fca_qc_question_input_div' ).toggle( 'fast' )
 			}
 				
 		})	
-		$( '.fca_qc_result_item' ).bind( 'mouseup', function() {
+		$( '.fca_qc_result_item' ).click( function() {
 			if ( dragCheck == false ) {
 				$( this ).find( '.fca_qc_result_input_div' ).toggle( 'fast' )	
 			}
 					
 		})	
+		
+		$( '.fca_qc_question_input_div, .fca_qc_result_input_div' ).bind( 'click', function(e) {
+			e.stopPropagation();
+		})
+		
 	}
 	add_question_and_result_click_toggles()
 	
