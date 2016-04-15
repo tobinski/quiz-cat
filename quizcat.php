@@ -238,6 +238,8 @@ function add_custom_meta_boxes() {
         'default'
     );
 	
+	//SIDE META BOX, UNUSED 
+	/*
 	add_meta_box( 
         'fca_qc_sidebar_meta_box',
         __( 'Extensions', 'fca_quiz_cat' ),
@@ -245,7 +247,8 @@ function add_custom_meta_boxes() {
         null,
         'side',
         'high'
-    );	
+    );
+	*/	
 }
 add_action( 'add_meta_boxes_fca_qc_quiz', 'add_custom_meta_boxes' );
 
@@ -462,7 +465,7 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 	}
 }
 
-//RENDER A SIDE META BOX
+//RENDER A SIDE META BOX (UNUSED)
 function fca_qc_render_side_meta_box() {
 	
 	echo '</p>COMING SOON</p>';
