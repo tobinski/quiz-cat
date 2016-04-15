@@ -12,10 +12,24 @@ jQuery( document ).ready(function($) {
 	//LOAD ALL QUIZZES INTO AN ARRAY AS KEY->VALUE PAIR WHERE KEY IS THE POST-ID OF THE QUIZ AND VALUE IS THE QUIZ OBJECT
 	let quizzes = {}
 	
-	$('.fca_qc_quiz').each(function( index ) {
-		let thisId = get_quiz_id(this)
-		quizzes[thisId] = eval( 'quizData_' + thisId )
-	})
+	function loadQuizzes() {
+		$('.fca_qc_quiz').each(function( index ) {
+			let thisId = get_quiz_id(this)
+			quizzes[thisId] = eval( 'quizData_' + thisId )
+		})		
+
+		//TRIM ANY QUESTIONS THAT HAVE NO ANSWERS
+		$.each(quizzes, function (key, value) {
+			for (var i = 0; i < quizzes[key].questions.length; i++) {
+				if ( quizzes[key].questions[i].answer == '' ) {
+					quizzes[key].questions.splice(i)
+					
+				}
+			}
+		})
+	}
+	loadQuizzes()
+	
 	
 	////////////////
 	//	PRE LOAD RESULT IMAGES 
@@ -24,13 +38,13 @@ jQuery( document ).ready(function($) {
 	function preloadImages() {
 		let preloaded_images = []
 		
-		for (var i = 0; i < quizzes.length; i++) {
-		
-			for (var j = 0; i < quizzes[i].quiz_results.length; j++) {
+		$.each(quizzes, function (key, value) {
+			for (var j = 0; j < quizzes[key].quiz_results.length; j++) {
 				preloaded_images[j] = new Image()
-				preloaded_images[j].src = quizzes[i].quiz_results[j].img
+				preloaded_images[j].src = quizzes[key].quiz_results[j].img
 			}
-		}
+		})
+
 	}
 	preloadImages()
 	
