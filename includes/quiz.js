@@ -10,11 +10,11 @@ jQuery( document ).ready(function($) {
 	
 	
 	//LOAD ALL QUIZZES INTO AN ARRAY AS KEY->VALUE PAIR WHERE KEY IS THE POST-ID OF THE QUIZ AND VALUE IS THE QUIZ OBJECT
-	let quizzes = {}
+	var quizzes = {}
 	
 	function loadQuizzes() {
 		$('.fca_qc_quiz').each(function( index ) {
-			let thisId = get_quiz_id(this)
+			var thisId = get_quiz_id(this)
 			quizzes[thisId] = eval( 'quizData_' + thisId )
 		})		
 
@@ -36,7 +36,7 @@ jQuery( document ).ready(function($) {
 	////////////////	
 		
 	function preloadImages() {
-		let preloaded_images = []
+		var preloaded_images = []
 		
 		$.each(quizzes, function (key, value) {
 			for (var j = 0; j < quizzes[key].quiz_results.length; j++) {
@@ -55,7 +55,7 @@ jQuery( document ).ready(function($) {
 	
 	$( '.fca_qc_start_button' ).click(function() {
 		
-		let thisQuiz =  quizzes[ get_quiz_id( this.parentNode ) ]
+		var thisQuiz =  quizzes[ get_quiz_id( this.parentNode ) ]
 		
 		thisQuiz.currentQuestion = 0
 		thisQuiz.score = 0
@@ -81,13 +81,13 @@ jQuery( document ).ready(function($) {
 	
 	
 	$( '.fca_qc_next_question').click(function() {
-		let thisQuiz =  quizzes[ get_quiz_id( $(this).closest('.fca_qc_quiz') ) ]
+		var thisQuiz =  quizzes[ get_quiz_id( $(this).closest('.fca_qc_quiz') ) ]
 		$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).removeClass('flip')
 		showQuestion( thisQuiz )
 	})
 
 	$( '.fca_qc_answer_div' ).click(function() {
-		let thisQuiz =  quizzes[ get_quiz_id( $(this).closest('.fca_qc_quiz') ) ]
+		var thisQuiz =  quizzes[ get_quiz_id( $(this).closest('.fca_qc_quiz') ) ]
 		$( this ).blur()
 		
 		thisQuiz.responses.push ( $( this ).children('.fca_qc_answer_span').html() )
@@ -148,15 +148,15 @@ jQuery( document ).ready(function($) {
 			
 			$( quiz.selector ).find( '.fca_qc_answer_div' ).removeClass('quizprep-wrong-answer')
 			
-			let question = quiz.questions[quiz.currentQuestion].question
-			let answer = quiz.questions[quiz.currentQuestion].answer
+			var question = quiz.questions[quiz.currentQuestion].question
+			var answer = quiz.questions[quiz.currentQuestion].answer
 			//currentHint = questions[currentQuestion].hint  //'GLOBAL' HINT - unused
-			let wrong1 = quiz.questions[quiz.currentQuestion].wrong1
-			let wrong2 = quiz.questions[quiz.currentQuestion].wrong2
-			let wrong3 = quiz.questions[quiz.currentQuestion].wrong3
+			var wrong1 = quiz.questions[quiz.currentQuestion].wrong1
+			var wrong2 = quiz.questions[quiz.currentQuestion].wrong2
+			var wrong3 = quiz.questions[quiz.currentQuestion].wrong3
 			
-			let answers = [answer, wrong1, wrong2, wrong3]
-			let shuffled_answers = shuffleArray( answers )
+			var answers = [answer, wrong1, wrong2, wrong3]
+			var shuffled_answers = shuffleArray( answers )
 			
 			$( quiz.selector ).find( '#fca_qc_question' ).html(question)
 			$( quiz.selector ).find( '#fca_qc_question_back' ).html(question)
@@ -186,7 +186,7 @@ jQuery( document ).ready(function($) {
 	}
 	
 	function scale_flip_box( selector ) {
-		let newHeight = $(selector).find('#fca_qc_question').outerHeight( true )
+		var newHeight = $(selector).find('#fca_qc_question').outerHeight( true )
 		
 		$(selector).find( '.fca_qc_answer_div' ).each(function(){
 			if ( $( this ).is( ':visible' ) ) {
@@ -206,8 +206,8 @@ jQuery( document ).ready(function($) {
 	
 	function set_result( quiz ) {
 
-		let yourResult = "undefined"
-		let i = 0
+		var yourResult = "undefined"
+		var i = 0
 		
 		while ( yourResult == "undefined" ) {
 			if ( quiz.quiz_results[i].min <= quiz.score && quiz.quiz_results[i].max >= quiz.score) {
@@ -219,7 +219,7 @@ jQuery( document ).ready(function($) {
 			}
 		}
 
-		let scoreParagraph = scoreString.replace('{{SCORE_CORRECT}}', quiz.score)
+		var scoreParagraph = scoreString.replace('{{SCORE_CORRECT}}', quiz.score)
 		scoreParagraph = scoreParagraph.replace('{{SCORE_TOTAL}}', quiz.questionCount)
 		  
 		$( quiz.selector ).find( '.fca_qc_score_text').html( scoreParagraph )
@@ -240,7 +240,7 @@ jQuery( document ).ready(function($) {
 	
 	function do_answer_response_div( question, answer, response, questionNumber, selector, yourAnswerString, correctAnswerString ) {
 		
-		let html = ''
+		var html = ''
 		
 		if ( answer == response ) {
 			html += "<div class='fca_eoi_question_response_item correct-answer'>"
@@ -279,9 +279,9 @@ jQuery( document ).ready(function($) {
 	////////////////	
 
 	function shuffleArray(array) {
-		for (let i = array.length - 1; i > 0; i--) {
-			let j = Math.floor(Math.random() * (i + 1))
-			let temp = array[i]
+		for (var i = array.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1))
+			var temp = array[i]
 			array[i] = array[j]
 			array[j] = temp
 		}

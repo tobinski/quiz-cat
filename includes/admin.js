@@ -88,11 +88,11 @@ jQuery(document).ready(function($){
 	//THE ADD QUESTION BUTTON
 	$( '#fca_qc_add_question_btn' ).click(function() {
 
-		let question_number = $( '.fca_qc_question_item' ).length
+		var question_number = $( '.fca_qc_question_item' ).length
 		
 		question_number = question_number + 1
 
-		let div_to_append = adminData.questionDiv.replace('{{QUESTION_NUMBER}}', question_number)
+		var div_to_append = adminData.questionDiv.replace('{{QUESTION_NUMBER}}', question_number)
 		div_to_append = div_to_append.replace('{{QUESTION_NUMBER}}:', question_number + ':')
 		
 		$( '.fca_qc_sortable_questions' ).append(div_to_append)
@@ -101,7 +101,7 @@ jQuery(document).ready(function($){
 		add_question_heading_text_handlers()
 		add_question_and_result_click_toggles()
 		add_question_3_and_4_toggles()
-		attach_delete_button_handlers()
+		attach_devare_button_handlers()
 		setScoreRanges()
 		setQuestionNumbers()
 		setConfirmUnload( true )
@@ -111,18 +111,18 @@ jQuery(document).ready(function($){
 	//THE ADD RESULT BUTTON
 	$( '#fca_qc_add_result_btn' ).click(function() {
 
-		let result_number = $( '.fca_qc_result_item' ).length
+		var result_number = $( '.fca_qc_result_item' ).length
 		
 		result_number = result_number + 1
 	
-		let div_to_append = adminData.resultDiv.replace('{{RESULT_NUMBER}}', result_number )
+		var div_to_append = adminData.resultDiv.replace('{{RESULT_NUMBER}}', result_number )
 		div_to_append = div_to_append.replace('{{RESULT_NUMBER}}<', result_number + '<' )
 		
 		$( '.fca_qc_sortable_results' ).append(div_to_append)
 		
 		add_drag_and_drop_sort()
 		add_question_and_result_click_toggles()
-		attach_delete_button_handlers()
+		attach_devare_button_handlers()
 		attach_image_upload_handlers()
 		add_result_heading_text_handlers()
 		setScoreRanges()
@@ -212,15 +212,15 @@ jQuery(document).ready(function($){
 	}
 	add_result_heading_text_handlers()
 	
-	//THE DELETE QUESTION BUTTON
-	function attach_delete_button_handlers() {
+	//THE DEvarE QUESTION BUTTON
+	function attach_devare_button_handlers() {
 			
-		$('.fca_qc_delete_icon').unbind( 'click' )
+		$('.fca_qc_devare_icon').unbind( 'click' )
 		
-		$('.fca_qc_delete_icon').click( function(){
+		$('.fca_qc_devare_icon').click( function(){
 
 			if (confirm( adminData.sureWarning_string )) {
-				$( this ).closest('.fca_qc_deletable_item').remove()
+				$( this ).closest('.fca_qc_devarable_item').remove()
 				setScoreRanges ()
 				setConfirmUnload( true )
 
@@ -230,7 +230,7 @@ jQuery(document).ready(function($){
 			
 		})
 	}	
-	attach_delete_button_handlers()
+	attach_devare_button_handlers()
 	
 		
 	////////////////
@@ -247,15 +247,15 @@ jQuery(document).ready(function($){
 		const resultCount = $( '.fca_qc_result_item' ).length
 		//plus one because zero is a possible result, e.g. you can get 0/10
 		const divisor = parseInt ( (questionCount + 1) / resultCount )
-		let remainder = ( (questionCount + 1) % resultCount )
+		var remainder = ( (questionCount + 1) % resultCount )
 		//n is the result 'counter' to be iterated, and passed to the next result to start at
-		let n = 0
+		var n = 0
 		
 		$( '.fca_qc_result_item' ).each(function() {
 			
 			if ( n <= questionCount ) {
-				let start = n
-				let end = 0
+				var start = n
+				var end = 0
 						
 				if ( start == questionCount ) {
 					
@@ -294,7 +294,7 @@ jQuery(document).ready(function($){
 	setScoreRanges()
 	
 	function setQuestionNumbers(){
-		let n = 1;
+		var n = 1;
 		$( '.fca_qc_question_item' ).each(function() {
 			$(this).children( '.fca_qc_question_label' ).children( '.fca_qc_quiz_heading_question_number' ).html( adminData.question_string + ' ' + n + ': ')
 			n = n + 1
