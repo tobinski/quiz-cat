@@ -3,7 +3,7 @@
 Plugin Name: Quiz Cat
 Plugin URI: https://fatcatapps.com/quiz-cat
 Description: Provides an easy way to create and administer quizes
-Version: 1.0-RC2
+Version: 1.0.0
 Author: Fatcat Apps
 Author URI: https://fatcatapps.com/
 License: GPLv2
