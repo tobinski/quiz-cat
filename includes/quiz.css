@@ -6,6 +6,12 @@ div.fca_qc_quiz {
 	text-align: center;
 	color: #151515;
 }
+
+.fca_qc_quiz p {
+	width: auto;
+}
+
+
 h2.fca_qc_quiz_title {
 	color: #151515;
 	margin: 0 0 20px 0;
