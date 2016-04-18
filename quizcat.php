@@ -573,14 +573,14 @@ function fca_qc_save_post( $post_id ) {
 			'fca_qc_hide_answers_until_end'	=> 'hide_answers',
 		);
 		
-		$save = array();
+		$settings = array();
 		
 		forEach ( $fields as $key => $value ) {
 			empty ( $_POST[$key] ) ?  $_POST[$key] = '' : '';
-			$save[$value] = fca_qc_escape_input( $_POST[$key] );
+			$settings[$value] = fca_qc_escape_input( $_POST[$key] );
 		}
 			
-		update_post_meta ( $post_id, 'quiz_cat_settings', $save );
+		update_post_meta ( $post_id, 'quiz_cat_settings', $settings );
 	}
 	
 }
@@ -740,7 +740,7 @@ function fca_qc_do_result_panel( $operation = 'echo') {
 }
 
 function fca_qc_convert_entities ( $array ) {
-	$array = is_array($array) ? array_map('fca_qc_convert_entities', $array) : wp_kses_decode_entities( $array );
+	$array = is_array($array) ? array_map('fca_qc_convert_entities', $array) : html_entity_decode( $array, ENT_QUOTES );
 
     return $array;
 }
