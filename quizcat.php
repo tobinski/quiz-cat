@@ -169,8 +169,8 @@ function fca_qc_admin_cpt_script( $hook ) {
 		wp_enqueue_media();	
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('jquery-ui-core');		
-		wp_enqueue_script('fca_qc_admin_js', FCA_QC_PLUGINS_URL . '/includes/admin.js' );		
-		wp_enqueue_style( 'fca_qc_admin_stylesheet', FCA_QC_PLUGINS_URL . '/includes/admin.css' );
+		wp_enqueue_script('fca_qc_admin_js', FCA_QC_PLUGINS_URL . '/includes/admin.min.js' );		
+		wp_enqueue_style( 'fca_qc_admin_stylesheet', FCA_QC_PLUGINS_URL . '/includes/admin.min.css' );
 		
 		$admin_data = array (
 			//A TEMPLATE DIV OF THE QUESTION AND RESULT DIVS, SO WE CAN ADD MORE OF THEM VIA JAVASCRIPT
@@ -617,8 +617,8 @@ function fca_qc_do_quiz( $atts ) {
 		}
 		
 		wp_enqueue_script( 'jquery' );
-		wp_enqueue_style( 'fca_qc_quiz_stylesheet', plugins_url( 'includes/quiz.css', __FILE__ ) );
-		wp_enqueue_script( 'fca_qc_quiz_js', plugins_url( 'includes/quiz.js', __FILE__ ) );
+		wp_enqueue_style( 'fca_qc_quiz_stylesheet', plugins_url( 'includes/quiz.min.css', __FILE__ ) );
+		wp_enqueue_script( 'fca_qc_quiz_js', plugins_url( 'includes/quiz.min.js', __FILE__ ) );
 		
 		//SEND JS THE DATA BUT CONVERT ANY ESCAPED THINGS BACK TO NORMAL CHARACTERS
 		$quiz_data = array(
