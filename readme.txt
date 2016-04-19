@@ -56,13 +56,13 @@ No need to read a dry, lengthy manual, though.
 = Quiz Cat Features =
 We’ll give you the 4-1-1 on Quiz Cat right here. Everything you need to know about our quiz builder plugin, and nothing you don’t. 
 
-For starters, you should know that Quiz Cat lets you create unlimited quizzes. Feel free to create as many quizzes as you desire. There’s no limit, really.
+For starters, each Quiz has a beautiful "Quiz landing page" that comes with headline, subheadline, image and a beautiful "Start Quiz" button.
+
+You should know that Quiz Cat lets you create unlimited quizzes. Feel free to create as many quizzes as you desire. There’s no limit, really.
 
 The same is true for the questions in your quizzes. Each quiz you create with Quiz Cat can have as many questions as you want. 
 
 Those quiz questions, in turn, will be accompanied by multiple choice answers. Each question on your quiz can have between two and four possible answers. 
-
-You can choose to reveal the correct answers for each question either immediately or at the end of the quiz. Having the answers at the end motivates those taking your quiz to finish it. Otherwise these quiz-takers will never know whether they responded correctly. 
 
 Plus, if you create interesting questions, you’ll have quiz-takers finishing the quiz just to see the answers. A hip-hop quiz, for example, might create this level of engagement with questions like “Who really shot Notorious B.I.G.?” or “Is Tupac in Africa?” 
 
@@ -72,7 +72,7 @@ Speaking of completion, that’s another fun feature of Quiz Cat. Our WordPress 
 
 Suppose, for instance, that you’re creating the “Game of Thrones” quiz we mentioned earlier. You could make your quiz even more enjoyable with amusing messages at the end. If someone answered all of the quiz questions correctly, you could have a message declaring them to be “a true Game of Thrones geek”. Anyone who missed quiz questions, on the other hand, might see a message poking fun at them or questioning their true knowledge of Game of Thrones. 
 
-The exact message(s) you show quiz-takers at the end is entirely up to you. You’re certainly not forced to follow any pre-determined, template messages. All Quiz Cat does here is provide the ability to create a custom headline, image, and description based on a respondent’s quiz score. You then have complete creative control over the quiz from there. 
+The exact messages and images you show quiz-takers at the end is entirely up to you. You’re certainly not forced to follow any pre-determined, template messages. All Quiz Cat does here is provide the ability to create a custom headline, image, and description based on a respondent’s quiz score. You then have complete creative control over the quiz from there. 
 
 Another feature of Quiz Cat - one you’ll love - is that this quiz plugin randomly shuffles quiz answers. Shuffling keeps the answer to question one of your quiz from always having to be “A”. “A” could be the right answer this time, while “D” might be the correct answer next. 
 
@@ -87,9 +87,11 @@ Still, for every other part of the quiz creation process, our plugin can definit
 Once your quiz is ready to be published, Quiz Cat allows you to do so with a simple shortcode. Take the shortcode from our WordPress quiz plugin and paste it into any post or page on your site. Like magic seeds, a quiz will then sprout from the shortcode - appearing wherever you wish.
 
 = Internationalization =
-You should be aware that Quiz Cat offers multilingual support on both the front end and back end. On the font-end, our WordPress quiz plugin allows the language in your quiz to be changed using PHP filters (see "Frequently Asked Questions" for more). And, on the back-end, Quiz Cat provides multi-lingual support by being fully translation ready. 
+You should be aware that Quiz Cat is fully translateable.
 
-Being able to translate a quiz makes sense given the international scope of web traffic. We want your quizzes to be enjoyed by everyone who visits your site. And our WordPress quiz plugin can do just that, making your quizzes linguistically accessible. 
+All text strings in Quiz Cat's backend support translation. On the frontend, most content can be changed to fit your target audience's language, and the few things that can't be changed from the user interface can be changed with PHP Filters (see the "Frequently Asked Questions" tab for more).
+
+Being able to translate the plugin quiz makes sense given the international scope of web traffic. We want your quizzes to be enjoyed by everyone who visits your site. And our WordPress quiz plugin can do just that, making your quizzes linguistically accessible. 
 
 As long as we’re talking about translating quizzes with Quiz Cat, here’s a fun fact. Some of the creators of Quiz Cat are not native English speakers. Visit our website (FatCatApps.com) and you’ll see this for yourself - our founder is a native German speaker. So when we decided to build a WordPress quiz plugin, it was a given that multilingual support would be included. 
 
