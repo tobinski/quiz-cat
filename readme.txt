@@ -8,7 +8,7 @@ Requires at least: 4.0
 Tested up to: 4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 Quiz Cat Lets You Create Beautiful Viral Quizzes That Drive Social Shares & User Engagement. Set It Up In 2 Minutes.
 
@@ -151,6 +151,9 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 
 
 == Changelog ==
+
+= Quiz Cat 1.0.1 =
+* Fix space in SVN repo
 
 = Quiz Cat 1.0.0 =
 * Initial release
