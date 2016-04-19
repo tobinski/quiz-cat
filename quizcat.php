@@ -1,14 +1,14 @@
 <?php
 /*
-	Plugin Name: Quiz Cat
-	Plugin URI: https://fatcatapps.com/quiz-cat
-	Description: Provides an easy way to create and administer quizes
-	Text Domain: fca-quiz-cat
-	Domain Path: /languages
-	Author: Fatcat Apps
-	Version: 1.0.0
-	Author URI: https://fatcatapps.com/
-	License: GPLv2
+Plugin Name: Quiz Cat
+Plugin URI: https://fatcatapps.com/quiz-cat
+Description: Provides an easy way to create and administer quizes
+Text Domain: fca-quiz-cat
+Domain Path: /languages
+Author: Fatcat Apps
+Author URI: https://fatcatapps.com/
+License: GPLv2
+Version: 1.0.0
 */
 
 // BASIC SECURITY
