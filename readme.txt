@@ -103,7 +103,7 @@ We’re looking for translators to help expand Quiz Cat’s multilingual support
 
 Regardless of whether you contact us about being a translator; thanks for reading this far. 
 
-=Ready To Build Viral & Engaging Quizzes? =
+= Ready To Build Viral & Engaging Quizzes? =
 
 We’ve at the end of our pitch now, on why Quiz Cat is the plugin you’re looking for. This game-changing WordPress quiz plugin that will electrify your audience, leading to more signups and/or sales. 
 
@@ -121,7 +121,8 @@ Here’s to you, your quizzes, and the satisfying results they’ll deliver!
 3. In your sidebar, select 'Quizzes -> Add New' to create a new quiz
 
 == Frequently Asked Questions ==
-=How Can I Change The Quiz Language On The Frontend?=
+= How Can I Change The Quiz Language On The Frontend? =
+
 All strings that appear on the frontend can be changed using this filter.
 `function my_quiz_callback_filter( $array ) {
 
