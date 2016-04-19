@@ -1,4 +1,4 @@
-=== Quiz Cat ===
+﻿=== Quiz Cat ===
 Contributors: fatcatapps
 Donate link: https://fatcatapps.com/
 Tags: quiz, quizzes
@@ -6,7 +6,7 @@ Author URI: https://fatcatapps.com/
 Plugin URI: https://fatcatapps.com/quizcat
 Requires at least: 4.0
 Tested up to: 4.5
-Stable tag: trunk
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
