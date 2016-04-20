@@ -153,6 +153,9 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 
 == Changelog ==
 
+= Quiz Cat 1.0.3 =
+* New Feline Menu Icon
+
 = Quiz Cat 1.0.2 =
 * Change text domain to match WordPress.org plugin slug (quiz-cat)
 

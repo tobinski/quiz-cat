@@ -8,7 +8,7 @@ Domain Path: /languages
 Author: Fatcat Apps
 Author URI: https://fatcatapps.com/
 License: GPLv2
-Version: 1.0.2
+Version: 1.0.3
 */
 
 // BASIC SECURITY
@@ -75,7 +75,7 @@ function fca_qc_register_post_type() {
 		'show_in_menu' => true,
 		'show_in_admin_bar' => true,
 		'menu_position' => 103,
-		'menu_icon' => null,
+		'menu_icon' => FCA_QC_PLUGINS_URL . '/assets/icon.png',
 		'capability_type' => 'post',
 		'hierarchical' => false,
 		'supports' => array('title'),
