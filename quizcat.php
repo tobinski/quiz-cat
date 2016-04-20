@@ -3,7 +3,7 @@
 Plugin Name: Quiz Cat
 Plugin URI: https://fatcatapps.com/quiz-cat
 Description: Provides an easy way to create and administer quizes
-Text Domain: fca-quiz-cat
+Text Domain: quiz-cat
 Domain Path: /languages
 Author: Fatcat Apps
 Author URI: https://fatcatapps.com/
@@ -24,18 +24,18 @@ add_action( 'wp_ajax_nopriv_fca_qc_submit_form', 'fca_qc_submit_form' );
 
 //RUN FILTER ON FRONT-END STRINGS
 $strings_array = array (
-	'no_quiz_found' => __('No Quiz found', 'fca-quiz-cat'),
-	'correct' => __('Correct!', 'fca-quiz-cat'),
-	'wrong' => __('Wrong!', 'fca-quiz-cat'),
-	'your_answer' => __('Your answer:', 'fca-quiz-cat'),
-	'correct_answer' => __('Correct answer:', 'fca-quiz-cat'),
-    'question' => __('Question', 'fca-quiz-cat'),
-	'next' =>  __('Next', 'fca-quiz-cat'),
-	'you_got' =>  __('You got', 'fca-quiz-cat'),
-	'out_of' => __('out of', 'fca-quiz-cat'),
-	'your_answers' =>  __('Your Answers', 'fca-quiz-cat'),
-	'start_quiz' => __('Start Quiz', 'fca-quiz-cat'),
-	'retake_quiz' => __('Retake Quiz', 'fca-quiz-cat'),
+	'no_quiz_found' => __('No Quiz found', 'quiz-cat'),
+	'correct' => __('Correct!', 'quiz-cat'),
+	'wrong' => __('Wrong!', 'quiz-cat'),
+	'your_answer' => __('Your answer:', 'quiz-cat'),
+	'correct_answer' => __('Correct answer:', 'quiz-cat'),
+    'question' => __('Question', 'quiz-cat'),
+	'next' =>  __('Next', 'quiz-cat'),
+	'you_got' =>  __('You got', 'quiz-cat'),
+	'out_of' => __('out of', 'quiz-cat'),
+	'your_answers' =>  __('Your Answers', 'quiz-cat'),
+	'start_quiz' => __('Start Quiz', 'quiz-cat'),
+	'retake_quiz' => __('Retake Quiz', 'quiz-cat'),
 );
 $quiz_text_strings = apply_filters( 'fca_qc_quiz_text', $strings_array );
 
@@ -49,19 +49,19 @@ $quiz_text_strings = apply_filters( 'fca_qc_quiz_text', $strings_array );
 function fca_qc_register_post_type() {
 	
 	$labels = array(
-		'name' => _x('Quizzes','fca-quiz-cat'),
-		'singular_name' => _x('Quiz','fca-quiz-cat'),
-		'add_new' => _x('Add New','fca-quiz-cat'),
-		'all_items' => _x('All Quizzes','fca-quiz-cat'),
-		'add_new_item' => _x('Add New Quiz','fca-quiz-cat'),
-		'edit_item' => _x('Edit Quiz','fca-quiz-cat'),
-		'new_item' => _x('New Quiz','fca-quiz-cat'),
-		'view_item' => _x('View Quiz','fca-quiz-cat'),
-		'search_items' => _x('Search Quizzes','fca-quiz-cat'),
-		'not_found' =>  _x('Quiz not found','fca-quiz-cat'),
-		'not_found_in_trash' => _x('No Quizzes found in trash','fca-quiz-cat'),
-		'parent_item_colon' => _x('Parent Quiz:','fca-quiz-cat'),
-		'menu_name' => _x('Quiz Cat','fca-quiz-cat')
+		'name' => _x('Quizzes','quiz-cat'),
+		'singular_name' => _x('Quiz','quiz-cat'),
+		'add_new' => _x('Add New','quiz-cat'),
+		'all_items' => _x('All Quizzes','quiz-cat'),
+		'add_new_item' => _x('Add New Quiz','quiz-cat'),
+		'edit_item' => _x('Edit Quiz','quiz-cat'),
+		'new_item' => _x('New Quiz','quiz-cat'),
+		'view_item' => _x('View Quiz','quiz-cat'),
+		'search_items' => _x('Search Quizzes','quiz-cat'),
+		'not_found' =>  _x('Quiz not found','quiz-cat'),
+		'not_found_in_trash' => _x('No Quizzes found in trash','quiz-cat'),
+		'parent_item_colon' => _x('Parent Quiz:','quiz-cat'),
+		'menu_name' => _x('Quiz Cat','quiz-cat')
 	);
 		
 	$args = array(
@@ -97,21 +97,21 @@ function fca_qc_post_updated_messages( $messages ){
 	
 	$messages['fca_qc_quiz'] = array(
 		0  => '', // Unused. Messages start at index 1.
-		1  => __( 'Quiz updated.','fca-quiz-cat'),
-		2  => __( 'Quiz updated.','fca-quiz-cat'),
-		3  => __( 'Quiz deleted.','fca-quiz-cat'),
-		4  => __( 'Quiz updated.','fca-quiz-cat'),
+		1  => __( 'Quiz updated.','quiz-cat'),
+		2  => __( 'Quiz updated.','quiz-cat'),
+		3  => __( 'Quiz deleted.','quiz-cat'),
+		4  => __( 'Quiz updated.','quiz-cat'),
 		/* translators: %s: date and time of the revision */
-		5  => isset( $_GET['revision'] ) ? sprintf( __( 'Quiz restored to revision from %s','fca-quiz-cat'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-		6  => __( 'Quiz published.' ,'fca-quiz-cat'),
-		7  => __( 'Quiz saved.' ,'fca-quiz-cat'),
-		8  => __( 'Quiz submitted.' ,'fca-quiz-cat'),
+		5  => isset( $_GET['revision'] ) ? sprintf( __( 'Quiz restored to revision from %s','quiz-cat'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+		6  => __( 'Quiz published.' ,'quiz-cat'),
+		7  => __( 'Quiz saved.' ,'quiz-cat'),
+		8  => __( 'Quiz submitted.' ,'quiz-cat'),
 		9  => sprintf(
-			__( 'Quiz scheduled for: <strong>%1$s</strong>.','fca-quiz-cat'),
+			__( 'Quiz scheduled for: <strong>%1$s</strong>.','quiz-cat'),
 			// translators: Publish box date format, see http://php.net/date
 			date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) )
 		),
-		10 => __( 'Quiz draft updated.' ,'fca-quiz-cat'),
+		10 => __( 'Quiz draft updated.' ,'quiz-cat'),
 	);
 
 	return $messages;
@@ -125,9 +125,9 @@ add_filter('post_updated_messages', 'fca_qc_post_updated_messages' );
 function fca_qc_add_new_post_table_columns($columns) {
 	
     $new_columns['cb'] = '<input type="checkbox" />';
-    $new_columns['title'] = _x('Quiz Name', 'column name', 'fca-quiz-cat');    
-    $new_columns['shortcode'] = __('Shortcode', 'fca-quiz-cat');
-    $new_columns['date'] = _x('Date', 'column name', 'fca-quiz-cat');
+    $new_columns['title'] = _x('Quiz Name', 'column name', 'quiz-cat');    
+    $new_columns['shortcode'] = __('Shortcode', 'quiz-cat');
+    $new_columns['date'] = _x('Date', 'column name', 'quiz-cat');
  
     return $new_columns;
 }
@@ -180,19 +180,19 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'resultDiv' 	=> 	fca_qc_render_result_meta_box( array(), '{{RESULT_NUMBER}}', 'return' ),
 			
 			//SOME LOCALIZATION STRINGS FOR JAVASCRIPT STUFF
-			'navigationWarning_string' => __( "You have entered new data on this page.  If you navigate away from this page without first saving your data, the changes will be lost.", 'fca-quiz-cat'),
-			'sureWarning_string' => 	 __( 'Are you sure?', 'fca-quiz-cat'),
-			'selectImage_string' => __('Select Image', 'fca-quiz-cat' ),			
-			'remove_string' =>  __('remove', 'fca-quiz-cat'),
-			'show_string' =>  __('show', 'fca-quiz-cat'),
-			'unused_string' =>  __('Unused', 'fca-quiz-cat'),
-			'points_string' =>  __('Points', 'fca-quiz-cat'),
+			'navigationWarning_string' => __( "You have entered new data on this page.  If you navigate away from this page without first saving your data, the changes will be lost.", 'quiz-cat'),
+			'sureWarning_string' => 	 __( 'Are you sure?', 'quiz-cat'),
+			'selectImage_string' => __('Select Image', 'quiz-cat' ),			
+			'remove_string' =>  __('remove', 'quiz-cat'),
+			'show_string' =>  __('show', 'quiz-cat'),
+			'unused_string' =>  __('Unused', 'quiz-cat'),
+			'points_string' =>  __('Points', 'quiz-cat'),
 			'image_placeholder_url' => FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png',
-			'question_string' =>  __('Question', 'fca-quiz-cat'),
-			'save_string' =>  __('Save', 'fca-quiz-cat'),
-			'preview_string' =>  __('Preview', 'fca-quiz-cat'),
-			'on_string' =>  __('YES', 'fca-quiz-cat'),
-			'off_string' =>  __('NO', 'fca-quiz-cat'),
+			'question_string' =>  __('Question', 'quiz-cat'),
+			'save_string' =>  __('Save', 'quiz-cat'),
+			'preview_string' =>  __('Preview', 'quiz-cat'),
+			'on_string' =>  __('YES', 'quiz-cat'),
+			'off_string' =>  __('NO', 'quiz-cat'),
 		);
 		
 		wp_localize_script( 'fca_qc_admin_js', 'adminData', $admin_data ); 
@@ -205,7 +205,7 @@ function add_custom_meta_boxes() {
 
 	add_meta_box( 
         'fca_qc_description_meta_box',
-        __( 'This Quiz', 'fca-quiz-cat' ),
+        __( 'This Quiz', 'quiz-cat' ),
         'fca_qc_render_description_meta_box',
         null,
         'normal',
@@ -214,7 +214,7 @@ function add_custom_meta_boxes() {
 	
 	add_meta_box( 
         'fca_qc_questions_meta_box',
-        __( 'Questions', 'fca-quiz-cat' ),
+        __( 'Questions', 'quiz-cat' ),
         'fca_qc_render_questions_meta_box',
         null,
         'normal',
@@ -224,7 +224,7 @@ function add_custom_meta_boxes() {
 
 	add_meta_box( 
         'fca_qc_add_result_meta_box',
-        __( 'Scoring (Optional)', 'fca-quiz-cat' ),
+        __( 'Scoring (Optional)', 'quiz-cat' ),
         'fca_qc_render_add_result_meta_box',
         null,
         'normal',
@@ -233,7 +233,7 @@ function add_custom_meta_boxes() {
 
 	add_meta_box( 
         'fca_qc_quiz_settings_meta_box',
-        __( 'Settings', 'fca-quiz-cat' ),
+        __( 'Settings', 'quiz-cat' ),
         'fca_qc_render_quiz_settings_meta_box',
         null,
         'normal',
@@ -244,7 +244,7 @@ function add_custom_meta_boxes() {
 	/*
 	add_meta_box( 
         'fca_qc_sidebar_meta_box',
-        __( 'Extensions', 'fca-quiz-cat' ),
+        __( 'Extensions', 'quiz-cat' ),
         'fca_qc_render_side_meta_box',
         null,
         'side',
@@ -264,10 +264,10 @@ function fca_qc_render_description_meta_box( $post ) {
 	empty ( $quiz_meta['desc_img_src'] ) ? $quiz_meta['desc_img_src'] = $img_placeholder : '';
 
 
-	echo "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'fca-quiz-cat') . "</label>";
+	echo "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'quiz-cat') . "</label>";
 	echo "<textarea class='fca_qc_texta' id='fca_qc_quiz_description' name='fca_qc_quiz_description'>" . $quiz_meta['desc'] . "</textarea>";	
 	
-	echo "<label class='fca_qc_admin_label'>" . __('Image (Optional)', 'fca-quiz-cat') . "</label>";
+	echo "<label class='fca_qc_admin_label'>" . __('Image (Optional)', 'quiz-cat') . "</label>";
 	echo "<input type='text' class='fca_qc_image_input' name='fca_qc_quiz_description_image_src' id='fca_qc_quiz_description_image_src' style='display: none;' value='" . $quiz_meta['desc_img_src'] . "'>";
 	//ASSIGN PLACEHOLDER IMAGE
 	
@@ -276,11 +276,11 @@ function fca_qc_render_description_meta_box( $post ) {
 		
 		//IF PLACEHOLDER IS THERE DON'T SHOW THE "REMOVE OR CHANGE" BUTTON
 		if ( $quiz_meta['desc_img_src'] == $img_placeholder ) {
-			echo "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn' style='display:none;'>" . __('Change', 'fca-quiz-cat') . "</button>";
-			echo "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn' style='display:none;'>" . __('Remove', 'fca-quiz-cat') . "</button>";
+			echo "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn' style='display:none;'>" . __('Change', 'quiz-cat') . "</button>";
+			echo "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn' style='display:none;'>" . __('Remove', 'quiz-cat') . "</button>";
 		}else {
-			echo "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'fca-quiz-cat') . "</button>";
-			echo "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn'>" . __('Remove', 'fca-quiz-cat') . "</button>";
+			echo "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'quiz-cat') . "</button>";
+			echo "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn'>" . __('Remove', 'quiz-cat') . "</button>";
 		}
 		
 	echo '</div>';	
@@ -307,7 +307,7 @@ function fca_qc_render_questions_meta_box( $post ) {
 		}		
 	}	
 	echo "</div>";
-	echo "<button type='button' id='fca_qc_add_question_btn' class='button-secondary fca_qc_add_btn' ><span class='dashicons dashicons-plus' style='vertical-align: text-top;'></span>" .__('Add', 'fca-quiz-cat') . "</button>";
+	echo "<button type='button' id='fca_qc_add_question_btn' class='button-secondary fca_qc_add_btn' ><span class='dashicons dashicons-plus' style='vertical-align: text-top;'></span>" .__('Add', 'quiz-cat') . "</button>";
 	
 }
 
@@ -331,35 +331,35 @@ function fca_qc_render_question_meta_box( $question, $question_number, $operatio
 	
 	$html = "<div class='fca_qc_question_item fca_qc_deletable_item' id='fca_qc_question_$question_number'>";
 		$html .= "<span class='dashicons dashicons-trash fca_qc_delete_icon'></span>";
-		$html .= "<h3 class='fca_qc_question_label'><span class='fca_qc_quiz_heading_question_number'>" . __('Question', 'fca-quiz-cat') . ' ' . $question_number . ": </span><span class='fca_qc_quiz_heading_text'>". $question['question'] . "</span></h3>";
+		$html .= "<h3 class='fca_qc_question_label'><span class='fca_qc_quiz_heading_question_number'>" . __('Question', 'quiz-cat') . ' ' . $question_number . ": </span><span class='fca_qc_quiz_heading_text'>". $question['question'] . "</span></h3>";
 			
 			$html .= "<div class='fca_qc_question_input_div'>";
 			
-				$html .= "<label class='fca_qc_admin_label'>" . __('Question', 'fca-quiz-cat') . "</label>";
+				$html .= "<label class='fca_qc_admin_label'>" . __('Question', 'quiz-cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta fca_qc_question_text' name='fca_qc_quiz_question[]'>" . $question['question']  ."</textarea><br>";
 
-				$html .= "<label class='fca_qc_admin_label'>" . __('Correct Answer', 'fca-quiz-cat') . "</label>";
+				$html .= "<label class='fca_qc_admin_label'>" . __('Correct Answer', 'quiz-cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_answer[]'>" . $question['answer']  ."</textarea><br>";
 
-			//	$html .= "<label class='fca_qc_admin_label'>" . __('Hint', 'fca-quiz-cat') . "</label>";
+			//	$html .= "<label class='fca_qc_admin_label'>" . __('Hint', 'quiz-cat') . "</label>";
 			//	$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_hint[]'>" . $question['hint']  ."</textarea><br>";
 
-				$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 1', 'fca-quiz-cat') . "</label>";
+				$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 1', 'quiz-cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_1[]'>" . $question['wrong1']  ."</textarea><br>";
 				
 				if ( empty ($question['wrong2']) ) {
-					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 2', 'fca-quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('show', 'fca-quiz-cat') . ")</span></label>";
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 2', 'quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('show', 'quiz-cat') . ")</span></label>";
 					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_2[]' style='display:none;'>" . $question['wrong2']  ."</textarea><br>";
 				} else {
-					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 2', 'fca-quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('remove', 'fca-quiz-cat') . ")</span></label>";
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 2', 'quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('remove', 'quiz-cat') . ")</span></label>";
 					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_2[]'>" . $question['wrong2']  ."</textarea><br>";
 				}
 				
 				if ( empty ($question['wrong3']) ) {
-					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 3', 'fca-quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('show', 'fca-quiz-cat') . ")</span></label>";
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 3', 'quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('show', 'quiz-cat') . ")</span></label>";
 					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_3[]' style='display:none;'>" . $question['wrong3']  ."</textarea><br>";
 				} else {
-					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 3', 'fca-quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('remove', 'fca-quiz-cat') . ")</span></label>";
+					$html .= "<label class='fca_qc_admin_label'>" . __('Wrong Answer 3', 'quiz-cat') . " <span class='fca_qc_answer_toggle'>(" . __('remove', 'quiz-cat') . ")</span></label>";
 					$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_wrong_3[]' >" . $question['wrong3']  ."</textarea><br>";
 				}
 
@@ -397,7 +397,7 @@ function fca_qc_render_add_result_meta_box( $post ) {
 		}		
 	}
 	echo "</div>";	
-	echo "<button type='button' id='fca_qc_add_result_btn' class='button-secondary fca_qc_add_btn' ><span class='dashicons dashicons-plus' style='vertical-align: text-top;'></span>" . __('Add', 'fca-quiz-cat') . "</button>";
+	echo "<button type='button' id='fca_qc_add_result_btn' class='button-secondary fca_qc_add_btn' ><span class='dashicons dashicons-plus' style='vertical-align: text-top;'></span>" . __('Add', 'quiz-cat') . "</button>";
 
 }
 
@@ -426,22 +426,22 @@ function fca_qc_render_result_meta_box( $result, $result_number, $operation = 'e
 		
 		$html .= "<div class='fca_qc_result_input_div'>";
 			
-				$html .= "<label class='fca_qc_admin_label'>" . __('Result Title', 'fca-quiz-cat') . "</label>";
+				$html .= "<label class='fca_qc_admin_label'>" . __('Result Title', 'quiz-cat') . "</label>";
 				$html .= "<input type='text' class='fca_qc_text_input fca_qc_quiz_result' name='fca_qc_quiz_result_title[]' value='" . $result['title'] . "'></input><br>";
-				$html .= "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'fca-quiz-cat') . "</label>";
+				$html .= "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'quiz-cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_result_description[]'>" . $result['desc'] . "</textarea><br>";
 			
-				$html .= "<label class='fca_qc_admin_label'>" . __('Image', 'fca-quiz-cat') . "</label>";
+				$html .= "<label class='fca_qc_admin_label'>" . __('Image', 'quiz-cat') . "</label>";
 				$html .= '<input type="text" class="fca_qc_image_input" name="fca_qc_quiz_result_image_src[]" style="display: none;" value="' . $result['img'] . '">';
 				$html .= '<img class="fca_qc_image" id="fca_qc_quiz_result_image[]" style="max-width: 252px" src="' . $result['img'] . '">';
 				$html .= "<div class='fca_qc_image_hover_controls'>";
 									
 					if (  $result['img'] == $default_image  ) {
-						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn' style='display:none;'>" . __('Change', 'fca-quiz-cat') . "</button>";
-						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn' style='display:none;'>" . __('Remove', 'fca-quiz-cat') . "</button>";
+						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn' style='display:none;'>" . __('Change', 'quiz-cat') . "</button>";
+						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn' style='display:none;'>" . __('Remove', 'quiz-cat') . "</button>";
 					} else {
-						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'fca-quiz-cat') . "</button>";
-						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn'>" . __('Remove', 'fca-quiz-cat') . "</button>";
+						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_upload_btn'>" . __('Change', 'quiz-cat') . "</button>";
+						$html .= "<button type='button' class='button-secondary fca_qc_quiz_image_revert_btn'>" . __('Remove', 'quiz-cat') . "</button>";
 						
 					}
 					
@@ -481,7 +481,7 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 	echo "<table id='fca_qc_setting_table'>";
 		echo "<tr>";
 			echo "<th>";
-				echo "<label class='fca_qc_admin_label fca_qc_admin_settings_label' for='fca_qc_hide_answers_until_end'>" . __('Hide answers until the end of the quiz', 'fca-quiz-cat') . "</label>";
+				echo "<label class='fca_qc_admin_label fca_qc_admin_settings_label' for='fca_qc_hide_answers_until_end'>" . __('Hide answers until the end of the quiz', 'quiz-cat') . "</label>";
 			echo "</th>";
 			echo "<td>";
 				echo "<div class='onoffswitch'>";
@@ -492,7 +492,7 @@ function fca_qc_render_quiz_settings_meta_box( $post ) {
 		echo "</tr>";
 		echo "<tr>";
 			echo "<th>";
-				echo "<label class='fca_qc_admin_label fca_qc_admin_settings_label' for='fca_qc_shortcode_input'>" . __('Shortcode', 'fca-quiz-cat') . "</label>";
+				echo "<label class='fca_qc_admin_label fca_qc_admin_settings_label' for='fca_qc_shortcode_input'>" . __('Shortcode', 'quiz-cat') . "</label>";
 			echo "</th>";
 			echo "<td>";
 				echo "<input type='text' class='fca_qc_text_input' id='fca_qc_shortcode_input' name='fca_qc_shortcode_input' value='$shortcode' readonly>";		
@@ -749,6 +749,6 @@ function fca_qc_convert_entities ( $array ) {
 
 /* Localization */
 function fca_qc_load_localization() {
-	load_plugin_textdomain( 'fca-quiz-cat', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( 'quiz-cat', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 add_action( 'init', 'fca_qc_load_localization' );
