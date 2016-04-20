@@ -1,3 +1,16 @@
+#fca_qc_opt_in_meta_box h2 {
+	background-color: #32373c;
+	color: white;
+}
+
+#fca_qc_opt_in_meta_box button {
+	display: none;
+}
+
+#fca_qc_opt_in_meta_box h2.hndle {
+	cursor: default;
+}
+
 .pointer{
 	cursor: pointer;
 }
