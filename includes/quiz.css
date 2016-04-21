@@ -33,7 +33,9 @@ h2.fca_qc_quiz_title {
 	margin-bottom: 20px;
 	color: #151515;
 }
-
+#fca_qc_question_back {
+	display: block;
+}
 div.fca_qc_quiz svg.fca_qc_rectancle {
 	margin: 15px;
 }

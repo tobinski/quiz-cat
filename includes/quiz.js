@@ -105,12 +105,12 @@ jQuery( document ).ready(function($) {
 			
 		} else {
 			
+			$( thisQuiz.selector ).find( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
+			$( thisQuiz.selector ).find( '#fca_qc_correct_answer' ).html( thisQuiz.currentAnswer )						
 			$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).addClass( 'flip' )
 			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
 			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
-			$( thisQuiz.selector ).find( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
-			$( thisQuiz.selector ).find( '#fca_qc_correct_answer' ).html( thisQuiz.currentAnswer )
-			
+
 			if ( $( this ).children('.fca_qc_answer_span').html() == thisQuiz.currentAnswer ) {
 				
 				thisQuiz.score = thisQuiz.score + 1
@@ -127,6 +127,8 @@ jQuery( document ).ready(function($) {
 				$( thisQuiz.selector ).find( '#fca_qc_correct_answer_p' ).show()
 				
 			}
+			
+			scale_flip_box_back( thisQuiz.selector )
 		}
 	
 	})
@@ -176,8 +178,11 @@ jQuery( document ).ready(function($) {
 			quiz.currentQuestion = quiz.currentQuestion + 1
 						
 			quiz.currentAnswer = answer
+			$( quiz.selector ).find( '#fca_qc_question' ).imagesLoaded( function() {
+				scale_flip_box_question( quiz.selector )
+			})
+
 			
-			scale_flip_box( quiz.selector )
 			
 		} else {
 			endTest( quiz )
@@ -185,13 +190,13 @@ jQuery( document ).ready(function($) {
 		
 	}
 	
-	function scale_flip_box( selector ) {
-		var newHeight = $(selector).find('#fca_qc_question').outerHeight( true )
+	function scale_flip_box_question( selector ) {
+		var newHeight = $(selector).find('#fca_qc_question').outerHeight(true)
 		
 		$(selector).find( '.fca_qc_answer_div' ).each(function(){
 			if ( $( this ).is( ':visible' ) ) {
 				
-				newHeight += $(this).outerHeight( true )
+				newHeight += $(this).outerHeight(true)
 			}
 			
 		})
@@ -201,7 +206,26 @@ jQuery( document ).ready(function($) {
 		}
 
 		$(selector).find( '.fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
+		
+	}
+	
+	function scale_flip_box_back( selector ) {
+		var newHeight = 0
+		$(selector).find('#fca_qc_back_container').children().each( function() {
+			if ( $( this ).is( ':visible' ) ) {	
+				newHeight += $(this).outerHeight(true)
+			}
+		})
+		
+		// A MARGIN FOR THE BOTTOM
+		newHeight += 35
+	
+		if ( newHeight < 400 ) {
+			newHeight = 400
+		}
 
+		$(selector).find( '.fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
+		
 	}
 	
 	function set_result( quiz ) {
