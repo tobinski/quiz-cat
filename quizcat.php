@@ -331,12 +331,13 @@ function fca_qc_render_question_meta_box( $question, $question_number, $operatio
 	
 	$html = "<div class='fca_qc_question_item fca_qc_deletable_item' id='fca_qc_question_$question_number'>";
 		$html .= "<span class='dashicons dashicons-trash fca_qc_delete_icon'></span>";
-		$html .= "<h3 class='fca_qc_question_label'><span class='fca_qc_quiz_heading_question_number'>" . __('Question', 'quiz-cat') . ' ' . $question_number . ": </span><span class='fca_qc_quiz_heading_text'>". $question['question'] . "</span></h3>";
+		$html .= "<h3 class='fca_qc_question_label'><span class='fca_qc_quiz_heading_question_number'>" . __('Question', 'quiz-cat') . ' ' . $question_number . ": </span><span class='fca_qc_quiz_heading_text'>". fca_qc_convert_entities($question['question']) . "</span></h3>";
 			
 			$html .= "<div class='fca_qc_question_input_div'>";
 			
 				$html .= "<label class='fca_qc_admin_label'>" . __('Question', 'quiz-cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta fca_qc_question_text' name='fca_qc_quiz_question[]'>" . $question['question']  ."</textarea><br>";
+				$html .= "<button type='button' class='button-secondary fca_qc_add_question_img_btn' ><span class='dashicons dashicons-plus' style='vertical-align: text-top;'></span>" . __('Add Image', 'quiz-cat') . "</button>";
 
 				$html .= "<label class='fca_qc_admin_label'>" . __('Correct Answer', 'quiz-cat') . "</label>";
 				$html .= "<textarea class='fca_qc_question_texta' name='fca_qc_quiz_answer[]'>" . $question['answer']  ."</textarea><br>";

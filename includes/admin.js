@@ -101,7 +101,8 @@ jQuery(document).ready(function($){
 		add_question_heading_text_handlers()
 		add_question_and_result_click_toggles()
 		add_question_3_and_4_toggles()
-		attach_devare_button_handlers()
+		attach_delete_button_handlers()
+		attach_image_upload_handlers()
 		setScoreRanges()
 		setQuestionNumbers()
 		setConfirmUnload( true )
@@ -122,7 +123,7 @@ jQuery(document).ready(function($){
 		
 		add_drag_and_drop_sort()
 		add_question_and_result_click_toggles()
-		attach_devare_button_handlers()
+		attach_delete_button_handlers()
 		attach_image_upload_handlers()
 		add_result_heading_text_handlers()
 		setScoreRanges()
@@ -212,8 +213,8 @@ jQuery(document).ready(function($){
 	}
 	add_result_heading_text_handlers()
 	
-	//THE DEvarE QUESTION BUTTON
-	function attach_devare_button_handlers() {
+	//THE DELETE QUESTION BUTTON
+	function attach_delete_button_handlers() {
 			
 		$('.fca_qc_devare_icon').unbind( 'click' )
 		
@@ -230,7 +231,7 @@ jQuery(document).ready(function($){
 			
 		})
 	}	
-	attach_devare_button_handlers()
+	attach_delete_button_handlers()
 	
 		
 	////////////////
@@ -307,7 +308,8 @@ jQuery(document).ready(function($){
 		
 	function attach_image_upload_handlers() {
 		//ACTION WHEN CLICKING IMAGE UPLOAD
-		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').unbind( 'click' )
+		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image .fca_qc_add_question_img_btn').unbind( 'click' )
+		//HANDLER FOR RESULTS AND META IMAGES
 		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').click(function(e) {
 			
 			e.preventDefault()
@@ -334,6 +336,30 @@ jQuery(document).ready(function($){
 				$this.siblings('.fca_qc_image_hover_controls').children('.fca_qc_quiz_image_revert_btn').show()
 				$this.siblings('.fca_qc_image_hover_controls').children('.fca_qc_quiz_image_upload_btn').show()
 				
+			})
+		})
+		
+		//HANDLER QUESTION ADD IMAGE BUTTON
+		$('.fca_qc_add_question_img_btn').click(function(e) {
+			
+			e.preventDefault()
+			$this = $( this )
+			
+			var image = wp.media({ 
+				title: adminData.selectImage_string,
+				// mutiple: true if you want to upload multiple files at once
+				multiple: false
+			}).open()
+			.on('select', function(e){
+				// This will return the selected image from the Media Uploader, the result is an object
+				var uploaded_image = image.state().get('selection').first()
+
+				var image_url = uploaded_image.toJSON().url
+				// Assign the url value to the input field
+				var oldHtml = $this.siblings('.fca_qc_question_text').val()
+				$this.siblings('.fca_qc_question_text').attr('value', oldHtml + '<img src="' + image_url + '">' )
+				$this.siblings('.fca_qc_question_text').trigger( 'keyup' )
+						
 			})
 		})
 		

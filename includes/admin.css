@@ -1,3 +1,8 @@
+.fca_qc_question_label img {
+	max-width: 252px;
+	vertical-align: text-top;
+}
+
 #fca_qc_opt_in_meta_box h2 {
 	background-color: #32373c;
 	color: white;
