@@ -638,6 +638,7 @@ function fca_qc_do_quiz( $atts ) {
 		
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_style( 'fca_qc_quiz_stylesheet', plugins_url( 'includes/quiz.min.css', __FILE__ ) );
+		wp_enqueue_script( 'fca_qc_img_loaded', plugins_url( 'includes/imagesloaded.min.js', __FILE__ ) );
 		wp_enqueue_script( 'fca_qc_quiz_js', plugins_url( 'includes/quiz.min.js', __FILE__ ) );
 		
 		//SEND JS THE DATA BUT CONVERT ANY ESCAPED THINGS BACK TO NORMAL CHARACTERS
@@ -715,8 +716,8 @@ function fca_qc_do_answer_panel( $operation = 'echo') {
 	global $quiz_text_strings;
 	$html = "<div class='back' id='fca_qc_back_container'>";
 		$html .= "<p id='fca_qc_question_right_or_wrong'></p>";
-		$html .= "<span id='fca_qc_question_back'></span></p>";
-		$html .= "<p class='fca_qc_back_response'>" . $quiz_text_strings['your_answer'] . " <span id='fca_qc_your_answer'></span></p>";
+		$html .= "<span id='fca_qc_question_back'></span>";
+		$html .= "<p id='fca_qc_back_response_p' class='fca_qc_back_response'>" . $quiz_text_strings['your_answer'] . " <span id='fca_qc_your_answer'></span></p>";
 		$html .= "<p id='fca_qc_correct_answer_p' class='fca_qc_back_response'>" . $quiz_text_strings['correct_answer'] . " <span id='fca_qc_correct_answer'></span></p>";
 		$html .= "<button type='button' class='fca_qc_next_question'>" . $quiz_text_strings['next'] . "</button>";
 	$html .= "</div>";
