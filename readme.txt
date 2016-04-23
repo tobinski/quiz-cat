@@ -1,7 +1,7 @@
-﻿=== Quiz Cat ===
+﻿=== Quiz Cat - Build Viral Quizzes ===
 Contributors: fatcatapps
 Donate link: https://fatcatapps.com/
-Tags: quiz, quizzes
+Tags: quiz, quizzes, create quiz, viral quiz, quiz plugin, buzzfeed quiz, trivia quiz, personality quiz, lead generation quiz
 Author URI: https://fatcatapps.com/
 Plugin URI: https://fatcatapps.com/quizcat
 Requires at least: 4.0
@@ -10,7 +10,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: 1.0.2
 
-Quiz Cat Lets You Create Beautiful Viral Quizzes That Drive Social Shares & User Engagement. Set It Up In 2 Minutes.
+Quiz Cat Lets You Create Beautiful Viral BuzzFeed-style Quizzes That Drive Social Shares & User Engagement. Set It Up In 2 Minutes.
 
 == Description ==
 You’re not playing around, are you?
@@ -154,7 +154,7 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 == Changelog ==
 
 = Quiz Cat 1.0.3 =
-* New Feline Menu Icon
+* New Quiz Cat Menu Icon
 
 = Quiz Cat 1.0.2 =
 * Change text domain to match WordPress.org plugin slug (quiz-cat)
