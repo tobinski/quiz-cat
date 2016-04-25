@@ -122,6 +122,7 @@
 	max-width: 100%;
 	display: block;
 	cursor: pointer;
+	margin-bottom: 5px;
 }
 img.fca_qc_image:hover + div.fca_qc_image_hover_controls {
 	visibility: visible;
@@ -134,7 +135,7 @@ div.fca_qc_image_hover_controls:hover {
 div.fca_qc_image_hover_controls {
 	visibility: hidden;
 	position: relative;
-	top: -35px;
+	top: -40px;
 }
 
 

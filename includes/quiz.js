@@ -48,6 +48,7 @@ jQuery( document ).ready(function($) {
 	}
 	preloadImages()
 	
+	console.log ( quizzes )
 	
 	////////////////
 	//	EVENT HANDLERS 
@@ -152,13 +153,16 @@ jQuery( document ).ready(function($) {
 			
 			var question = quiz.questions[quiz.currentQuestion].question
 			var answer = quiz.questions[quiz.currentQuestion].answer
-			//currentHint = questions[currentQuestion].hint  //'GLOBAL' HINT - unused
+			var img = quiz.questions[quiz.currentQuestion].img
 			var wrong1 = quiz.questions[quiz.currentQuestion].wrong1
 			var wrong2 = quiz.questions[quiz.currentQuestion].wrong2
 			var wrong3 = quiz.questions[quiz.currentQuestion].wrong3
 			
 			var answers = [answer, wrong1, wrong2, wrong3]
 			var shuffled_answers = shuffleArray( answers )
+			
+			$( quiz.selector ).find( '#fca_qc_answer_container' ).find( '.fca_qc_quiz_question_img' ).attr('src', img)
+			$( quiz.selector ).find( '#fca_qc_back_container' ).find( '.fca_qc_quiz_question_img' ).attr('src', img)
 			
 			$( quiz.selector ).find( '#fca_qc_question' ).html(question)
 			$( quiz.selector ).find( '#fca_qc_question_back' ).html(question)
@@ -178,7 +182,7 @@ jQuery( document ).ready(function($) {
 			quiz.currentQuestion = quiz.currentQuestion + 1
 						
 			quiz.currentAnswer = answer
-			$( quiz.selector ).find( '#fca_qc_question' ).imagesLoaded( function() {
+			$( quiz.selector ).find( '#fca_qc_answer_container' ).waitForImages( function() {
 				scale_flip_box_question( quiz.selector )
 			})
 
@@ -192,6 +196,8 @@ jQuery( document ).ready(function($) {
 	
 	function scale_flip_box_question( selector ) {
 		var newHeight = $(selector).find('#fca_qc_question').outerHeight(true)
+		
+		newHeight += $(selector).find('.fca_qc_quiz_question_img').outerHeight(true)
 		
 		$(selector).find( '.fca_qc_answer_div' ).each(function(){
 			if ( $( this ).is( ':visible' ) ) {
@@ -257,25 +263,25 @@ jQuery( document ).ready(function($) {
 	function show_responses( quiz ) {
 				
 		for (var i = 0; i<quiz.questions.length; i++ ) {
-			do_answer_response_div( quiz.questions[i].question, quiz.questions[i].answer, quiz.responses[i], i + 1, quiz.selector, quiz.your_answer_string, quiz.correct_answer_string  )
+			do_answer_response_div( quiz.questions[i], quiz.responses[i], i + 1, quiz.selector, quiz.your_answer_string, quiz.correct_answer_string  )
 		}
 		$( quiz.selector ).find( '.fca_qc_result_container' ).show()
 	}
 	
-	function do_answer_response_div( question, answer, response, questionNumber, selector, yourAnswerString, correctAnswerString ) {
-		
+	function do_answer_response_div( questionArray, response, questionNumber, selector, yourAnswerString, correctAnswerString ) {
+	
 		var html = ''
 		
-		if ( answer == response ) {
+		if ( questionArray.answer == response ) {
 			html += "<div class='fca_eoi_question_response_item correct-answer'>"
 		} else {
 			html += "<div class='fca_eoi_question_response_item wrong-answer'>"
 		}
 				
-		html += "<h3 class='fca_eoi_question_response_question'>" + questionNumber + ". " + question + "</h3>"
-		
+		html += "<h3 class='fca_eoi_question_response_question'>" + questionNumber + ". " + questionArray.question + "</h3>"
+		html += "<img class='fca_qc_quiz_question_img' src='" + questionArray.img + "'>"
 		html += "<p class='fca_eoi_question_response_response'><span class='fca_qc_bold'>" + yourAnswerString + " </span>" + response + "</p>"
-		html += "<p class='fca_eoi_question_response_correct_answer'><span class='fca_qc_bold'>" + correctAnswerString + " </span>" + answer + "</p>"
+		html += "<p class='fca_eoi_question_response_correct_answer'><span class='fca_qc_bold'>" + correctAnswerString + " </span>" + questionArray.answer + "</p>"
 					
 		html += "</div>"
 		

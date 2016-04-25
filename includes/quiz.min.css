@@ -2,7 +2,8 @@ div.fca_qc_quiz{max-width:600px;margin-left:auto;margin-right:auto;padding:30px 
 .fca_qc_quiz p{width:auto}
 h2.fca_qc_quiz_title{color:#151515;margin:0 0 20px}
 .fca_qc_quiz_description{font-size:16px;margin:0 0 20px}
-.fca_qc_quiz_description_img{max-width:100%;margin-left:auto;margin-right:auto}
+.fca_qc_quiz_description_img,.fca_qc_quiz_question_img{max-width:100%;margin-left:auto;margin-right:auto}
+.fca_qc_quiz_question_img{margin-bottom:20px}
 #fca_qc_question{font-size:26px;margin-bottom:20px;color:#151515}
 #fca_qc_question_back{display:block}
 div.fca_qc_quiz svg.fca_qc_rectancle{margin:15px}
