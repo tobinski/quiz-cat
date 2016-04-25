@@ -495,7 +495,7 @@ function fca_qc_render_opt_in() {
 
 				.fca_qc_ad_sidebar {
 					position: absolute;
-					top: 65px;
+					top: 62px;
 					right: 20px;
 					width: 280px;
 				}
@@ -518,6 +518,10 @@ function fca_qc_render_opt_in() {
 					border-top: 1px solid #fcfcfc;
 					margin: 0 -11px;
 					padding: 0 11px;
+				}
+				
+				#side-sortables {
+					border: none;
 				}
 				
 				@media screen and (max-width: 850px) {
