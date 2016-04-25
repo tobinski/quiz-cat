@@ -241,7 +241,7 @@ function add_custom_meta_boxes() {
     );
 	
 	//SIDE META BOX, UNUSED 
-	
+/*	
 	add_meta_box( 
         'fca_qc_opt_in_meta_box',
         __( 'Need Quiz Ideas?', 'quiz-cat' ),
@@ -250,7 +250,7 @@ function add_custom_meta_boxes() {
         'side',
         'high'
     );
-		
+*/		
 }
 add_action( 'add_meta_boxes_fca_qc_quiz', 'add_custom_meta_boxes' );
 
@@ -482,24 +482,88 @@ function fca_qc_render_side_meta_box() {
 }
 
 function fca_qc_render_opt_in() {
+	global $post;
+	
+	if ( $post->post_type === 'fca_qc_quiz' ) {
+	
+		ob_start(); ?>
+			<style>
+				.fca_qc_ad_bar a {
+					font-size: 14px;
+					font-weight: bold;
+				}
 
-ob_start(); ?>
+				.fca_qc_ad_sidebar {
+					position: absolute;
+					top: 65px;
+					right: 20px;
+					width: 280px;
+				}
 
-	<p style="text-align: center;"> <?php _e("So you wanna build engaging, viral quizzes? We'll send you our favorite example quizzes for inspiration.", 'quiz-cat') ?></p><br>
+				.fca_qc_ad_sidebar .fca_qc_centered {
+					text-align: center;
+				}
 
-	<form action="https://www.getdrip.com/forms/77666172/submissions" method="post" data-drip-embedded-form="77666172">
-		<div>
-			<label for="fields[email]"> <?php _e("Email", 'quiz-cat') ?></label><br />
-			<input type="email" name="fields[email]" style="width: 100%; margin-bottom: 15px;" value="<?php echo htmlspecialchars( wp_get_current_user()->user_email )?>"/><br>
-		</div>		
-		<div style="text-align: center;">
-			<input style="height: 32px;" class="button-primary button-large" type="submit" name="submit" value="<?php _e("Free Download", 'quiz-cat') ?>" data-drip-attribute="sign-up-button" />
-		</div>
-	</form>
+				.fca_qc_ad_sidebar .button-large {
+					font-size: 17px;
+					line-height: 30px;
+					height: 32px;
+				}
 
-<?php echo ob_get_clean();
+				.fca_qc_ad_input {
+					width: 100%;
+				}
+
+				.fca_qc_ad_form {
+					border-top: 1px solid #fcfcfc;
+					margin: 0 -11px;
+					padding: 0 11px;
+				}
+				
+				@media screen and (max-width: 850px) {
+					.fca_qc_ad_sidebar {
+						display: none;
+					}
+				}	
+
+			</style>
+			<div class="sidebar-container metabox-holder fca_qc_ad_sidebar" id="fca_qc_ad_sidebar">
+				<div class="postbox">
+					<h3 class="wp-ui-primary"><span><?php _e('Need Quiz Ideas?', 'quiz-cat') ?></span></h3>
+
+					<div class="inside">
+						<div class="main">
+							<p class="fca_qc_centered">
+								<?php _e("So you wanna build engaging, viral quizzes? We'll send you our favorite example quizzes for inspiration?", 'quiz-cat') ?>
+								
+							</p>
+
+							<form class="fca_qc_ad_form" action="https://www.getdrip.com/forms/77666172/submissions" method="post" target="_blank">
+								<p>
+									<label for="fca_qc_ad_input_email">Email</label>
+									<input type="email" name="fields[email]" id="fca_qc_ad_input_email" class="fca_qc_ad_input" value="<?php
+
+									echo htmlspecialchars( wp_get_current_user()->user_email )
+
+									?>">
+								</p>
+
+								<div class="fca_qc_centered">
+									<input type="submit" name="submit" class="button-primary button-large" value="<?php _e('Sign Up', 'quiz-cat') ?>">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+
+		<?php echo ob_get_clean();
+	}	
 
 }
+add_action( 'admin_footer-post.php', 'fca_qc_render_opt_in' );
+add_action( 'admin_footer-post-new.php', 'fca_qc_render_opt_in' );
 
 //RENDER THE QUIZ SETTINGS META BOX 
 function fca_qc_render_quiz_settings_meta_box( $post ) {

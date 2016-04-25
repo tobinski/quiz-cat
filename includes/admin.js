@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
 	//	VARIABLES FROM PHP
 	////////////////	
 	
-	console.log ( adminData )
+	//console.log ( adminData )
 
 	
 	////////////////
