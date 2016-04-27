@@ -13,6 +13,11 @@ Stable tag: 1.0.2
 Quiz Cat Lets You Create Beautiful Viral BuzzFeed-style Quizzes That Drive Social Shares & User Engagement. Set It Up In 2 Minutes.
 
 == Description ==
+
+> #### Quiz Cat Live Demo
+>Wanna demo our viral quiz builder?
+> [Click here to view a live demo >>](https://fatcatapps.com/quizcat)
+
 You’re not playing around, are you?
 
 If you’re looking at this Quiz plugin, you want results.
@@ -28,10 +33,6 @@ As its name suggests, Quiz Cat is all about quizzes. Install it and you can effo
 That’s a bold statement to make, but we can back it up. As proof, just think about the revealing quizzes your friends may pass around on Facebook. Or the addictive pop culture quizzes from sites like BuzzFeed. In both cases, quizzes act as a kind of “digital glue” - making people stick to websites.
 
 Knowing that, imagine what you could accomplish with a quiz.
-
-> #### Quiz Cat Live Demo
->Interested in a demo quiz?
-> [Click here to view a live demo >>](https://fatcatapps.com/quizcat)
 
 With a quiz, you’d give your website its own “digital glue”. Whoever came to your site would have a definite reason to stick around. After all, who doesn’t want to know “Are you a true Game of Thrones expert?” or “How well you know body language?”. These are among life’s most important questions. Rivaled only by other equally pressing ones like “Who wants to be a millionaire?” and “What’s for dinner?”
 
@@ -155,6 +156,8 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 
 = Quiz Cat 1.0.3 =
 * New Quiz Cat Menu Icon
+* Added the abilty to add images to quiz questions
+* Added "Need Quiz Ideas?" form
 
 = Quiz Cat 1.0.2 =
 * Change text domain to match WordPress.org plugin slug (quiz-cat)
