@@ -32,7 +32,7 @@ jQuery(document).ready(function($){
 	const previewButton = '<button type="button" class="button-secondary" id="fca_qc_preview_button">' + adminData.preview_string + '</buttton>'
 
 	$( '#normal-sortables' ).append( saveButton )
-	$('#fca_qc_submit_button').click(function() {
+	$('#fca_qc_submit_button').click(function(event) {
 		setConfirmUnload( false )
 		//$('#publish').click()
 		event.preventDefault()
@@ -42,18 +42,19 @@ jQuery(document).ready(function($){
         form.removeAttr('target')
 
         // Remove preview url
-        $('#fca_qc_quiz_preview_url').remove()
+        $('#fca_qc_quiz_preview_url').val('')
 		
         // Submit form
         form.submit()
 		  
         return false
 	})
-	
-	console.log ( adminData.preview_url ) 
+	 
 	$( '#normal-sortables' ).append( previewButton )
-	$('#fca_qc_preview_button').click(function() {
+	$('#fca_qc_preview_button').click(function(event) {
 		setConfirmUnload( false )
+		var url = $('#fca_qc_quiz_preview_url').attr('data')
+		$('#fca_qc_quiz_preview_url').val(url)
 		event.preventDefault()
 		// Add target
         var form = $(this).closest('form')

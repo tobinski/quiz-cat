@@ -11,6 +11,35 @@ License: GPLv2
 Version: 1.0.4
 */
 
+// Create a helper function for easy SDK access.
+function fca_qc_fs() {
+    global $fca_qc_fs;
+
+    if ( ! isset( $fca_qc_fs ) ) {
+        // Include Freemius SDK.
+        require_once dirname(__FILE__) . '/freemius/start.php';
+
+        $fca_qc_fs = fs_dynamic_init( array(
+            'id'                => '284',
+            'slug'              => 'quiz-cat',
+            'public_key'        => 'pk_4ca03d6e4a1d5e18948fa9839ccb2',
+            'is_premium'        => false,
+            'has_addons'        => false,
+            'has_paid_plans'    => false,
+            'menu'              => array(
+                'slug'       => 'edit.php?post_type=fca_qc_quiz',
+                'account'    => false,
+                'support'    => false,
+            ),
+        ) );
+    }
+
+    return $fca_qc_fs;
+}
+
+// Init Freemius.
+fca_qc_fs();
+
 // BASIC SECURITY
 defined( 'ABSPATH' ) or die( 'Unauthorized Access!' );
 
@@ -264,7 +293,7 @@ function fca_qc_render_description_meta_box( $post ) {
 	empty ( $quiz_meta['desc_img_src'] ) ? $quiz_meta['desc_img_src'] = $img_placeholder : '';
 
 	//ADD A HIDDEN PREVIEW URL INPUT
-	echo "<input type='text' class='fca_qc_image_input' name='fca_qc_quiz_preview_url' id='fca_qc_quiz_preview_url'  hidden readonly value='" . get_permalink( $post->ID ) . "'>";
+	echo "<input type='text' class='fca_qc_image_input' name='fca_qc_quiz_preview_url' id='fca_qc_quiz_preview_url'  hidden readonly data='" . get_permalink( $post->ID ) . "'>";
 	
 	echo "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'quiz-cat') . "</label>";
 	echo "<textarea class='fca_qc_texta' id='fca_qc_quiz_description' name='fca_qc_quiz_description'>" . $quiz_meta['desc'] . "</textarea>";	
