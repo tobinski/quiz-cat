@@ -5,10 +5,10 @@ Tags: quiz, quizzes, create quiz, viral quiz, quiz plugin, buzzfeed quiz, trivia
 Author URI: https://fatcatapps.com/
 Plugin URI: https://fatcatapps.com/quizcat
 Requires at least: 4.0
-Tested up to: 4.5
+Tested up to: 4.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 
 Quiz Cat Lets You Create Beautiful Viral BuzzFeed-style Quizzes That Drive Social Shares & User Engagement. Set It Up In 2 Minutes.
 
