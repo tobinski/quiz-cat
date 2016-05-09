@@ -1,3 +1,21 @@
+.fca_qc_question_label img {
+	max-width: 252px;
+	vertical-align: text-top;
+}
+
+#fca_qc_opt_in_meta_box h2 {
+	background-color: #32373c;
+	color: white;
+}
+
+#fca_qc_opt_in_meta_box button {
+	display: none;
+}
+
+#fca_qc_opt_in_meta_box h2.hndle {
+	cursor: default;
+}
+
 .pointer{
 	cursor: pointer;
 }
@@ -104,6 +122,7 @@
 	max-width: 100%;
 	display: block;
 	cursor: pointer;
+	margin-bottom: 5px;
 }
 img.fca_qc_image:hover + div.fca_qc_image_hover_controls {
 	visibility: visible;
@@ -116,7 +135,7 @@ div.fca_qc_image_hover_controls:hover {
 div.fca_qc_image_hover_controls {
 	visibility: hidden;
 	position: relative;
-	top: -35px;
+	top: -40px;
 }
 
 

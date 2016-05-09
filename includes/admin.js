@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
 	//	VARIABLES FROM PHP
 	////////////////	
 	
-	console.log ( adminData )
+	//console.log ( adminData )
 
 	
 	////////////////
@@ -13,8 +13,8 @@ jQuery(document).ready(function($){
 	
 	//SET TRANSLATIONS FOR ON/OFF SWITCHES
 	$( '.onoffswitch-inner' ).each( function(){
-		$(this).attr('data-content-on',adminData.on_string );
-		$(this).attr('data-content-off',adminData.off_string );
+		$(this).attr('data-content-on', adminData.on_string );
+		$(this).attr('data-content-off', adminData.off_string );
 	});
 	
 	
@@ -101,7 +101,8 @@ jQuery(document).ready(function($){
 		add_question_heading_text_handlers()
 		add_question_and_result_click_toggles()
 		add_question_3_and_4_toggles()
-		attach_devare_button_handlers()
+		attach_delete_button_handlers()
+		attach_image_upload_handlers()
 		setScoreRanges()
 		setQuestionNumbers()
 		setConfirmUnload( true )
@@ -122,7 +123,7 @@ jQuery(document).ready(function($){
 		
 		add_drag_and_drop_sort()
 		add_question_and_result_click_toggles()
-		attach_devare_button_handlers()
+		attach_delete_button_handlers()
 		attach_image_upload_handlers()
 		add_result_heading_text_handlers()
 		setScoreRanges()
@@ -212,15 +213,15 @@ jQuery(document).ready(function($){
 	}
 	add_result_heading_text_handlers()
 	
-	//THE DEvarE QUESTION BUTTON
-	function attach_devare_button_handlers() {
+	//THE DELETE QUESTION BUTTON
+	function attach_delete_button_handlers() {
 			
-		$('.fca_qc_devare_icon').unbind( 'click' )
+		$('.fca_qc_delete_icon').unbind( 'click' )
 		
-		$('.fca_qc_devare_icon').click( function(){
+		$('.fca_qc_delete_icon').click( function(){
 
 			if (confirm( adminData.sureWarning_string )) {
-				$( this ).closest('.fca_qc_devarable_item').remove()
+				$( this ).closest('.fca_qc_deletable_item').remove()
 				setScoreRanges ()
 				setConfirmUnload( true )
 
@@ -230,7 +231,7 @@ jQuery(document).ready(function($){
 			
 		})
 	}	
-	attach_devare_button_handlers()
+	attach_delete_button_handlers()
 	
 		
 	////////////////
@@ -308,6 +309,7 @@ jQuery(document).ready(function($){
 	function attach_image_upload_handlers() {
 		//ACTION WHEN CLICKING IMAGE UPLOAD
 		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').unbind( 'click' )
+		//HANDLER FOR RESULTS AND META IMAGES
 		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').click(function(e) {
 			
 			e.preventDefault()

@@ -22,10 +22,15 @@ h2.fca_qc_quiz_title {
 	margin: 0 0 20px 0;
 }
 
-.fca_qc_quiz_description_img {
+.fca_qc_quiz_description_img, .fca_qc_quiz_question_img {
 	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.fca_qc_quiz_question_img {
+	margin-bottom: 20px;
+
 }
 
 #fca_qc_question {
@@ -33,7 +38,9 @@ h2.fca_qc_quiz_title {
 	margin-bottom: 20px;
 	color: #151515;
 }
-
+#fca_qc_question_back {
+	display: block;
+}
 div.fca_qc_quiz svg.fca_qc_rectancle {
 	margin: 15px;
 }
