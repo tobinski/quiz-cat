@@ -34,11 +34,35 @@ jQuery(document).ready(function($){
 	$( '#normal-sortables' ).append( saveButton )
 	$('#fca_qc_submit_button').click(function() {
 		setConfirmUnload( false )
-		$('#publish').click()
+		//$('#publish').click()
+		event.preventDefault()
+		
+        // Add target
+        var form = $(this).closest('form')
+        form.removeAttr('target')
+
+        // Remove preview url
+        $('#fca_qc_quiz_preview_url').remove()
+		
+        // Submit form
+        form.submit()
+		  
+        return false
 	})
+	
+	console.log ( adminData.preview_url ) 
 	$( '#normal-sortables' ).append( previewButton )
 	$('#fca_qc_preview_button').click(function() {
-		$('#post-preview').click()
+		setConfirmUnload( false )
+		event.preventDefault()
+		// Add target
+        var form = $(this).closest('form')
+        form.prop('target', '_blank')
+					
+        // Submit form
+        form.submit()
+		  
+        return false
 	})
 	
 	$( '#submitdiv' ).hide()

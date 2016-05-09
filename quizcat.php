@@ -190,7 +190,7 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'image_placeholder_url' => FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png',
 			'question_string' =>  __('Question', 'quiz-cat'),
 			'save_string' =>  __('Save', 'quiz-cat'),
-			'preview_string' =>  __('Preview', 'quiz-cat'),
+			'preview_string' =>  __('Save & Preview', 'quiz-cat'),
 			'on_string' =>  __('YES', 'quiz-cat'),
 			'off_string' =>  __('NO', 'quiz-cat'),
 		);
@@ -263,7 +263,9 @@ function fca_qc_render_description_meta_box( $post ) {
 	empty ( $quiz_meta['desc'] ) ? $quiz_meta['desc'] = '' : '';
 	empty ( $quiz_meta['desc_img_src'] ) ? $quiz_meta['desc_img_src'] = $img_placeholder : '';
 
-
+	//ADD A HIDDEN PREVIEW URL INPUT
+	echo "<input type='text' class='fca_qc_image_input' name='fca_qc_quiz_preview_url' id='fca_qc_quiz_preview_url'  hidden readonly value='" . get_permalink( $post->ID ) . "'>";
+	
 	echo "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'quiz-cat') . "</label>";
 	echo "<textarea class='fca_qc_texta' id='fca_qc_quiz_description' name='fca_qc_quiz_description'>" . $quiz_meta['desc'] . "</textarea>";	
 	
@@ -699,10 +701,35 @@ function fca_qc_escape_input($data) {
 
 }
 
+/* Redirect when Save & Preview button is clicked */
+add_filter('redirect_post_location', 'fca_qc_save_preview_redirect');
+function fca_qc_save_preview_redirect ( $location ) {
+    global $post;
+ 
+    if ( !empty($_POST['fca_qc_quiz_preview_url'] ) ) {
+		// Flush rewrite rules
+		global $wp_rewrite;
+		$wp_rewrite->flush_rules(true);
+		
+        // Always redirect to the post
+        $location = $_POST['fca_qc_quiz_preview_url'];
+    }
+ 
+    return $location;
+}
+
 ////////////////////////////
 //		DISPLAY QUIZ
 ////////////////////////////
 
+//SUPPRESS POST TITLES ON OUR CUSTOM POST TYPE
+function fca_qc_suppress_post_title() {
+	global $post;
+	if ( $post->post_type == 'fca_qc_quiz' &&  is_main_query() ) {
+		wp_enqueue_style( 'fca_qc_quiz_post_stylesheet', plugins_url( 'includes/hide-title.css', __FILE__ ) );
+	}
+}	
+add_filter( 'wp_enqueue_scripts', 'fca_qc_suppress_post_title' );
 
 function fca_qc_do_quiz( $atts ) {
 	
