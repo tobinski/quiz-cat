@@ -77,6 +77,8 @@ jQuery( document ).ready(function($) {
 		$( this ).siblings( '.fca_qc_question_count' ).html( 1 + "/" + thisQuiz.questionCount )
 		
 		showQuestion( thisQuiz )
+		thisQuiz.selector.scrollIntoView( true )
+		
 		
 	})
 	
