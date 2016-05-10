@@ -154,6 +154,12 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 
 == Changelog ==
 
+= Quiz Cat 1.0.4 =
+* Preview changed to Save & Preview - the current quiz will be saved before preview
+* Remove duplicate title on quiz previews
+* Change delete icons from red to gray
+* Add (optional) feedback tracking
+
 = Quiz Cat 1.0.3 =
 * New Quiz Cat Menu Icon
 * Added the abilty to add images to quiz questions
