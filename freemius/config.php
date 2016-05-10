@@ -12,7 +12,7 @@
 	
 define( 'WP_FS__SLUG', 'freemius' );
 	if ( ! defined( 'WP_FS__DEV_MODE' ) ) {
-		define( 'WP_FS__DEV_MODE', true );
+		define( 'WP_FS__DEV_MODE', false );
 	}
 
 	/**
