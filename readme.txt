@@ -159,6 +159,7 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 * Make quiz scroll in to view when clicking start
 * Remove duplicate title on quiz previews
 * Change delete icons from red to gray
+* Add CSS to hide images with no source tag set (fix Firefox displaying broken image icons)
 * Add optional feedback tracking
 
 = Quiz Cat 1.0.3 =
