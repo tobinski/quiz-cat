@@ -40,6 +40,23 @@ function fca_qc_fs() {
 // Init Freemius.
 fca_qc_fs();
 
+//Freemius filter
+function fca_qc_fs_custom_connect_message_on_update(
+	$message,
+	$user_first_name,
+	$plugin_title,
+	$user_login,
+	$site_link,
+	$freemius_link
+) {
+	return __('Hey ', 'quiz-cat') . $user_first_name .  ', ' . '<br>'
+			. __('In order to enjoy all our features and functionality', 'quiz-cat' ) . ', Quiz Cat '
+			. __('needs to connect your user', 'quiz-cat' ) . ", $user_login" . ' ' 
+			. __("at $site_link, to freemius.com.", 'quiz-cat' );
+}
+
+fca_qc_fs()->add_filter('connect_message_on_update', 'fca_qc_fs_custom_connect_message_on_update', 10, 6);
+
 // BASIC SECURITY
 defined( 'ABSPATH' ) or die( 'Unauthorized Access!' );
 
