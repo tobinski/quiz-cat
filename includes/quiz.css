@@ -67,6 +67,7 @@ div.fca_qc_quiz button.fca_qc_button {
 	color: #FFF;
 	font-size: 20px;
 	transition: all 0s;
+	-webkit-transition: all 0s;
 	border: none;
 }
 div.fca_qc_quiz button.fca_qc_start_button:hover {
@@ -211,8 +212,9 @@ div.fca_qc_quiz div.wrong-answer {
 /* entire container, keeps perspective */
 .flip-container {
 	width: 100%;
-	
+	-webkit-perspective: 1000;
 	perspective: 1000;
+	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 }
 
@@ -232,8 +234,13 @@ div.fca_qc_quiz div.wrong-answer {
 /* hide back of pane during swap */
 .front, .back {
 	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	
 	transition: 0.6s;
+	-webkit-transition:  0.6s;
+	
 	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -243,16 +250,19 @@ div.fca_qc_quiz div.wrong-answer {
 .front {
 	z-index: 2;
 	transform: rotateY(0deg);
+	-webkit-transform:  rotateY(0deg);
 }
 
 /* back, initially hidden pane */
 .back {
 	transform: rotateY(-180deg);
+	-webkit-transform:  rotateY(-180deg);
 }
 
 
 .flip-container.flip .flipper {
 	transform: rotateY(180deg);
+	-webkit-transform:  rotateY(180deg);
 }
 
 
