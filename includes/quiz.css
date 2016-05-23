@@ -15,7 +15,6 @@ div.fca_qc_quiz {
 	width: auto;
 }
 
-
 h2.fca_qc_quiz_title {
 	color: #151515;
 	margin: 0 0 20px 0;
@@ -46,12 +45,12 @@ h2.fca_qc_quiz_title {
 	display: block;
 }
 div.fca_qc_quiz svg.fca_qc_rectancle {
-	margin: 15px;
+	margin: 10px 15px 0 10px;
 }
 
 div.fca_qc_quiz span.fca_qc_answer_span {
 	position: relative;
-	top: -21px;
+	top: -7px;
 	font-size: 16px;
 	color: #151515;
 	
@@ -75,7 +74,7 @@ div.fca_qc_quiz button.fca_qc_start_button:hover {
 }
 
 .fca_qc_next_question {
-	background-color: inherit;
+	background-color: transparent;
 	color: black;
 	width: 140px;
 	border-radius: 2px;
@@ -84,7 +83,8 @@ div.fca_qc_quiz button.fca_qc_start_button:hover {
 }
 
 .fca_qc_next_question:hover {
-	background-color: initial;
+	background-color: black;
+	color: white;
 }
 
 div.fca_qc_quiz div.fca_qc_answer_div {
@@ -100,6 +100,7 @@ div.fca_qc_quiz div.fca_qc_answer_div {
 	font-weight: normal;
 	cursor: pointer;
 	color: #151515;
+	padding: 5px;
 }
 
 #fca_qc_your_answer, #fca_qc_correct_answer {
@@ -130,7 +131,6 @@ h3.fca_qc_score_title{
 	color: #151515;
 	
 }
-
 
 .fca_qc_quiz_footer {
 	margin-top: 20px;
@@ -218,13 +218,13 @@ div.fca_qc_quiz div.wrong-answer {
 	transform-style: preserve-3d;
 }
 
-.flip-container, .front, .back {
+.flip-container, .fca-qc-front, .fca-qc-back {
 	width: 100%;
 	height: 400px;
 }
 
 /* flip speed goes here */
-.flipper {
+.fca-qc-flipper {
 	transition: 0.6s;
 	transform-style: preserve-3d;
 
@@ -232,7 +232,7 @@ div.fca_qc_quiz div.wrong-answer {
 }
 
 /* hide back of pane during swap */
-.front, .back {
+.fca-qc-front, .fca-qc-back {
 	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 	
@@ -247,20 +247,20 @@ div.fca_qc_quiz div.wrong-answer {
 }
 
 /*  front pane, placed above back */
-.front {
+.fca-qc-front {
 	z-index: 2;
 	transform: rotateY(0deg);
 	-webkit-transform:  rotateY(0deg);
 }
 
 /* back, initially hidden pane */
-.back {
+.fca-qc-back {
 	transform: rotateY(-180deg);
 	-webkit-transform:  rotateY(-180deg);
 }
 
 
-.flip-container.flip .flipper {
+.flip-container.flip .fca-qc-flipper {
 	transform: rotateY(180deg);
 	-webkit-transform:  rotateY(180deg);
 }

@@ -795,7 +795,6 @@ function fca_qc_do_quiz( $atts ) {
 		}
 		
 		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'fca_qc_modernizr', plugins_url( 'includes/modernizr-quiz-cat.min.js', __FILE__ ) );
 		wp_enqueue_style( 'fca_qc_quiz_stylesheet', plugins_url( 'includes/quiz.min.css', __FILE__ ) );
 		wp_enqueue_script( 'fca_qc_img_loaded', plugins_url( 'includes/jquery.waitforimages.min.js', __FILE__ ) );
 		wp_enqueue_script( 'fca_qc_quiz_js', plugins_url( 'includes/quiz.min.js', __FILE__ ) );
@@ -829,7 +828,7 @@ function fca_qc_do_quiz( $atts ) {
 			<button type='button' class='fca_qc_button fca_qc_start_button'><?php echo $quiz_text_strings[ 'start_quiz' ] ?></button>
 			
 			<div class='flip-container fca_qc_quiz_div' style='display: none;'>
-				<div class='flipper'>
+				<div class='fca-qc-flipper'>
 					<?php fca_qc_do_question_panel() ?> 
 					<?php fca_qc_do_answer_panel() ?> 
 					
@@ -856,7 +855,7 @@ function fca_qc_do_question_panel( $operation = 'echo' ) {
 	global $quiz_text_strings;
 	$svg_rectangle = '<svg class="fca_qc_rectancle" width="26" height="26"><rect width="26" height="26" style="fill:#fff;stroke-width:1;stroke:#000"></svg>';
 			
-	$html = "<div class='front' id='fca_qc_answer_container'>";
+	$html = "<div class='fca-qc-front' id='fca_qc_answer_container'>";
 		$html .= "<p id='fca_qc_question'>" . $quiz_text_strings['question'] . "</p>";
 		$html .= "<img class='fca_qc_quiz_question_img' src=''>";
 		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
@@ -874,7 +873,7 @@ function fca_qc_do_question_panel( $operation = 'echo' ) {
 
 function fca_qc_do_answer_panel( $operation = 'echo') {
 	global $quiz_text_strings;
-	$html = "<div class='back' id='fca_qc_back_container'>";
+	$html = "<div class='fca-qc-back' id='fca_qc_back_container'>";
 		$html .= "<p id='fca_qc_question_right_or_wrong'></p>";
 		$html .= "<img class='fca_qc_quiz_question_img' src=''>";
 		$html .= "<span id='fca_qc_question_back'></span>";

@@ -1,14 +1,41 @@
 jQuery( document ).ready(function($) {
 	
+	////////////////
+	//   BROWSER DETECTION
+	////////////////
+	
+	function detectIE() {
+		var ua = window.navigator.userAgent;
+
+		var msie = ua.indexOf('MSIE ')
+		if (msie > 0) {
+			// IE 10 or older
+			return true
+		}
+
+		var trident = ua.indexOf('Trident/')
+		if (trident > 0) {
+			// IE 11
+			return true
+		}
+
+		// other browser
+		return false
+	}
+	var usingIE = detectIE()
+	
+	function ieFix( selector ) {
+		$( selector ).find( '#fca_qc_back_container' ).css( "backface-visibility", "visible" )
+		$( selector ).find( '#fca_qc_back_container' ).css( "transform", "none" )
+		$( selector ).find( '#fca_qc_back_container' ).hide()
+	}
 	
 	////////////////
 	//	LOAD VARIABLES FROM PHP
 	////////////////
-	
-	
-	const scoreString = $( '.fca_qc_score_text').first().html()
-	
-	
+		
+	var scoreString = $( '.fca_qc_score_text').first().html()
+		
 	//LOAD ALL QUIZZES INTO AN ARRAY AS KEY->VALUE PAIR WHERE KEY IS THE POST-ID OF THE QUIZ AND VALUE IS THE QUIZ OBJECT
 	var quizzes = {}
 	
@@ -30,7 +57,6 @@ jQuery( document ).ready(function($) {
 	}
 	loadQuizzes()
 	
-	
 	////////////////
 	//	PRE LOAD RESULT IMAGES 
 	////////////////	
@@ -48,8 +74,6 @@ jQuery( document ).ready(function($) {
 	}
 	preloadImages()
 	
-	console.log ( quizzes )
-	
 	////////////////
 	//	EVENT HANDLERS 
 	////////////////	
@@ -58,13 +82,14 @@ jQuery( document ).ready(function($) {
 		
 		var thisQuiz =  quizzes[ get_quiz_id( this.parentNode ) ]
 		
+		thisQuiz.selector = this.parentNode
+		usingIE ? ieFix( thisQuiz.selector ) : ''
+		
 		thisQuiz.currentQuestion = 0
 		thisQuiz.score = 0
 		thisQuiz.responses = []
 		thisQuiz.questionCount = thisQuiz.questions.length
-		thisQuiz.selector = this.parentNode
 		thisQuiz.hideAnswers = thisQuiz.quiz_settings.hide_answers == 'on' ? true : false
-				
 		
 		$( this ).siblings( '.fca_qc_quiz_title' ).hide()
 		$( this ).siblings( '.fca_qc_quiz_description' ).hide()
@@ -79,13 +104,18 @@ jQuery( document ).ready(function($) {
 		showQuestion( thisQuiz )
 		thisQuiz.selector.scrollIntoView( true )
 		
-		
 	})
-	
 	
 	$( '.fca_qc_next_question').click(function() {
 		var thisQuiz =  quizzes[ get_quiz_id( $(this).closest('.fca_qc_quiz') ) ]
-		$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).removeClass('flip')
+		if ( usingIE ) {
+			$( thisQuiz.selector ).find( '#fca_qc_answer_container' ).show()
+			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).hide()
+			
+		} else {
+			$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).removeClass('flip')
+		}
+
 		showQuestion( thisQuiz )
 	})
 
@@ -109,8 +139,14 @@ jQuery( document ).ready(function($) {
 		} else {
 			
 			$( thisQuiz.selector ).find( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
-			$( thisQuiz.selector ).find( '#fca_qc_correct_answer' ).html( thisQuiz.currentAnswer )						
-			$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).addClass( 'flip' )
+			$( thisQuiz.selector ).find( '#fca_qc_correct_answer' ).html( thisQuiz.currentAnswer )	
+			if ( usingIE ) {
+				$( thisQuiz.selector ).find( '#fca_qc_answer_container' ).hide()
+				$( thisQuiz.selector ).find( '#fca_qc_back_container' ).show()
+			} else {
+				$( thisQuiz.selector ).find( '.fca_qc_quiz_div' ).addClass( 'flip' )
+			}
+			
 			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
 			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
 
@@ -135,7 +171,6 @@ jQuery( document ).ready(function($) {
 		}
 	
 	})
-	
 	
 	////////////////
 	//	HELPER FUNCTIONS 
@@ -188,8 +223,6 @@ jQuery( document ).ready(function($) {
 				scale_flip_box_question( quiz.selector )
 			})
 
-			
-			
 		} else {
 			endTest( quiz )
 		}
@@ -288,7 +321,6 @@ jQuery( document ).ready(function($) {
 		html += "</div>"
 		
 		$( selector ).find( '.fca_qc_insert_response_above' ).before(html)
-		
 		
 	}
 	
