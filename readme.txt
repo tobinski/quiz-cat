@@ -155,7 +155,9 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 == Changelog ==
 
 = Quiz Cat 1.0.5 =
-* Fixed quiz display on Safari browser
+* Added quick links sidebar
+* Improve browser support ( Safari and IE 8-11 )
+* Fix possible issue with non-latin characters (Č, Ć, Ž, Š, etc.)
 
 = Quiz Cat 1.0.4 =
 * Preview changed to Save & Preview - the current quiz will be saved before preview
