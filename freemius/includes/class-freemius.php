@@ -6215,7 +6215,7 @@
 							$this->_menu->is_submenu_item_visible( 'account' )
 						);
 					}
-
+					/*
 					// Add contact page.
 					$this->add_submenu_item(
 						__fs( 'contact-us', $this->_slug ),
@@ -6227,7 +6227,7 @@
 						WP_FS__DEFAULT_PRIORITY,
 						$this->_menu->is_submenu_item_visible( 'contact' )
 					);
-
+					*/
 					if ( $this->has_addons() ) {
 						$this->add_submenu_item(
 							__fs( 'add-ons', $this->_slug ),
