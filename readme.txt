@@ -120,8 +120,13 @@ Here’s to you, your quizzes, and the satisfying results they’ll deliver!
 1. Upload the Quiz Cat plugin file (`quiz-cat.zip`) to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. In your sidebar, select 'Quizzes -> Add New' to create a new quiz
+ 
+[Watch a Quiz Catinstallation + setup video here.](https://youtu.be/CQe3VsX_Xag)
 
 == Frequently Asked Questions ==
+= How do I build a quiz? =
+[Watch a video with instructions here.](https://youtu.be/CQe3VsX_Xag)
+
 = How Can I Change The Quiz Language On The Frontend? =
 
 All strings that appear on the frontend can be changed using this filter.
