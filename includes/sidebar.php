@@ -86,7 +86,7 @@
 			<div class="inside">
 				<div class="main">
 					<ul>
-						<li><div class="dashicons dashicons-arrow-right"></div><a href="http://fatcatapps.com/quizcat/" target="_blank"><?php _e( 'Need help getting started? Watch a video tutorial.', 'quiz-cat' ); ?></a> </li>
+						<li><div class="dashicons dashicons-arrow-right"></div><a href="https://youtu.be/CQe3VsX_Xag" target="_blank"><?php _e( 'Need help getting started? Watch a video tutorial.', 'quiz-cat' ); ?></a> </li>
 						<li><div class="dashicons dashicons-arrow-right"></div><a href="http://wordpress.org/support/plugin/quiz-cat" target="_blank"><?php _e( 'Problems or Suggestions? Get help here.', 'quiz-cat' ); ?></a> </li>
 						<li><div class="dashicons dashicons-arrow-right"></div><strong><a href="https://wordpress.org/support/view/plugin-reviews/quiz-cat?rate=5#postform" target="_blank"><?php _e( 'Like this plugin?  Please leave a review.', 'quiz-cat' ); ?></strong></a> </li>
 					</ul>
