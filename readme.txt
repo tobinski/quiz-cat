@@ -121,7 +121,7 @@ Here’s to you, your quizzes, and the satisfying results they’ll deliver!
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. In your sidebar, select 'Quizzes -> Add New' to create a new quiz
  
-[Watch a Quiz Catinstallation + setup video here.](https://youtu.be/CQe3VsX_Xag)
+[Watch a Quiz Cat installation + setup video here.](https://youtu.be/CQe3VsX_Xag)
 
 == Frequently Asked Questions ==
 = How do I build a quiz? =
