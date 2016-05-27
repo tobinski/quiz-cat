@@ -85,8 +85,6 @@ $strings_array = array (
 );
 $quiz_text_strings = apply_filters( 'fca_qc_quiz_text', $strings_array );
 
-
-
 ////////////////////////////
 //		SET UP POST TYPE
 ////////////////////////////
@@ -135,7 +133,6 @@ function fca_qc_register_post_type() {
 }
 add_action ( 'init', 'fca_qc_register_post_type' );
 
-
 //CHANGE CUSTOM 'UPDATED' MESSAGES FOR OUR CPT
 function fca_qc_post_updated_messages( $messages ){
 	
@@ -164,10 +161,7 @@ function fca_qc_post_updated_messages( $messages ){
 }
 add_filter('post_updated_messages', 'fca_qc_post_updated_messages' );
 
-
-
 //Customize CPT table columns
-
 function fca_qc_add_new_post_table_columns($columns) {
 	
     $new_columns['cb'] = '<input type="checkbox" />';
@@ -191,7 +185,6 @@ function fca_qc_manage_post_table_columns($column_name, $id) {
 }   
 // Add to admin_init function
 add_action('manage_fca_qc_quiz_posts_custom_column', 'fca_qc_manage_post_table_columns', 10, 2);
-
 
 //PREVIEW
 function fca_qc_live_preview( $content ){

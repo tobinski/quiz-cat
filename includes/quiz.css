@@ -53,7 +53,6 @@ div.fca_qc_quiz span.fca_qc_answer_span {
 	top: -7px;
 	font-size: 16px;
 	color: #151515;
-	
 }
 
 div.fca_qc_quiz button.fca_qc_button {
@@ -69,6 +68,7 @@ div.fca_qc_quiz button.fca_qc_button {
 	-webkit-transition: all 0s;
 	border: none;
 }
+
 div.fca_qc_quiz button.fca_qc_start_button:hover {
 	background-color: #3c7d73;
 }
@@ -169,6 +169,7 @@ div.fca_qc_quiz p.fca_eoi_question_response_correct_answer {
 	padding-bottom: 15px;
 	color: #151515;
 }
+
 .fca_qc_bold{
 	font-weight: bold;
 }
@@ -225,7 +226,9 @@ div.fca_qc_quiz div.wrong-answer {
 
 /* flip speed goes here */
 .fca-qc-flipper {
-	transition: 0.6s;
+	transition: all 0.6s, height 1ms;
+	-webkit-transition:  0.6s ease, height 1ms;
+
 	transform-style: preserve-3d;
 
 	position: relative;
@@ -236,9 +239,9 @@ div.fca_qc_quiz div.wrong-answer {
 	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 	
-	transition: 0.6s;
-	-webkit-transition:  0.6s;
-	
+	transition: all 0.6s, height 1ms;
+	-webkit-transition: all 0.6s, height 1ms;
+
 	transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
 	position: absolute;
