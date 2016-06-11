@@ -8,8 +8,54 @@ Domain Path: /languages
 Author: Fatcat Apps
 Author URI: https://fatcatapps.com/
 License: GPLv2
-Version: 1.0.3
+Version: 1.0.5
 */
+
+// Create a helper function for easy SDK access.
+function fca_qc_fs() {
+    global $fca_qc_fs;
+
+    if ( ! isset( $fca_qc_fs ) ) {
+        // Include Freemius SDK.
+        require_once dirname(__FILE__) . '/freemius/start.php';
+
+        $fca_qc_fs = fs_dynamic_init( array(
+            'id'                => '284',
+            'slug'              => 'quiz-cat',
+            'public_key'        => 'pk_4ca03d6e4a1d5e18948fa9839ccb2',
+            'is_premium'        => false,
+            'has_addons'        => false,
+            'has_paid_plans'    => false,
+            'menu'              => array(
+                'slug'       => 'edit.php?post_type=fca_qc_quiz',
+                'account'    => false,
+                'support'    => false,
+            ),
+        ) );
+    }
+
+    return $fca_qc_fs;
+}
+
+// Init Freemius.
+fca_qc_fs();
+
+//Freemius filter
+function fca_qc_fs_custom_connect_message_on_update(
+	$message,
+	$user_first_name,
+	$plugin_title,
+	$user_login,
+	$site_link,
+	$freemius_link
+) {
+	return __('Hey ', 'quiz-cat') . $user_first_name .  ', ' . '<br>'
+			. __('In order to enjoy all our features and functionality', 'quiz-cat' ) . ', Quiz Cat '
+			. __('needs to connect your user', 'quiz-cat' ) . ", $user_login" . ' ' 
+			. __("at $site_link, to freemius.com.", 'quiz-cat' );
+}
+
+fca_qc_fs()->add_filter('connect_message_on_update', 'fca_qc_fs_custom_connect_message_on_update', 10, 6);
 
 // BASIC SECURITY
 defined( 'ABSPATH' ) or die( 'Unauthorized Access!' );
@@ -38,8 +84,6 @@ $strings_array = array (
 	'retake_quiz' => __('Retake Quiz', 'quiz-cat'),
 );
 $quiz_text_strings = apply_filters( 'fca_qc_quiz_text', $strings_array );
-
-
 
 ////////////////////////////
 //		SET UP POST TYPE
@@ -89,7 +133,6 @@ function fca_qc_register_post_type() {
 }
 add_action ( 'init', 'fca_qc_register_post_type' );
 
-
 //CHANGE CUSTOM 'UPDATED' MESSAGES FOR OUR CPT
 function fca_qc_post_updated_messages( $messages ){
 	
@@ -118,10 +161,7 @@ function fca_qc_post_updated_messages( $messages ){
 }
 add_filter('post_updated_messages', 'fca_qc_post_updated_messages' );
 
-
-
 //Customize CPT table columns
-
 function fca_qc_add_new_post_table_columns($columns) {
 	
     $new_columns['cb'] = '<input type="checkbox" />';
@@ -145,7 +185,6 @@ function fca_qc_manage_post_table_columns($column_name, $id) {
 }   
 // Add to admin_init function
 add_action('manage_fca_qc_quiz_posts_custom_column', 'fca_qc_manage_post_table_columns', 10, 2);
-
 
 //PREVIEW
 function fca_qc_live_preview( $content ){
@@ -190,7 +229,7 @@ function fca_qc_admin_cpt_script( $hook ) {
 			'image_placeholder_url' => FCA_QC_PLUGINS_URL . '/assets/fca-qc-image-placeholder.png',
 			'question_string' =>  __('Question', 'quiz-cat'),
 			'save_string' =>  __('Save', 'quiz-cat'),
-			'preview_string' =>  __('Preview', 'quiz-cat'),
+			'preview_string' =>  __('Save & Preview', 'quiz-cat'),
 			'on_string' =>  __('YES', 'quiz-cat'),
 			'off_string' =>  __('NO', 'quiz-cat'),
 		);
@@ -263,7 +302,9 @@ function fca_qc_render_description_meta_box( $post ) {
 	empty ( $quiz_meta['desc'] ) ? $quiz_meta['desc'] = '' : '';
 	empty ( $quiz_meta['desc_img_src'] ) ? $quiz_meta['desc_img_src'] = $img_placeholder : '';
 
-
+	//ADD A HIDDEN PREVIEW URL INPUT
+	echo "<input type='text' class='fca_qc_image_input' name='fca_qc_quiz_preview_url' id='fca_qc_quiz_preview_url'  hidden readonly data='" . get_permalink( $post->ID ) . "'>";
+	
 	echo "<label class='fca_qc_admin_label'>" . __('Description (Optional)', 'quiz-cat') . "</label>";
 	echo "<textarea class='fca_qc_texta' id='fca_qc_quiz_description' name='fca_qc_quiz_description'>" . $quiz_meta['desc'] . "</textarea>";	
 	
@@ -485,84 +526,7 @@ function fca_qc_render_opt_in() {
 	global $post;
 	
 	if ( $post->post_type === 'fca_qc_quiz' ) {
-	
-		ob_start(); ?>
-			<style>
-				.fca_qc_ad_bar a {
-					font-size: 14px;
-					font-weight: bold;
-				}
-
-				.fca_qc_ad_sidebar {
-					position: absolute;
-					top: 62px;
-					right: 20px;
-					width: 280px;
-				}
-
-				.fca_qc_ad_sidebar .fca_qc_centered {
-					text-align: center;
-				}
-
-				.fca_qc_ad_sidebar .button-large {
-					font-size: 17px;
-					line-height: 30px;
-					height: 32px;
-				}
-
-				.fca_qc_ad_input {
-					width: 100%;
-				}
-
-				.fca_qc_ad_form {
-					border-top: 1px solid #fcfcfc;
-					margin: 0 -11px;
-					padding: 0 11px;
-				}
-				
-				#side-sortables {
-					border: none;
-				}
-				
-				@media screen and (max-width: 850px) {
-					.fca_qc_ad_sidebar {
-						display: none;
-					}
-				}	
-
-			</style>
-			<div class="sidebar-container metabox-holder fca_qc_ad_sidebar" id="fca_qc_ad_sidebar">
-				<div class="postbox">
-					<h3 class="wp-ui-primary"><span><?php _e('Need Quiz Ideas?', 'quiz-cat') ?></span></h3>
-
-					<div class="inside">
-						<div class="main">
-							<p class="fca_qc_centered">
-								<?php _e("So you wanna build engaging, viral quizzes? We'll send you our favorite example quizzes for inspiration?", 'quiz-cat') ?>
-								
-							</p>
-
-							<form class="fca_qc_ad_form" action="https://www.getdrip.com/forms/77666172/submissions" method="post" target="_blank">
-								<p>
-									<label for="fca_qc_ad_input_email">Email</label>
-									<input type="email" name="fields[email]" id="fca_qc_ad_input_email" class="fca_qc_ad_input" value="<?php
-
-									echo htmlspecialchars( wp_get_current_user()->user_email )
-
-									?>">
-								</p>
-
-								<div class="fca_qc_centered">
-									<input type="submit" name="submit" class="button-primary button-large" value="<?php _e('Sign Up', 'quiz-cat') ?>">
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-
-		<?php echo ob_get_clean();
+		include_once 'includes/sidebar.php';
 	}	
 
 }
@@ -693,16 +657,41 @@ add_action( 'save_post_fca_qc_quiz', 'fca_qc_save_post' );
 
 function fca_qc_escape_input($data) {
  
-	$data = htmlentities ( $data, ENT_QUOTES );
+	$data = htmlentities ( $data, ENT_QUOTES, "UTF-8");
 		
 	return $data;
 
+}
+
+/* Redirect when Save & Preview button is clicked */
+add_filter('redirect_post_location', 'fca_qc_save_preview_redirect');
+function fca_qc_save_preview_redirect ( $location ) {
+    global $post;
+ 
+    if ( !empty($_POST['fca_qc_quiz_preview_url'] ) ) {
+		// Flush rewrite rules
+		global $wp_rewrite;
+		$wp_rewrite->flush_rules(true);
+		
+        // Always redirect to the post
+        $location = $_POST['fca_qc_quiz_preview_url'];
+    }
+ 
+    return $location;
 }
 
 ////////////////////////////
 //		DISPLAY QUIZ
 ////////////////////////////
 
+//SUPPRESS POST TITLES ON OUR CUSTOM POST TYPE
+function fca_qc_suppress_post_title() {
+	global $post;
+	if ( $post->post_type == 'fca_qc_quiz' &&  is_main_query() ) {
+		wp_enqueue_style( 'fca_qc_quiz_post_stylesheet', plugins_url( 'includes/hide-title.css', __FILE__ ) );
+	}
+}	
+add_action( 'wp_enqueue_scripts', 'fca_qc_suppress_post_title' );
 
 function fca_qc_do_quiz( $atts ) {
 	
@@ -755,7 +744,7 @@ function fca_qc_do_quiz( $atts ) {
 			<button type='button' class='fca_qc_button fca_qc_start_button'><?php echo $quiz_text_strings[ 'start_quiz' ] ?></button>
 			
 			<div class='flip-container fca_qc_quiz_div' style='display: none;'>
-				<div class='flipper'>
+				<div class='fca-qc-flipper'>
 					<?php fca_qc_do_question_panel() ?> 
 					<?php fca_qc_do_answer_panel() ?> 
 					
@@ -782,7 +771,7 @@ function fca_qc_do_question_panel( $operation = 'echo' ) {
 	global $quiz_text_strings;
 	$svg_rectangle = '<svg class="fca_qc_rectancle" width="26" height="26"><rect width="26" height="26" style="fill:#fff;stroke-width:1;stroke:#000"></svg>';
 			
-	$html = "<div class='front' id='fca_qc_answer_container'>";
+	$html = "<div class='fca-qc-front' id='fca_qc_answer_container'>";
 		$html .= "<p id='fca_qc_question'>" . $quiz_text_strings['question'] . "</p>";
 		$html .= "<img class='fca_qc_quiz_question_img' src=''>";
 		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
@@ -800,7 +789,7 @@ function fca_qc_do_question_panel( $operation = 'echo' ) {
 
 function fca_qc_do_answer_panel( $operation = 'echo') {
 	global $quiz_text_strings;
-	$html = "<div class='back' id='fca_qc_back_container'>";
+	$html = "<div class='fca-qc-back' id='fca_qc_back_container'>";
 		$html .= "<p id='fca_qc_question_right_or_wrong'></p>";
 		$html .= "<img class='fca_qc_quiz_question_img' src=''>";
 		$html .= "<span id='fca_qc_question_back'></span>";

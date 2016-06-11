@@ -28,17 +28,42 @@ jQuery(document).ready(function($){
 
 	
 	//SET UP SAVE AND PREVIEW BUTTONS, THEN HIDE THE PUBLISHING METABOX
-	const saveButton = '<button type="button" class="button-primary" id="fca_qc_submit_button">' + adminData.save_string + '</buttton>'
-	const previewButton = '<button type="button" class="button-secondary" id="fca_qc_preview_button">' + adminData.preview_string + '</buttton>'
+	var saveButton = '<button type="button" class="button-primary" id="fca_qc_submit_button">' + adminData.save_string + '</buttton>'
+	var previewButton = '<button type="button" class="button-secondary" id="fca_qc_preview_button">' + adminData.preview_string + '</buttton>'
 
 	$( '#normal-sortables' ).append( saveButton )
-	$('#fca_qc_submit_button').click(function() {
+	$('#fca_qc_submit_button').click(function(event) {
 		setConfirmUnload( false )
-		$('#publish').click()
+		//$('#publish').click()
+		event.preventDefault()
+		
+        // Add target
+        var form = $(this).closest('form')
+        form.removeAttr('target')
+
+        // Remove preview url
+        $('#fca_qc_quiz_preview_url').val('')
+		
+        // Submit form
+        form.submit()
+		  
+        return false
 	})
+	 
 	$( '#normal-sortables' ).append( previewButton )
-	$('#fca_qc_preview_button').click(function() {
-		$('#post-preview').click()
+	$('#fca_qc_preview_button').click(function(event) {
+		setConfirmUnload( false )
+		var url = $('#fca_qc_quiz_preview_url').attr('data')
+		$('#fca_qc_quiz_preview_url').val(url)
+		event.preventDefault()
+		// Add target
+        var form = $(this).closest('form')
+        form.prop('target', '_blank')
+					
+        // Submit form
+        form.submit()
+		  
+        return false
 	})
 	
 	$( '#submitdiv' ).hide()
@@ -142,7 +167,7 @@ jQuery(document).ready(function($){
 			
 			$(this).parent().next().toggle()
 			
-			const str = "(" + adminData.remove_string + ")"
+			var str = "(" + adminData.remove_string + ")"
 			
 			if ( $(this).html() === str ) {
 				$(this).html( "(" + adminData.show_string + ")") 
@@ -244,10 +269,10 @@ jQuery(document).ready(function($){
 	//at max ( equal to questions ) -> remove ability to add more
 	//when question or result count changes, have to re-calculate
 	function setScoreRanges() {
-		const questionCount = $( '.fca_qc_question_item' ).length
-		const resultCount = $( '.fca_qc_result_item' ).length
+		var questionCount = $( '.fca_qc_question_item' ).length
+		var resultCount = $( '.fca_qc_result_item' ).length
 		//plus one because zero is a possible result, e.g. you can get 0/10
-		const divisor = parseInt ( (questionCount + 1) / resultCount )
+		var divisor = parseInt ( (questionCount + 1) / resultCount )
 		var remainder = ( (questionCount + 1) % resultCount )
 		//n is the result 'counter' to be iterated, and passed to the next result to start at
 		var n = 0

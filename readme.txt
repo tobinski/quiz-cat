@@ -5,10 +5,10 @@ Tags: quiz, quizzes, create quiz, viral quiz, quiz plugin, buzzfeed quiz, trivia
 Author URI: https://fatcatapps.com/
 Plugin URI: https://fatcatapps.com/quizcat
 Requires at least: 4.0
-Tested up to: 4.5
+Tested up to: 4.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.3
+Stable tag: 1.0.5
 
 Quiz Cat Lets You Create Beautiful Viral BuzzFeed-style Quizzes That Drive Social Shares & User Engagement. Set It Up In 2 Minutes.
 
@@ -120,8 +120,13 @@ Here’s to you, your quizzes, and the satisfying results they’ll deliver!
 1. Upload the Quiz Cat plugin file (`quiz-cat.zip`) to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. In your sidebar, select 'Quizzes -> Add New' to create a new quiz
+ 
+[Watch a Quiz Cat installation + setup video here.](https://youtu.be/CQe3VsX_Xag)
 
 == Frequently Asked Questions ==
+= How do I build a quiz? =
+[Watch a video with instructions here.](https://youtu.be/CQe3VsX_Xag)
+
 = How Can I Change The Quiz Language On The Frontend? =
 
 All strings that appear on the frontend can be changed using this filter.
@@ -153,6 +158,19 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 
 
 == Changelog ==
+
+= Quiz Cat 1.0.5 =
+* Added quick links sidebar
+* Improve browser support ( Safari and IE 8-11 )
+* Fix possible issue with non-latin characters (Č, Ć, Ž, Š, etc.)
+
+= Quiz Cat 1.0.4 =
+* Preview changed to Save & Preview - the current quiz will be saved before preview
+* Make quiz scroll in to view when clicking start
+* Remove duplicate title on quiz previews
+* Change delete icons from red to gray
+* Add CSS to hide images with no source tag set (fix Firefox displaying broken image icons)
+* Add optional feedback tracking
 
 = Quiz Cat 1.0.3 =
 * New Quiz Cat Menu Icon

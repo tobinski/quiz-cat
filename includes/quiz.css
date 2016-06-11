@@ -1,3 +1,7 @@
+div.fca_qc_quiz img[src=''] {
+	display: none;
+}
+
 div.fca_qc_quiz {
 	max-width: 600px;
 	margin-left: auto;
@@ -10,7 +14,6 @@ div.fca_qc_quiz {
 .fca_qc_quiz p {
 	width: auto;
 }
-
 
 h2.fca_qc_quiz_title {
 	color: #151515;
@@ -42,15 +45,14 @@ h2.fca_qc_quiz_title {
 	display: block;
 }
 div.fca_qc_quiz svg.fca_qc_rectancle {
-	margin: 15px;
+	margin: 10px 15px 0 10px;
 }
 
 div.fca_qc_quiz span.fca_qc_answer_span {
 	position: relative;
-	top: -21px;
+	top: -7px;
 	font-size: 16px;
 	color: #151515;
-	
 }
 
 div.fca_qc_quiz button.fca_qc_button {
@@ -63,14 +65,16 @@ div.fca_qc_quiz button.fca_qc_button {
 	color: #FFF;
 	font-size: 20px;
 	transition: all 0s;
+	-webkit-transition: all 0s;
 	border: none;
 }
+
 div.fca_qc_quiz button.fca_qc_start_button:hover {
 	background-color: #3c7d73;
 }
 
 .fca_qc_next_question {
-	background-color: inherit;
+	background-color: transparent;
 	color: black;
 	width: 140px;
 	border-radius: 2px;
@@ -79,7 +83,8 @@ div.fca_qc_quiz button.fca_qc_start_button:hover {
 }
 
 .fca_qc_next_question:hover {
-	background-color: initial;
+	background-color: black;
+	color: white;
 }
 
 div.fca_qc_quiz div.fca_qc_answer_div {
@@ -95,6 +100,7 @@ div.fca_qc_quiz div.fca_qc_answer_div {
 	font-weight: normal;
 	cursor: pointer;
 	color: #151515;
+	padding: 5px;
 }
 
 #fca_qc_your_answer, #fca_qc_correct_answer {
@@ -125,7 +131,6 @@ h3.fca_qc_score_title{
 	color: #151515;
 	
 }
-
 
 .fca_qc_quiz_footer {
 	margin-top: 20px;
@@ -164,6 +169,7 @@ div.fca_qc_quiz p.fca_eoi_question_response_correct_answer {
 	padding-bottom: 15px;
 	color: #151515;
 }
+
 .fca_qc_bold{
 	font-weight: bold;
 }
@@ -207,48 +213,59 @@ div.fca_qc_quiz div.wrong-answer {
 /* entire container, keeps perspective */
 .flip-container {
 	width: 100%;
-	
+	-webkit-perspective: 1000;
 	perspective: 1000;
+	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 }
 
-.flip-container, .front, .back {
+.flip-container, .fca-qc-front, .fca-qc-back {
 	width: 100%;
 	height: 400px;
 }
 
 /* flip speed goes here */
-.flipper {
-	transition: 0.6s;
+.fca-qc-flipper {
+	transition: all 0.6s, height 1ms;
+	-webkit-transition:  0.6s ease, height 1ms;
+
 	transform-style: preserve-3d;
 
 	position: relative;
 }
 
 /* hide back of pane during swap */
-.front, .back {
+.fca-qc-front, .fca-qc-back {
 	backface-visibility: hidden;
-	transition: 0.6s;
+	-webkit-backface-visibility: hidden;
+	
+	transition: all 0.6s, height 1ms;
+	-webkit-transition: all 0.6s, height 1ms;
+
 	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
 	position: absolute;
 	top: 0;
 	left: 0;
 }
 
 /*  front pane, placed above back */
-.front {
+.fca-qc-front {
 	z-index: 2;
 	transform: rotateY(0deg);
+	-webkit-transform:  rotateY(0deg);
 }
 
 /* back, initially hidden pane */
-.back {
+.fca-qc-back {
 	transform: rotateY(-180deg);
+	-webkit-transform:  rotateY(-180deg);
 }
 
 
-.flip-container.flip .flipper {
+.flip-container.flip .fca-qc-flipper {
 	transform: rotateY(180deg);
+	-webkit-transform:  rotateY(180deg);
 }
 
 
