@@ -667,7 +667,6 @@ function fca_qc_escape_input($data) {
 add_filter('redirect_post_location', 'fca_qc_save_preview_redirect');
 function fca_qc_save_preview_redirect ( $location ) {
     global $post;
- 
     if ( !empty($_POST['fca_qc_quiz_preview_url'] ) ) {
 		// Flush rewrite rules
 		global $wp_rewrite;
@@ -687,6 +686,9 @@ function fca_qc_save_preview_redirect ( $location ) {
 //SUPPRESS POST TITLES ON OUR CUSTOM POST TYPE
 function fca_qc_suppress_post_title() {
 	global $post;
+	if ( empty ( $post ) ) {
+		return false;
+	}
 	if ( $post->post_type == 'fca_qc_quiz' &&  is_main_query() ) {
 		wp_enqueue_style( 'fca_qc_quiz_post_stylesheet', plugins_url( 'includes/hide-title.css', __FILE__ ) );
 	}
