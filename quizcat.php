@@ -774,10 +774,10 @@ function fca_qc_do_question_panel( $operation = 'echo' ) {
 	$html = "<div class='fca-qc-front' id='fca_qc_answer_container'>";
 		$html .= "<p id='fca_qc_question'>" . $quiz_text_strings['question'] . "</p>";
 		$html .= "<img class='fca_qc_quiz_question_img' src=''>";
-		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
-		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
-		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
-		$html .= "<div class='fca_qc_answer_div'> $svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='1'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='2'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='3'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='4'> $svg_rectangle<span class='fca_qc_answer_span'></span></div>";
 	$html .= "</div>";
 	
 	if ( $operation == 'echo' ) {

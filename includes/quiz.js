@@ -127,7 +127,7 @@ jQuery( document ).ready(function($) {
 		thisQuiz.responses.push ( $( this ).children('.fca_qc_answer_span').html() )
 		
 		if ( thisQuiz.hideAnswers ) {
-			if ( $( this ).children('.fca_qc_answer_span').html() == thisQuiz.currentAnswer ) {
+			if ( $( this ).attr('data-question') == thisQuiz.currentAnswer ) {
 				
 				thisQuiz.score = thisQuiz.score + 1
 				showQuestion( thisQuiz )
@@ -151,7 +151,7 @@ jQuery( document ).ready(function($) {
 			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'correct-answer' )
 			$( thisQuiz.selector ).find( '#fca_qc_back_container' ).removeClass( 'wrong-answer' )
 
-			if ( $( this ).children('.fca_qc_answer_span').html() == thisQuiz.currentAnswer ) {
+			if ( $( this ).attr('data-question') == thisQuiz.currentAnswer ) {
 				
 				thisQuiz.score = thisQuiz.score + 1
 				
@@ -212,6 +212,9 @@ jQuery( document ).ready(function($) {
 				if ( shuffled_answers[i] == '') {
 					$( quiz.selector ).find( '.fca_qc_answer_span' ).eq(i).parent().hide()
 				} else {
+					if ( shuffled_answers[i] == quiz.questions[quiz.currentQuestion].answer ) {
+						quiz.currentAnswer = $( quiz.selector ).find( '.fca_qc_answer_div' ).eq(i).attr('data-question')
+					}
 					$( quiz.selector ).find( '.fca_qc_answer_span' ).eq(i).html(shuffled_answers[i])
 				}
 		
@@ -219,7 +222,7 @@ jQuery( document ).ready(function($) {
 				
 			quiz.currentQuestion = quiz.currentQuestion + 1
 						
-			quiz.currentAnswer = answer
+			
 			$( quiz.selector ).find( '#fca_qc_answer_container' ).waitForImages( function() {
 				scale_flip_box_question( quiz.selector )
 			})
