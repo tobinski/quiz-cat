@@ -140,7 +140,8 @@ jQuery( document ).ready(function($) {
 		} else {
 			
 			$( thisQuiz.selector ).find( '#fca_qc_your_answer' ).html( $( this ).children('.fca_qc_answer_span').html() )
-			$( thisQuiz.selector ).find( '#fca_qc_correct_answer' ).html( thisQuiz.currentAnswer )	
+			
+			$( thisQuiz.selector ).find( '#fca_qc_correct_answer' ).html( get_correct_answer_html( thisQuiz ) )
 			if ( usingIE ) {
 				$( thisQuiz.selector ).find( '#fca_qc_answer_container' ).hide()
 				$( thisQuiz.selector ).find( '#fca_qc_back_container' ).show()
@@ -339,6 +340,17 @@ jQuery( document ).ready(function($) {
 		if ( quiz.hideAnswers ) {
 			show_responses( quiz )
 		}
+		
+	}
+	
+	function get_correct_answer_html ( quiz ) {
+		var returnItem = ''
+		$( quiz.selector ).find('.fca_qc_answer_div').each(function() {
+			if ( $(this).attr('data-question') == quiz.currentAnswer ) {
+				returnItem = $(this).find('.fca_qc_answer_span').html()
+			}
+		})
+		return returnItem
 		
 	}
 	
