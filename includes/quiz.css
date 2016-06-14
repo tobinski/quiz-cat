@@ -45,14 +45,18 @@ h2.fca_qc_quiz_title {
 	display: block;
 }
 div.fca_qc_quiz svg.fca_qc_rectancle {
-	margin: 10px 15px 0 10px;
+	display: inline-block;
+	vertical-align: top;
 }
 
 div.fca_qc_quiz span.fca_qc_answer_span {
-	position: relative;
-	top: -7px;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
 	font-size: 16px;
 	color: #151515;
+	width: calc(100% - 41px);
+	margin-left: 15px;
 }
 
 div.fca_qc_quiz button.fca_qc_button {
@@ -100,7 +104,8 @@ div.fca_qc_quiz div.fca_qc_answer_div {
 	font-weight: normal;
 	cursor: pointer;
 	color: #151515;
-	padding: 5px;
+	padding: 15px;
+
 }
 
 #fca_qc_your_answer, #fca_qc_correct_answer {
