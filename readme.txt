@@ -1,4 +1,4 @@
-﻿=== Quiz Cat - Build Viral Quizzes ===
+﻿=== Quiz Cat - WordPress Quiz Builder ===
 Contributors: fatcatapps
 Donate link: https://fatcatapps.com/
 Tags: quiz, quizzes, create quiz, viral quiz, quiz plugin, buzzfeed quiz, trivia quiz, personality quiz, lead generation quiz
@@ -159,8 +159,10 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 
 == Changelog ==
 
-= Quiz Cat 1.0.5 =
-TODO: update changelog
+= Quiz Cat 1.0.6 =
+* Visual improvement: multi-line answers now line up nicer
+* Bugfix: PHP notice on 404 pages
+* Bugfix: for some users, "correct" answers were marked as "incorrect"
 
 = Quiz Cat 1.0.5 =
 * Added quick links sidebar
