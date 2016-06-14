@@ -8,7 +8,7 @@ Domain Path: /languages
 Author: Fatcat Apps
 Author URI: https://fatcatapps.com/
 License: GPLv2
-Version: 1.0.5
+Version: 1.0.6
 */
 
 // Create a helper function for easy SDK access.
@@ -667,7 +667,6 @@ function fca_qc_escape_input($data) {
 add_filter('redirect_post_location', 'fca_qc_save_preview_redirect');
 function fca_qc_save_preview_redirect ( $location ) {
     global $post;
- 
     if ( !empty($_POST['fca_qc_quiz_preview_url'] ) ) {
 		// Flush rewrite rules
 		global $wp_rewrite;
@@ -687,6 +686,9 @@ function fca_qc_save_preview_redirect ( $location ) {
 //SUPPRESS POST TITLES ON OUR CUSTOM POST TYPE
 function fca_qc_suppress_post_title() {
 	global $post;
+	if ( empty ( $post ) ) {
+		return false;
+	}
 	if ( $post->post_type == 'fca_qc_quiz' &&  is_main_query() ) {
 		wp_enqueue_style( 'fca_qc_quiz_post_stylesheet', plugins_url( 'includes/hide-title.css', __FILE__ ) );
 	}
@@ -774,10 +776,10 @@ function fca_qc_do_question_panel( $operation = 'echo' ) {
 	$html = "<div class='fca-qc-front' id='fca_qc_answer_container'>";
 		$html .= "<p id='fca_qc_question'>" . $quiz_text_strings['question'] . "</p>";
 		$html .= "<img class='fca_qc_quiz_question_img' src=''>";
-		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
-		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
-		$html .= "<div class='fca_qc_answer_div'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
-		$html .= "<div class='fca_qc_answer_div'> $svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='1'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='2'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='3'>$svg_rectangle<span class='fca_qc_answer_span'></span></div>";
+		$html .= "<div class='fca_qc_answer_div' data-question='4'> $svg_rectangle<span class='fca_qc_answer_span'></span></div>";
 	$html .= "</div>";
 	
 	if ( $operation == 'echo' ) {
