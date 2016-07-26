@@ -652,6 +652,8 @@ function fca_qc_save_post( $post_id ) {
 		update_post_meta ( $post_id, 'quiz_cat_settings', $settings );
 	}
 	
+	wp_publish_post( $post_id );
+	
 }
 add_action( 'save_post_fca_qc_quiz', 'fca_qc_save_post' );
 
