@@ -8,7 +8,7 @@ Requires at least: 4.0
 Tested up to: 4.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 
 Quiz Cat Lets You Create Beautiful Viral BuzzFeed-style Quizzes That Drive Social Shares & User Engagement. Set It Up In 2 Minutes.
 
@@ -158,6 +158,9 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 
 
 == Changelog ==
+
+= Quiz Cat 1.0.7 =
+TODO: update changelog
 
 = Quiz Cat 1.0.6 =
 * Visual improvement: multi-line answers now line up nicer

@@ -8,7 +8,7 @@ Domain Path: /languages
 Author: Fatcat Apps
 Author URI: https://fatcatapps.com/
 License: GPLv2
-Version: 1.0.6
+Version: 1.0.7
 */
 
 // Create a helper function for easy SDK access.
