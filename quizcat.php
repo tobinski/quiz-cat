@@ -263,7 +263,7 @@ function add_custom_meta_boxes() {
 
 	add_meta_box( 
         'fca_qc_add_result_meta_box',
-        __( 'Scoring', 'quiz-cat' ),
+        __( 'Results', 'quiz-cat' ),
         'fca_qc_render_add_result_meta_box',
         null,
         'normal',
@@ -715,7 +715,7 @@ function fca_qc_do_quiz( $atts ) {
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_style( 'fca_qc_quiz_stylesheet', plugins_url( 'includes/quiz.min.css', __FILE__ ) );
 		wp_enqueue_script( 'fca_qc_img_loaded', plugins_url( 'includes/jquery.waitforimages.min.js', __FILE__ ) );
-		wp_enqueue_script( 'fca_qc_quiz_js', plugins_url( 'includes/quiz.min.js', __FILE__ ) );
+		wp_enqueue_script( 'fca_qc_quiz_js', plugins_url( 'includes/quiz.js', __FILE__ ) );
 		
 		//SEND JS THE DATA BUT CONVERT ANY ESCAPED THINGS BACK TO NORMAL CHARACTERS
 		$quiz_data = array(
