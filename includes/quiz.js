@@ -103,7 +103,12 @@ jQuery( document ).ready(function($) {
 		$( this ).siblings( '.fca_qc_question_count' ).html( 1 + "/" + thisQuiz.questionCount )
 		
 		showQuestion( thisQuiz )
-		thisQuiz.selector.scrollIntoView( true )
+		
+		var screenPosition = $(thisQuiz.selector).offset().top + -120
+		screenPosition < 0 ? screenPosition = 0 : ''
+		
+		$('html, body').animate( { scrollTop: screenPosition }, 300);
+			
 		
 	})
 	
@@ -247,8 +252,8 @@ jQuery( document ).ready(function($) {
 			
 		})
 		
-		if ( newHeight < 400 ) {
-			newHeight = 400
+		if ( newHeight < 200 ) {
+			newHeight = 200
 		}
 
 		$(selector).find( '.fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
