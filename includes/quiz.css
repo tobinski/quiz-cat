@@ -8,6 +8,7 @@ div.fca_qc_quiz {
 	margin-right: auto;
 	text-align: center;
 	color: #151515;
+	padding: 30px 50px;
 }
 
 .fca_qc_quiz p {
@@ -37,7 +38,7 @@ h2.fca_qc_quiz_title {
 
 #fca_qc_question {
 	font-size: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	color: #151515;
 }
 #fca_qc_question_back {
@@ -93,7 +94,7 @@ div.fca_qc_quiz button.fca_qc_start_button:hover {
 
 div.fca_qc_quiz div.fca_qc_answer_div {
 	display: block;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	width: 100%;
 	min-height: 56px;
 	border-radius: 2px;
@@ -203,7 +204,7 @@ div.fca_qc_quiz p.fca_eoi_question_response_correct_answer {
 div.fca_qc_quiz p.fca_qc_back_response {
 	font-size: 16px;
 	font-weight: bold;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	color: #151515;
 }
 
@@ -277,6 +278,9 @@ div.fca_qc_quiz div.wrong-answer {
 
 
 @media (max-width: 600px) {
+	div.fca_qc_quiz {
+		padding: 30px 0px;		
+	}
 
 	div.fca_qc_quiz button.fca_qc_button {
 		width: 80%;
