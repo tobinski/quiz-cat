@@ -63,20 +63,13 @@ jQuery( document ).ready(function($) {
 	////////////////	
 		
 	function preloadImages() {
-		var preloaded_images = []
-		var k = 0
 		$.each(quizzes, function (key, value) {
 			for (var j = 0; j < quizzes[key].quiz_results.length; j++) {
-				preloaded_images[j] = new Image()
-				preloaded_images[j].src = quizzes[key].quiz_results[j].img
+				lazyLoadImage( quizzes[key].quiz_results[j].img )
 			}
-			
 			//LOAD FIRST IMAGE
-			preloaded_images[k] = new Image()
-			preloaded_images[k].src = quizzes[key].questions[0].img
-			k++
+			lazyLoadImage( quizzes[key].questions[0].img )
 		})
-
 	}
 	preloadImages()
 	
