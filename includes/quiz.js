@@ -65,10 +65,17 @@ jQuery( document ).ready(function($) {
 	function preloadImages() {
 		$.each(quizzes, function (key, value) {
 			for (var j = 0; j < quizzes[key].quiz_results.length; j++) {
-				lazyLoadImage( quizzes[key].quiz_results[j].img )
+				if ( quizzes[key].quiz_results[j].hasOwnProperty('img') ) {
+					lazyLoadImage( quizzes[key].quiz_results[j].img )
+				}
+				
 			}
 			//LOAD FIRST IMAGE
-			lazyLoadImage( quizzes[key].questions[0].img )
+			if ( quizzes[key].questions[0] ) {
+				if ( quizzes[key].questions[0].hasOwnProperty('img') ){
+					lazyLoadImage( quizzes[key].questions[0].img )
+				}
+			}
 		})
 	}
 	preloadImages()
@@ -364,7 +371,7 @@ jQuery( document ).ready(function($) {
 			if ( $(this).attr('data-question') == quiz.currentAnswer ) {
 				returnItem = $(this).find('.fca_qc_answer_span').html()
 			}
-		})
+		}) 
 		return returnItem
 		
 	}
