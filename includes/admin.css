@@ -108,6 +108,7 @@ img[src=''] {
 	max-width: 100%;
 	display: block;
 	cursor: pointer;
+	max-height: 400px;
 }
 
 .fca_qc_result_item, .fca_qc_question_item {
