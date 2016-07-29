@@ -116,7 +116,7 @@ jQuery( document ).ready(function($) {
 		
 		showQuestion( thisQuiz )
 		
-		var screenPosition = $(thisQuiz.selector).offset().top + -120
+		var screenPosition = $(thisQuiz.selector).offset().top + -100
 		screenPosition < 0 ? screenPosition = 0 : ''
 		
 		$('html, body').animate( { scrollTop: screenPosition }, 300);
