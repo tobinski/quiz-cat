@@ -164,6 +164,7 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 * Added image preloader - more fluid image-based quizzes
 * Improved scrolling on quiz start
 * Various UI improvements
+* Tested up to WordPress 4.6 RC1
 
 = Quiz Cat 1.0.6 =
 * Visual improvement: multi-line answers now line up nicer
