@@ -1,0 +1,6 @@
+*.zip
+build/tmp
+build/.DS_Store
+build/builds/quiz-cat
+.DS_Store
+build/builds/.DS_Store

@@ -1,0 +1,94 @@
+#!/usr/bin/php
+<?php
+/* Quiz Cat Plugin Build
+	*requires 'yui-compressor': `sudo apt-get install yui-compressor`
+	*probably need to make executable:  `sudo chmod +x ./plugin-build`
+*/
+$script_dir = dirname( __FILE__ );
+$build_dir = "$script_dir/build";
+$MAINFILE = "quizcat.php";
+$run_dir = getcwd();
+
+$plugin_versions = array ( 'Free', 'Premium', 'Business' );
+
+$NEWVERSION1 = preg_replace("/[^0-9\.]/", '', `grep "^Stable tag:" $script_dir/readme.txt`);
+$NEWVERSION2 = preg_replace("/[^0-9\.]/", '', `grep "Version:" $script_dir/quizcat.php`);
+
+if ( $NEWVERSION1 !== $NEWVERSION2) {
+	echo "Version in readme.txt & $MAINFILE don't match. Exiting....\n";
+	exit;
+}
+if ( !is_dir( $build_dir ) ) {
+	echo "Cannot find 'build' folder in the current folder.  Exiting.... \n";
+	exit;
+}
+
+forEach ( $plugin_versions as $version ) {
+	buildPlugin ( $version, $NEWVERSION1 );
+}
+
+
+function buildPlugin ( $slug = '', $ver = '' ) {
+	global $script_dir, $MAINFILE, $build_dir, $run_dir;
+	chdir( $script_dir );
+
+	if ( empty ( $slug ) OR empty ( $ver ) ) {
+		echo 'Plugin Slug is empty, tell a programmer.  Exiting....';
+		exit;
+	}
+		
+	echo "=== Automagic build started for: $slug v$ver ===\n";
+	
+	$tmp_dir = "$build_dir/tmp";
+	
+	//DELETE OLD TEMP DIR
+	`rm -Rf $tmp_dir 2>/dev/null`;
+	
+	mkdir( $tmp_dir );
+	
+	// Create plugin main file with variables replaced
+	$plugin_main_file_contents = file_get_contents( $MAINFILE , FILE_USE_INCLUDE_PATH  );
+	$plugin_main_file_contents = str_replace( '{{QC-Edition}}', $slug, $plugin_main_file_contents );
+	file_put_contents( "quizcat-$slug.php", $plugin_main_file_contents );
+
+	$filter_file = "$build_dir/filter/$slug";
+	`rsync -r --filter=". $filter_file" $run_dir/* $tmp_dir/quizcat`;   /**/
+
+	chdir( "$tmp_dir/quizcat" );
+
+	`mv "quizcat-$slug.php" 'quizcat.php'`;
+	unlink( "$script_dir/quizcat-$slug.php" );
+	
+	echo "Push Git tags? (y/N)";
+	
+	if ( 'y' == trim( fgets( STDIN ) ) ) {
+		plugin_deploy($slug, $ver);
+	}
+	
+	chdir( $tmp_dir );
+	$lower_slug = strtolower ( $slug );
+	$zip_name = "quizcat-$lower_slug-$ver.zip";
+	`zip -r $zip_name "quizcat" 1>/dev/null`; 
+	`mv $zip_name $script_dir/build/builds`;
+		
+	// Cleanup
+	`rm -Rf $tmp_dir`;
+		
+	echo "=== Automagic build completed for: $slug v$ver ===\n";	
+	
+	chdir( $script_dir );
+
+}
+
+function plugin_deploy ( $slug = '', $ver = '' ) {
+	`git init`;
+	`git remote add origin https://github.com/davidhme/quizcat.git`;
+	`git add *`;
+	`git commit -am "$slug v$ver"`;
+	`git tag -a "$ver-$slug" -m "Deploy $slug $ver"`;
+	//`git push origin`;
+	`git push origin --tags`;
+	  
+	echo "Git Tagging Completed for $slug \n";
+
+}
