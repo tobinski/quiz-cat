@@ -104,8 +104,14 @@ jQuery(document).ready(function($){
 	
 	}
 	add_drag_and_drop_sort()
-
 	
+	//HIDE "ADD IMAGE" BUTTONS IF IMAGE HAS BEEN SET
+	$('.fca_qc_image').each(function(index){
+		if ( $(this).attr('src') !== '' ) {
+			$(this).siblings('.fca_qc_quiz_image_upload_btn').hide()
+		}
+		
+	})
 	////////////////
 	//	ON CLICK EVENT HANDLERS
 	////////////////
@@ -333,34 +339,41 @@ jQuery(document).ready(function($){
 		
 	function attach_image_upload_handlers() {
 		//ACTION WHEN CLICKING IMAGE UPLOAD
-		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').unbind( 'click' )
+		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image, .fca_qc_quiz_image_change_btn').unbind( 'click' )
 		//HANDLER FOR RESULTS AND META IMAGES
-		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image').click(function(e) {
+		$('.fca_qc_quiz_image_upload_btn, .fca_qc_image, .fca_qc_quiz_image_change_btn').click(function(e) {
 			
 			e.preventDefault()
 			$this = $( this )
-			//IF WE CLICK ON THE IMAGE VS THE BUTTON IT HAS TO WORK A LITTLE DIFFERENTLY
-			if ( $(this).hasClass( 'fca_qc_quiz_image_upload_btn' ) ) {
-				$this = $( this.parentNode ).siblings('.fca_qc_image')
-			}			
 			
+			//IF WE CLICK ON THE IMAGE VS THE BUTTON IT HAS TO WORK A LITTLE DIFFERENTLY
+			if ( $(this).hasClass( 'fca_qc_quiz_image_change_btn' ) ) {
+				$this = $( this.parentNode ).siblings('.fca_qc_quiz_image_upload_btn')
+			} else if ( $(this).hasClass( 'fca_qc_image' ) ) {
+				$this = $( this ).siblings('.fca_qc_quiz_image_upload_btn')
+			}
+			
+						
 			var image = wp.media({ 
 				title: adminData.selectImage_string,
 				// mutiple: true if you want to upload multiple files at once
 				multiple: false
 			}).open()
-			.on('select', function(e){
+			.on('select', function(){
 				// This will return the selected image from the Media Uploader, the result is an object
 				var uploaded_image = image.state().get('selection').first()
 
 				var image_url = uploaded_image.toJSON().url
 				// Assign the url value to the input field
 				$this.siblings('.fca_qc_image_input').attr('value', image_url)
-				$this.attr('src',image_url)
-				//UNHIDE THE REMOVE AND CHANGE IMAGE BUTTONS
-				$this.siblings('.fca_qc_image_hover_controls').children('.fca_qc_quiz_image_revert_btn').show()
-				$this.siblings('.fca_qc_image_hover_controls').children('.fca_qc_quiz_image_upload_btn').show()
+				$this.siblings('.fca_qc_image').attr('src',image_url)
+								
+				$this.hide()
 				
+				//UNHIDE THE REMOVE AND CHANGE IMAGE BUTTONS
+				$this.siblings('.fca_qc_image_hover_controls').find('.fca_qc_quiz_image_change_btn').show()
+				$this.siblings('.fca_qc_image_hover_controls').find('.fca_qc_quiz_image_revert_btn').show()
+
 			})
 		})
 		
@@ -368,7 +381,8 @@ jQuery(document).ready(function($){
 		$('.fca_qc_quiz_image_revert_btn').unbind( 'click' )
 		$('.fca_qc_quiz_image_revert_btn').click( function(e) {
 			$( this.parentNode ).siblings('.fca_qc_image_input').attr('value', '')
-			$( this.parentNode ).siblings('.fca_qc_image').attr('src', adminData.image_placeholder_url )
+			$( this.parentNode ).siblings('.fca_qc_image').attr('src', '' )
+			$( this.parentNode ).siblings('.fca_qc_quiz_image_upload_btn').show()
 			$( this ).hide()
 			$( this ).siblings( '.fca_qc_quiz_image_upload_btn' ).hide()
 			

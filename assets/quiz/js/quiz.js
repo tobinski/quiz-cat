@@ -63,17 +63,29 @@ jQuery( document ).ready(function($) {
 	////////////////	
 		
 	function preloadImages() {
-		var preloaded_images = []
-		
 		$.each(quizzes, function (key, value) {
 			for (var j = 0; j < quizzes[key].quiz_results.length; j++) {
-				preloaded_images[j] = new Image()
-				preloaded_images[j].src = quizzes[key].quiz_results[j].img
+				if ( quizzes[key].quiz_results[j].hasOwnProperty('img') ) {
+					lazyLoadImage( quizzes[key].quiz_results[j].img )
+				}
+				
+			}
+			//LOAD FIRST IMAGE
+			if ( quizzes[key].questions[0] ) {
+				if ( quizzes[key].questions[0].hasOwnProperty('img') ){
+					lazyLoadImage( quizzes[key].questions[0].img )
+				}
 			}
 		})
-
 	}
 	preloadImages()
+	
+	function lazyLoadImage( src ) {
+		if ( src != '' && src != undefined && typeof src == 'string' ) {
+			var img = new Image()
+			img.src = src
+		}
+	}
 	
 	////////////////
 	//	EVENT HANDLERS 
@@ -103,7 +115,12 @@ jQuery( document ).ready(function($) {
 		$( this ).siblings( '.fca_qc_question_count' ).html( 1 + "/" + thisQuiz.questionCount )
 		
 		showQuestion( thisQuiz )
-		thisQuiz.selector.scrollIntoView( true )
+		
+		var screenPosition = $(thisQuiz.selector).offset().top + -100
+		screenPosition < 0 ? screenPosition = 0 : ''
+		
+		$('html, body').animate( { scrollTop: screenPosition }, 300);
+			
 		
 	})
 	
@@ -203,6 +220,11 @@ jQuery( document ).ready(function($) {
 			$( quiz.selector ).find( '#fca_qc_answer_container' ).find( '.fca_qc_quiz_question_img' ).attr('src', img)
 			$( quiz.selector ).find( '#fca_qc_back_container' ).find( '.fca_qc_quiz_question_img' ).attr('src', img)
 			
+			//LAZY LOAD NEXT IMAGE 
+			if ( (quiz.currentQuestion + 1) < quiz.questionCount ) {
+				lazyLoadImage ( quiz.questions[quiz.currentQuestion+1].img )
+			}
+			
 			$( quiz.selector ).find( '#fca_qc_question' ).html(question)
 			$( quiz.selector ).find( '#fca_qc_question_back' ).html(question)
 			
@@ -247,8 +269,8 @@ jQuery( document ).ready(function($) {
 			
 		})
 		
-		if ( newHeight < 400 ) {
-			newHeight = 400
+		if ( newHeight < 200 ) {
+			newHeight = 200
 		}
 
 		$(selector).find( '.fca_qc_quiz_div, #fca_qc_answer_container, #fca_qc_back_container' ).height( newHeight )
@@ -349,7 +371,7 @@ jQuery( document ).ready(function($) {
 			if ( $(this).attr('data-question') == quiz.currentAnswer ) {
 				returnItem = $(this).find('.fca_qc_answer_span').html()
 			}
-		})
+		}) 
 		return returnItem
 		
 	}

@@ -1,6 +1,19 @@
-.fca_qc_question_label img {
-	max-width: 252px;
-	vertical-align: text-top;
+img[src=''] {
+	display: none !important;
+}
+
+#wpbody-content {
+	display: none;
+}
+
+#fca_qc_quiz_description {
+	width: 98%;
+}
+#fca_qc_setting_table {
+	width: 100%;
+}
+#fca_qc_setting_table th {
+	width: 250px;
 }
 
 #fca_qc_opt_in_meta_box h2 {
@@ -16,24 +29,13 @@
 	cursor: default;
 }
 
-.pointer{
-	cursor: pointer;
-}
-
-#wpbody-content {
-	display: none;
-}
-
 #fca_qc_submit_button {
 	margin-right: 5px;
 }
-.fca_qc_quiz_image_upload_btn, .fca_qc_quiz_image_revert_btn {
-	font-size: 1.5rem;
-	margin-left: 7px !important;
-}
 
-#fca_qc_quiz_description {
-	width: 98%;
+.fca_qc_question_label img {
+	max-width: 252px;
+	vertical-align: text-top;
 }
 
 .fca_qc_answer_toggle{
@@ -66,27 +68,18 @@
 }
 .fca_qc_admin_settings_label {
 	font-weight: normal;
-
 }
 
-#fca_qc_setting_table {
-	width: 100%;
-}
-#fca_qc_setting_table th {
-	width: 250px;
-}
 .fca_qc_question_label, .fca_qc_result_label {
 	margin-top: 1rem;
 	cursor: pointer;
 }
-
 
 .fca_qc_delete_icon {
 	margin-top: 1rem;
 	color: #a3a3a3;
 	cursor: pointer;
 	float: right;
-
 }
 
 .fca_qc_add_btn {
@@ -115,22 +108,8 @@
 	max-width: 100%;
 	display: block;
 	cursor: pointer;
-	margin-bottom: 5px;
+	max-height: 400px;
 }
-img.fca_qc_image:hover + div.fca_qc_image_hover_controls {
-	visibility: visible;
-}
-
-div.fca_qc_image_hover_controls:hover {
-	visibility: visible;
-}
-
-div.fca_qc_image_hover_controls {
-	visibility: hidden;
-	position: relative;
-	top: -40px;
-}
-
 
 .fca_qc_result_item, .fca_qc_question_item {
     border: 1px solid #ddd;
@@ -139,6 +118,30 @@ div.fca_qc_image_hover_controls {
 	cursor: move;
 	background-color: #FFF;
 }
+
+div.fca_qc_image_hover_controls {
+	display: none;
+	position: relative;
+	top: -35px;
+	margin-bottom: -28px;
+}
+
+div.fca_qc_image_hover_controls:hover {
+	display: block;
+}
+
+img.fca_qc_image:hover + div.fca_qc_image_hover_controls {
+	display: block;
+}
+
+.fca_qc_quiz_image_change_btn, .fca_qc_quiz_image_revert_btn {
+	font-size: 1.5rem;
+	margin-left: 7px !important;
+}
+.fca_qc_quiz_image_upload_btn {
+	margin-bottom: 5px !important;
+}
+
 
 /* ON OFF SWITCH */
 

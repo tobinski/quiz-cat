@@ -1,0 +1,6 @@
+- .*
+- .git
+- /build
+- /minify.sh
+- /deploy.sh
+- /plugin-build
