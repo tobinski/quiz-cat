@@ -160,7 +160,10 @@ add_filter( 'fca_qc_quiz_text', 'my_quiz_callback_filter' );`
 == Changelog ==
 
 = Quiz Cat 1.0.7 =
-TODO: update changelog
+* Optimized various margins and spacing for mobile
+* Added image preloader - more fluid image-based quizzes
+* Improved scrolling on quiz start
+* Various UI improvements
 
 = Quiz Cat 1.0.6 =
 * Visual improvement: multi-line answers now line up nicer
