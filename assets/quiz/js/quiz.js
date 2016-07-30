@@ -41,7 +41,7 @@ jQuery( document ).ready(function($) {
 	var quizzes = {}
 	
 	function loadQuizzes() {
-		$('.fca_qc_quiz').each(function( index ) {
+		$('[id^=fca_qc_quiz]').each(function( index ) {
 			var thisId = get_quiz_id(this)
 			quizzes[thisId] = eval( 'quizData_' + thisId )
 		})		
